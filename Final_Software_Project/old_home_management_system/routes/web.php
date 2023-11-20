@@ -14,8 +14,6 @@ Use App\Http\Controllers\ViewController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/roster', function () {
+    return view('roster');
 });
-
-
