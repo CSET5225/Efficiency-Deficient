@@ -14,7 +14,7 @@ class supervisor extends Model
         "role_id",
         "first_name",
         "last_name",
-        "D.O.B",
+        "DOB",
         "email",
         "salary",
         "approved"
