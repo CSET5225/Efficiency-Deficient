@@ -14,7 +14,7 @@ class patient extends Model
         "role_id",
         "first_name",
         "last_name",
-        "D.O.B",
+        "DOB",
         "emergency_contact",
         "email",
         "addmission_date",
