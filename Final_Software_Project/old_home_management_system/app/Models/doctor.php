@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+// class User extends Authenticatable
+// {
+// use HasApiTokens, HasFactory, Notifiable;
+// }
+
 
 class doctor extends Model
 {
@@ -14,7 +20,7 @@ class doctor extends Model
         "role_id",
         "first_name",
         "last_name",
-        "D.O.B",
+        "DOB",
         "email",
         "salary",
         "approved"
