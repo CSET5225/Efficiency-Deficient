@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\RegistrationControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\App\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource("viewing", ViewController::class);
+Route::resource('/doctors', RegistrationControllerApi::class);
