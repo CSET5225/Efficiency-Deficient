@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class patient extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "patient_id",
