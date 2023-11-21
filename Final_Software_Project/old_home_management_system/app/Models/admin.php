@@ -17,6 +17,7 @@ class admin extends Model
         "DOB",
         "email",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }

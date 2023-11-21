@@ -17,6 +17,7 @@ class caregiver extends Model
         "DOB",
         "email",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }
