@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class payment extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "payment_id",
