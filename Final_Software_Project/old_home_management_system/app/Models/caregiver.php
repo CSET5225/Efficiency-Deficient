@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class caregiver extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         "caregiver_id",
         "role_id",
