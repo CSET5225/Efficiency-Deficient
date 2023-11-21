@@ -18,7 +18,8 @@
     </head>
 
     <body>
-        <form action="{{ url('api/viewing') }}" method="POST">
+        <form action="{{ url('api/roster') }}" method="GET">
+            @csrf
             <section class="date">
                 <label>Date</label>
                 <input type="date" name="date">
@@ -38,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
             </tbody>
         </table>
     </body>
