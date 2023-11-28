@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\patient;
+use App\Models\caregiver;
 use App\Models\doctor;
+use App\Models\supervisor;
+use App\Models\admin;
+use App\Models\Role;
 
 class RegistrationControllerApi extends Controller
 {
@@ -21,9 +26,35 @@ class RegistrationControllerApi extends Controller
      */
     public function store(Request $request)
     {
-        $doctor = $request->all();
-        doctor::create($doctor);
-        return $doctor;
+
+        if(isset($_POST['register_button'])){
+            $data = $request->all();
+            if($data['role_id']=1){
+                patient::create($data);
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view('registration_form');
+            }
+            if($data['role_id']=2){
+                caregiver::create($data);
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view('registration_form');
+            }
+            if($data['role_id']=3){
+                doctor::create($data);
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view('registration_form');
+            }
+            if($data['role_id']=4){
+                supervisor::create($data);
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view('registration_form');
+            }
+            if($data['role_id']=5){
+                admin::create($data);
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view('registration_form');
+            }
+        }
     }
 
     /**

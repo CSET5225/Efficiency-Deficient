@@ -14,10 +14,4 @@ Use App\Http\Controllers\ViewController;
 |
 */
 
-Route::get('/roster', function () {
-    return view('roster');
-});
-
-Route::get('/roster/new', function(){
-    return view('newRoster');
-});
+Route::get('/registration', [ViewController::class,  'registrationFormView']);

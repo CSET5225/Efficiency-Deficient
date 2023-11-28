@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class admin extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         "admin_id",
         "role_id",
@@ -17,6 +17,7 @@ class admin extends Model
         "DOB",
         "email",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }

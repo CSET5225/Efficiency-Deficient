@@ -14,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 class doctor extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "doctor_id",
@@ -23,6 +24,7 @@ class doctor extends Model
         "DOB",
         "email",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }
