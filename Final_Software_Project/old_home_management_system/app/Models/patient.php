@@ -18,7 +18,6 @@ class patient extends Model
         "DOB",
         "emergency_contact",
         "email",
-        "password",
         "addmission_date",
         "group_id",
         "family_code",

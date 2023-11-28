@@ -16,7 +16,6 @@ class caregiver extends Model
         "last_name",
         "DOB",
         "email",
-        "password",
         "salary",
         "approved",
         "password"
