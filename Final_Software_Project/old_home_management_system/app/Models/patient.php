@@ -21,6 +21,7 @@ class patient extends Model
         "addmission_date",
         "group_id",
         "family_code",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }
