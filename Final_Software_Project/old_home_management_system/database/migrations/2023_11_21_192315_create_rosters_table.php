@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->date('scheduled_date');
             $table->int('group_id');
-            $table->int('supervisor_id');
-            $table->int('doctor_id');
+            $table->unsignedInteger('supervisor_id');
+            $table->unsignedInteger('doctor_id');
             $table->int('caregiver_id');
         });
     }
