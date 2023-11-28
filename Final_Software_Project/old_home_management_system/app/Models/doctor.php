@@ -25,6 +25,7 @@ class doctor extends Model
         "email",
         "password",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }

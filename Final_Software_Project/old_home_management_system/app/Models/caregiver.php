@@ -18,6 +18,7 @@ class caregiver extends Model
         "email",
         "password",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }

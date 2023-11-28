@@ -19,6 +19,7 @@ class supervisor extends Model
         "email",
         "password",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }

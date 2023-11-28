@@ -18,6 +18,7 @@ class admin extends Model
         "email",
         "password",
         "salary",
-        "approved"
+        "approved",
+        "password"
      ] ;
 }
