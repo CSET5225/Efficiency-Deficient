@@ -18,7 +18,7 @@
             width: 200px;
             height: 50px;
             text-align: center;
-            background-color: 7C93C3;
+            background-color: #7C93C3;
             color: white;
             border: 1px solid black;
         }
@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-    <form action="">
+    <form action="" method="POST">
         @csrf
         <div>
             <label>Email</label>

@@ -30,6 +30,10 @@ class ViewController extends Controller
             return $this->registrationFormView();
         }
     }
+
+    public function patientHomeView(){
+        return view("patientsHome");
+    }
     
     public function familyHomeView(Request $request){
         $request -> validate([
