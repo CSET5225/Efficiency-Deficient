@@ -9,7 +9,6 @@ use App\Models\caregiver;
 use App\Models\doctor;
 use App\Models\supervisor;
 use App\Models\admin;
-use App\Models\Role;
 
 class RegistrationControllerApi extends Controller
 {
@@ -26,33 +25,30 @@ class RegistrationControllerApi extends Controller
      */
     public function store(Request $request)
     {
-
         if(isset($_POST['register_button'])){
-            $data = $request->all();
-            if($data['role_id']=1){
+
+            //This is for all other roles since their columns are the same
+            $data = request()->all();
+
+            if($data['role_id']==1){
                 patient::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view('registration_form');
+                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
             }
-            if($data['role_id']=2){
+            if($data['role_id']==2){
                 caregiver::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view('registration_form');
+                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
             }
-            if($data['role_id']=3){
+            if($data['role_id']==3){
                 doctor::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view('registration_form');
+                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
             }
-            if($data['role_id']=4){
+            if($data['role_id']==4){
                 supervisor::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view('registration_form');
+                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
             }
-            if($data['role_id']=5){
+            if($data['role_id']==5){
                 admin::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view('registration_form');
+                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
             }
         }
     }

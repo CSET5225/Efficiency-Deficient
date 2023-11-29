@@ -35,12 +35,15 @@
                 
                 <div id="hidden_information">
                     <label>Family Code:<label><br>
-                    <input type="text" name="family_code" id="family_code"><br><br>     
+                    <input type="text" name="family_code" id="family_code" readonly value=<?php 
+                        echo substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'), 0, 10);
+                    ?>><br><br>
+                    
                         
                     <label>Emergency Contact:</label><br>
                     <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12"><br><br> 
                 </div>
-
+                
                 <button name = "register_button">Submit</button>
             </form>
 
@@ -58,6 +61,7 @@
                         tele.value += '-';
                     }
                 });
+
         
             </script>
     </body>
