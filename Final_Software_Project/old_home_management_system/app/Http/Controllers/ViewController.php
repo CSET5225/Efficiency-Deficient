@@ -36,7 +36,7 @@ class ViewController extends Controller
             'family_code'=>'required',
             'emergency_contact'=> 'required',
         ]);
-        $person = DB::select('SELECT CONCAT(doctors.first_name, , doctors.last_name) AS doctors_name, 
+        $person = DB::select('SELECT CONCAT(doctors.first_name, , doctors.last_name) AS doctors_name,
             CONCAT(appointments.scheduled_date,appointments.appointment_id) AS doctors_appointments,
             CONCAT(caregivers.first_name, caregivers.last_name) AS caregivers_name,
             morning_medicine,
