@@ -10,76 +10,102 @@
     body {
       margin: 0;
       overflow: hidden;
-      background: linear-gradient(to bottom, #9EB8D9, #799DCB);
+      background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
     }
 
-    /* body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: 100px solid #EEF5FF;
-      box-sizing: border-box;
-      animation: border 10s linear infinite;
-      background: linear-gradient(to bottom, #9EB8D9, #799DCB);
-    } */
+
 
     @keyframes border {
       0%, 100% { background-color: #EEF5FF; }
-      25% { background-color: #9EB8D9; }
-      50% { background-color: #799DCB; }
-      75% { background-color: #9EB8D9; }
+      20% { background-color: #9EB8D9; }
+      40% { background-color: #8fadd3; }
+      60% { background-color: #799DCB; }
+      80% { background-color: #e7d2da }
     }
+form{
+  background-color:#EEF5FF;
+  padding: 20px;
+  border-radius: 20px;
+  border: 5px solid #A25772;
+  box-sizing: border-box;
+  z-index: 1;
+  width: 150%;
+  max-width: 420px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  
+}
+.date{
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 100%; 
+  margin: 10px 0; 
+}
 
-    #form {
-      background: linear-gradient(to bottom, #9EB8D9, #799DCB);
-      padding: 20px;
-      border-radius: 20px;
-      border: 10px solid #A25772;
-      box-sizing: border-box;
-      z-index: 1;
-      width: 80%; 
-      max-width: 400px; 
-    }
+.code{
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 100%; 
+  margin: 10px 0; 
+}
 
-    form {
-      text-align: center;
-      
-    }
+.emergency_contact{
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 100%; 
+  margin: 10px 0; 
+}
 
-    input {
+
+
+     input {
       margin: 10px;
       width: 100%;
       border-radius: 10px;
-        border: 2px solid #A25772;
+      border: 2px solid #A25772;
+      font-size: large;
+        
     }
 
     button{
         margin: 10px;
-        width: 100%;
+        width: 50%;
         border-radius: 10px;
         border: 2px solid #A25772;
-        background-color: #7C93C3; 
+        background-color:#9EB8D9; 
+        font-size: large;
+        color: white;
+        
+        
 }
 
-h1 {
-        animation: border 10s linear infinite;
-        margin: 0;
+button:hover{
+  transition-duration: 2s;
+        background-color: #EEF5FF;
+        color:black;   
+}
+
+h1{
+        margin-top: 100px;
         position: absolute; 
         top: 20px; 
-        left: 50%; 
+        left: 54%; 
         transform: translateX(-50%); 
         z-index: 2; 
       padding: 10px;
+      border-radius: 10px;
     }
-</style>
 
+  
+</style>
 
 
 
@@ -88,20 +114,28 @@ h1 {
 <div id="form">
         <form action="{{ url('/familyMembers_home')}}" method="post">
                 @csrf
+                <div class= 'date'>
                     <label>Date:</label><br>
-                    <input type="date" name="date" id="date"><br><br>
+                    <input type="date" name="date" id="date" >
+                </div>
+                <br><br>
 
-                    <label>Family Code:<label><br>
-                    <input type="text" name="family_code" id="family_code"><br><br>     
-                        
+
+                <div class="code">
+                  <label>Family Code:</label><br>
+                  <input type="text" name="family_code" id="family_code" placeholder="Enter Family Code">
+                 </div> 
+
+                <br><br>
+                <div class= 'emergency_contact'>
                     <label>Emergency Contact:</label><br>
-                    <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12"><br><br> 
-                
-
+                    <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" placeholder="Enter Emergency Contact">
+                </div>  
+                <br><br>
                 <button name = "register_button">Ok</button>
 
                 <button name = "cancel_button">cancel</button>
-                
+  </form>
                 </div>
 
 
