@@ -17,13 +17,29 @@ class ViewController extends Controller
         return view("FamilyMembers_home");
     }
 
-public function familyHomeVeiw(Request $request)
-      {
-          $request -> validate([
+    public function homeView(){
+        return view("homePage");
+    }
+    
+    public function loginView(){
+        return view("login");
+    }
+
+    public function regOrLogin(){
+        if(isset($_GET["home-login-button"])){
+            return $this->loginView();
+        }
+        elseif(isset($_GET["home-register-button"])){
+            return $this->registrationFormView();
+        }
+    }
+    
+    public function familyHomeView(Request $request){
+        $request -> validate([
             'family_code'=>'required',
             'emergency_contact'=> 'required',
-         ]);
-         $person = DB::select('SELECT CONCAT(doctors.first_name, , doctors.last_name) AS doctors_name, 
+        ]);
+        $person = DB::select('SELECT CONCAT(doctors.first_name, , doctors.last_name) AS doctors_name,
             CONCAT(appointments.scheduled_date,appointments.appointment_id) AS doctors_appointments,
             CONCAT(caregivers.first_name, caregivers.last_name) AS caregivers_name,
             morning_medicine,
@@ -42,7 +58,7 @@ public function familyHomeVeiw(Request $request)
             caregivers ON patients.caregiver_id = caregivers.caregiver_id; ');
          patient::create($person);
          $data = patient::all();
-          return view('familyMembers_home',['a'=>$data]);;
-      }
-
+         return view('familyMembers_home',['a'=>$data]);;
+        }
+        
 }
