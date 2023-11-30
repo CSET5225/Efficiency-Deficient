@@ -26,19 +26,8 @@
       60% { background-color: #799DCB; }
       80% { background-color: #e7d2da }
     }
-    /* form {
-      background: linear-gradient(to bottom,#EEF5FF, #799DCB,#A25772);
-      padding: 20px;
-      border-radius: 20px;
-      border: 5px solid #A25772;
-      box-sizing: border-box;
-      z-index: 1;
-      width: 80%; 
-      max-width: 420px; 
-      
-    } */
 form{
-  background: linear-gradient(to bottom, #EEF5FF, #799DCB, #A25772);
+  background-color:#EEF5FF;
   padding: 20px;
   border-radius: 20px;
   border: 5px solid #A25772;
@@ -91,18 +80,20 @@ form{
         width: 50%;
         border-radius: 10px;
         border: 2px solid #A25772;
-        background-color: #EEF5FF; 
+        background-color:#9EB8D9; 
         font-size: large;
+        color: white;
         
         
 }
 
 button:hover{
-        animation: border 6s linear infinite;    
+  transition-duration: 2s;
+        background-color: #EEF5FF;
+        color:black;   
 }
 
-h1 {
-        animation: border 7s linear infinite;
+h1{
         margin-top: 100px;
         position: absolute; 
         top: 20px; 
