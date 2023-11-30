@@ -6,6 +6,86 @@
     <title>Registration</title>
 </head>
     <body>
+    <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #9EB8D9, #799DCB);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 100px solid #EEF5FF;
+      box-sizing: border-box;
+      animation: border 10s linear infinite;
+      background: linear-gradient(to bottom, #9EB8D9, #799DCB);
+    } */
+
+    @keyframes border {
+      0%, 100% { background-color: #EEF5FF; }
+      25% { background-color: #9EB8D9; }
+      50% { background-color: #799DCB; }
+      75% { background-color: #9EB8D9; }
+    }
+
+    #form {
+      background: linear-gradient(to bottom, #9EB8D9, #799DCB);
+      padding: 20px;
+      border-radius: 20px;
+      border: 10px solid #A25772;
+      box-sizing: border-box;
+      z-index: 1;
+      width: 80%; 
+      max-width: 400px; 
+    }
+
+    form {
+      text-align: center;
+      
+    }
+
+    input {
+      margin: 10px;
+      width: 100%;
+      border-radius: 10px;
+        border: 2px solid #A25772;
+    }
+
+    button{
+        margin: 10px;
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid #A25772;
+        background-color: #7C93C3; 
+}
+
+h1 {
+        animation: border 10s linear infinite;
+        margin: 0;
+        position: absolute; 
+        top: 20px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 2; 
+      padding: 10px;
+    }
+</style>
+
+
+
+
+                <h1>Family Member</h1>
+
+<div id="form">
         <form action="{{ url('/familyMembers_home')}}" method="post">
                 @csrf
                     <label>Date:</label><br>
@@ -22,79 +102,12 @@
 
                 <button name = "cancel_button">cancel</button>
                 
-                <table id="hidden_information">
-                        <tr>
-                            <td class='doctors_name'>Doctor's Name</td>
-                            <td class='doctors_appointments'>Doctor's Appointment</td>
-                            <td class='caregivers_name'>Caregiver's Name</td>
-                            <td class='morning_medicine'>Morning Medicine</td>
-                            <td class='afternoon_medicine'>Afternoon Medicine</td>
-                            <td class='night_medicine'>Night Medicine</td>
-                            <td class='breakfast'>Breakfast</td>
-                            <td class='lunch'>Lunch</td>
-                            <td class='dinner'>Dinner</td>
-                        </tr>
-                       
-                        @foreach ($a as $patient)
-
-                        <tr>
-                        <td class="doctors_name">
-
-                       {{$Paitent['doctors_name'] }}
-                    </td>
-                    <td class="doctors_appointments">
-
-                  {{ $Paitent['doctors_appointments']  }}
-
-                    </td>
-
-                    <td class="caregivers_name">
-
-                    {{ $Paitent['caregivers_name'] }}
-
-                    </td>
-
-                    <td class="morning_medicine">
-
-                    {{ $Paitent['morning_medicine'] }}
-
-                    </td>
-
-                    <td class="afternoon_medicine">
-
-                    {{ $Paitent['afternoon_medicine'] }}
-
-                    </td>
-
-                    <td class="night_medicine">
-
-                    {{ $Paitent['night_medicine'] }}
-
-                    </td>
-
-                    <td class="breakfast">
-
-                    {{ $Paitent['breakfast'] }}
-
-                    </td>
-
-                    <td class="lunch">
-
-                    {{ $Paitent['lunch'] }}
-                    </td>
-
-                    <td class="dinner">
-
-                    {{ $Paitent['dinner'] }}
-                    </td>
-                        </tr>
-                        @endforeach 
-                </table>
+                </div>
 
 
                 <script>
                     function showDiv(){
-                    document.getElementById("hidden_information").style.display = family_code.value ==  ? 'block' : 'none';
+                    document.getElementById("hidden_information").style.display = family_code.value == 1 ? 'block' : 'none';
                 }
                 </script>
 

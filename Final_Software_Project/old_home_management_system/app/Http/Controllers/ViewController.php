@@ -13,6 +13,9 @@ class ViewController extends Controller
         return view("registration_form");
     }
 
+    public function familyMember(){
+        return view("FamilyMembers_home");
+    }
 
 public function familyHomeVeiw(Request $request)
       {
