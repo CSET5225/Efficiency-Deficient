@@ -12,6 +12,15 @@
             box-sizing: border-box;
         }
 
+        body{
+            background-color: lightblue;
+            
+        }
+        
+        .patient-info{
+            visibility: hidden;
+        }
+        
         table, tr, th, td{
             border: 1px solid black;
         }
@@ -22,13 +31,13 @@
         <section>
             <form action="">
                 @csrf
-                <div>
+                <div class="patient-info">
                     <label>Patient ID</label>
-                    <input type="text">
+                    <p name= "patient_id"></p>
                 </div>
-                <div>
+                <div class="patient-info">
                     <label>Patient Name</label>
-                    <input type="text">
+                    <p name="patient_name">
                 </div>
                 <div>
                     <label>Date</label>

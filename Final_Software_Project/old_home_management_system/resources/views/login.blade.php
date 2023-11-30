@@ -38,7 +38,18 @@
     </style>
 </head>
 <body>
-    <form action="" method="POST">
+    @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+        
+    @endif
+    
+    <form action="/login" method="POST">
         @csrf
         <div>
             <label>Email</label>
