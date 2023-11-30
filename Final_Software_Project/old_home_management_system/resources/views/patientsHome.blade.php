@@ -11,17 +11,26 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        html{
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(180deg, #EEF5FF, #9EB8D9, #7C93C3, #A25772) no-repeat;
+        }
+        
         body{
-            background-color: lightblue;
-            
+            overflow: hidden;
+            font-family: OCRA Std, monospace;
         }
         
         .patient-info{
-            visibility: hidden;
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            /* visibility: hidden; */
         }
         
         table, tr, th, td{
+            width: 1000pt;
             border: 1px solid black;
         }
     </style>
@@ -33,12 +42,14 @@
                 @csrf
                 <div class="patient-info">
                     <label>Patient ID</label>
-                    <p name= "patient_id"></p>
+                    <p name= "patient_id">#1415151</p>
                 </div>
+
                 <div class="patient-info">
                     <label>Patient Name</label>
-                    <p name="patient_name">
+                    <p name="patient_name">Test</p>
                 </div>
+
                 <div>
                     <label>Date</label>
                     <input type="date">
@@ -61,7 +72,18 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <tr>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                        <td>Test</td>
+                    </tr>
+                    
                 </tbody>
             </table>
         </section>

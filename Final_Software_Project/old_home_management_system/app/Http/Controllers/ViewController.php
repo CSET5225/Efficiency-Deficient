@@ -84,7 +84,6 @@ class ViewController extends Controller
         elseif($this->$role_id = 5){
             return $this->adminHomeView();
         }
-
         return "Sorry, this account does not exist.";
     }
     
