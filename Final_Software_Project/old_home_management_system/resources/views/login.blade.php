@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Log In!</title>
+    <title>Login</title>
     <style>
         body {
       margin: 0;
@@ -82,14 +82,13 @@
     </style>
 </head>
 <body>
-<div class='header'>
-            <h1>Login</h1>
-            </div> 
-<div class="form">
+    <div class='header'>
+      <h1>Login</h1>
+    </div> 
+    <div class="form">
     <form action="{{ url('/login')}}" method="get">
         @csrf
-        
-            <div>
+        <div>
             <label style="padding-top: 5px;">Email</label>
             <input id="email" name="email" type="email" placeholder="example@example.com">
         </div>
