@@ -25,6 +25,10 @@ class ViewController extends Controller
         return view("login");
     }
 
+    public function supervisorHomeView(){
+        return view("supervisorHome");
+    }
+
     public function regOrLogin(){
         if(isset($_GET["home-login-button"])){
             return $this->loginView();

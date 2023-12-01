@@ -30,15 +30,13 @@
             text-align: center;
             background-color: #7C93C3;
             color: white;
-            border: 1px solid ;
             justify-content: center;
-            border-color: #A25772;
         }
         input{
             width: 250px;
-            border: 3px solid;
+            border: 1px solid;
             font-size: 15pt;
-            border-color: #A25772;
+            border-color: black;
             border-radius: 10px;
         }
         button{
@@ -50,7 +48,7 @@
             text-align: center;
             font-size: 25pt;
             border-radius: 10px;
-            border: 3px solid #A25772;
+            border: none;
         }
         button:hover{
             background-color: #EEF5FF;
@@ -61,8 +59,6 @@
         .form{
             background-color: #EEF5FF;
             padding: 20px;
-             border-radius: 20px;
-            border: 5px solid #A25772;
             box-sizing: border-box;
             z-index: 1;
             width: 150%;
@@ -70,10 +66,10 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
+            border-radius: 20px;
             }
 
 .header{
-        margin-top: 100px;
         position: absolute; 
         top: 20px; 
         left: 50%; 
