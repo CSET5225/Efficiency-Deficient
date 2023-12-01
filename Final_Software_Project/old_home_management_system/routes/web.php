@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\ViewController;
+use App\Http\Controllers\loginApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Use App\Http\Controllers\ViewController;
 Route::get('/registration', [ViewController::class,  'registrationFormView']);
 
 Route::get('/login', [ViewController::class, 'loginView']);
+
+Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
 Route::get('/', [ViewController::class, 'homeView']);
 
