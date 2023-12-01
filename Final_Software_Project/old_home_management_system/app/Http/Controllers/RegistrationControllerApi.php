@@ -32,23 +32,28 @@ class RegistrationControllerApi extends Controller
 
             if($data['role_id']==1){
                 patient::create($data);
-                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view("/login");
             }
             if($data['role_id']==2){
                 caregiver::create($data);
-                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view("/login");
             }
             if($data['role_id']==3){
                 doctor::create($data);
-                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view("/login");
             }
             if($data['role_id']==4){
                 supervisor::create($data);
-                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view("/login");
             }
             if($data['role_id']==5){
                 admin::create($data);
-                // echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                return view("/login");
             }
         }
     }
