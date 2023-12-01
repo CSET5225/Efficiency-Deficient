@@ -17,8 +17,6 @@
       height: 100vh;
     }
 
-
-
     @keyframes border {
       0%, 100% { background-color: #EEF5FF; }
       20% { background-color: #9EB8D9; }
@@ -26,43 +24,42 @@
       60% { background-color: #799DCB; }
       80% { background-color: #e7d2da }
     }
-form{
-  background-color:#EEF5FF;
-  padding: 20px;
-  border-radius: 20px;
-  z-index: 1;
-  width: 150%;
-  max-width: 420px;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  
-}
-.date{
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  width: 100%; 
-  margin: 10px 0; 
-}
 
-.code{
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  width: 100%; 
-  margin: 10px 0; 
-}
+    form{
+      background-color:#EEF5FF;
+      padding: 20px;
+      border-radius: 20px;
+      z-index: 1;
+      width: 150%;
+      max-width: 420px;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      
+    }
+    .date{
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+      margin: 10px 0; 
+    }
 
-.emergency_contact{
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  width: 100%; 
-  margin: 10px 0; 
-}
+    .code{
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+      margin: 10px 0; 
+    }
 
-
+    .emergency_contact{
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+      margin: 10px 0; 
+    }
 
      input {
       margin: 10px;
@@ -80,7 +77,6 @@ form{
         color: white;
         border: none;
         border-radius: 20px;
-        
 }
 
 button:hover{
@@ -130,7 +126,7 @@ h1{
                 <button name = "register_button">Ok</button>
 
                 <button name = "cancel_button">cancel</button>
-  </form>
+        </form>
                 </div>
 
 
