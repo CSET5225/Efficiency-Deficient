@@ -30,8 +30,6 @@ form{
   background-color:#EEF5FF;
   padding: 20px;
   border-radius: 20px;
-  border: 5px solid #A25772;
-  box-sizing: border-box;
   z-index: 1;
   width: 150%;
   max-width: 420px;
@@ -69,21 +67,19 @@ form{
      input {
       margin: 10px;
       width: 100%;
-      border-radius: 10px;
-      border: 2px solid #A25772;
       font-size: large;
-        
+      border-radius: 20px; 
+      border :1px solid black; 
     }
 
     button{
         margin: 10px;
         width: 50%;
-        border-radius: 10px;
-        border: 2px solid #A25772;
         background-color:#9EB8D9; 
         font-size: large;
         color: white;
-        
+        border: none;
+        border-radius: 20px;
         
 }
 
@@ -94,7 +90,6 @@ button:hover{
 }
 
 h1{
-        margin-top: 100px;
         position: absolute; 
         top: 20px; 
         left: 54%; 

@@ -34,7 +34,7 @@ class ViewController extends Controller
     public function loginView(){
     return view("login");
     }
-
+  
     public function familyHomeView(Request $request){
     $request -> validate([
     'family_code'=>'required',
