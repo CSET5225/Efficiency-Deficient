@@ -8,7 +8,6 @@
     <style>
         form{
             display: flex;
-            
         }
     </style>
 </head>

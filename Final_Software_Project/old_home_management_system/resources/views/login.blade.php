@@ -86,7 +86,7 @@
       <h1>Login</h1>
     </div> 
     <div class="form">
-    <form action="{{ url('/login')}}" method="get">
+    <form action="{{ url('/loginCheck')}}" method="GET">
         @csrf
         <div>
             <label style="padding-top: 5px;">Email</label>

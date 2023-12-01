@@ -25,19 +25,19 @@ class loginApplicationController extends Controller
 
 
             if(DB::SELECT("SELECT * FROM patients WHERE email = '$email' AND password = '$password'")){
-                return view('');
+                return view('patientsHome');
             }
-            if(DB::SELECT("SELECT * FROM admins WHERE email = '$email' AND password = '$password'")){
-                return view('');
+            elseif(DB::SELECT("SELECT * FROM admins WHERE email = '$email' AND password = '$password'")){
+                return view('adminsHome');
             }
-            if(DB::SELECT("SELECT * FROM doctors WHERE email = '$email' AND password = '$password'")){
-                return view('');
+            elseif(DB::SELECT("SELECT * FROM doctors WHERE email = '$email' AND password = '$password'")){
+                return view('doctorsHome');
             }
-            if(DB::SELECT("SELECT * FROM supervisors WHERE email = '$email' AND password = '$password'")){
-                return view('');
+            elseif(DB::SELECT("SELECT * FROM supervisors WHERE email = '$email' AND password = '$password'")){
+                return view('supervisorsHome');
             }
-            if(DB::SELECT("SELECT * FROM caregivers WHERE email = '$email' AND password = '$password'")){
-                return view('');
+            elseif(DB::SELECT("SELECT * FROM caregivers WHERE email = '$email' AND password = '$password'")){
+                return view('caregiversHome');
             }
             else{
                 echo "<script>alert('Account does not exist with this information');</script>";
