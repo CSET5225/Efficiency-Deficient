@@ -84,6 +84,7 @@ class ViewController extends Controller
         ->first();
 
         if($this->$role_id = 1){
+            
             return $this->patientHomeView();
         }
         elseif($this->$role_id = 2){
