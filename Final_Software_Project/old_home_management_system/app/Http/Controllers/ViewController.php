@@ -34,6 +34,20 @@ class ViewController extends Controller
     public function loginView(){
         return view("login");
     }
+
+
+    public function supervisorHomeView(){
+        return view("supervisorHome");
+    }
+
+    public function regOrLogin(){
+        if(isset($_GET["home-login-button"])){
+            return $this->loginView();
+        }
+        elseif(isset($_GET["home-register-button"])){
+            return $this->registrationFormView();
+        }
+    }
     
     public function patientHomeView(){
         return view("patientsHome");
