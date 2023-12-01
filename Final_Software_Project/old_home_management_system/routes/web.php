@@ -15,9 +15,7 @@ Use App\Http\Controllers\ViewController;
 */
 
 Route::get('/registration', [ViewController::class,  'registrationFormView']);
-
 Route::get('/login', [ViewController::class, 'loginView']);
-
-Route::get('/', [ViewController::class, 'homeView']);
-
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+Route::get('/home', [ViewController::class, 'homeView']);
+Route::get('/loginOrRegister', [ViewController::class, 'regOrLogin']);
+Route::get('/familyMembers_home', [ViewController::class, 'familyMember']);
