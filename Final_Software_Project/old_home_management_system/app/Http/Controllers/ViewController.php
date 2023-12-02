@@ -56,11 +56,25 @@ class ViewController extends Controller
     public function adminHomeView(){
         return view("adminsHome");
     }
+
     public function doctorsHomeView(){
         return view("doctorsHome");
     }
+
+    public function doctorsDashboardView(){
+        return view("doctorDashboard");
+    }
+    
     public function caregiversHomeView(){
         return view("caregiversHome");
+    }
+
+    public function doctorPatientsView(){
+        return view("doctorPatients");
+    }
+
+    public function rosterView(){
+        return view("roster");
     }
     
     public function login(Request $request){

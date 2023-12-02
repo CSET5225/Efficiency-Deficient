@@ -21,5 +21,9 @@ Route::get('/home', [ViewController::class, 'homeView']);
 Route::get('/loginOrRegister', [ViewController::class, 'regOrLogin']);
 Route::get('/familyMembers_home', [ViewController::class, 'familyMember']);
 Route::get('/supervisorHome', [ViewController::class, 'supervisorHomeView']);
-Route::get('/', [ViewController::class, 'homeView']);
-           
+Route::get('/patientHome', [ViewController::class, 'patientHomeView']);
+
+Route::get('/doctorsHome', [ViewController::class, 'doctorsHomeView']);
+Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView']);
+Route::get('/rosterHome', [ViewController::class, 'rosterView']);
+Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
