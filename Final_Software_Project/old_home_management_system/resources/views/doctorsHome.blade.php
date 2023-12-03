@@ -12,46 +12,77 @@
             box-sizing: border-box;
         }
         
+        html{
+            height: 100%;
+            background: linear-gradient(180deg, #EEF5FF, #608ac1,#A25772);
+            font-size: 18px;
+            font-family: monospace;
+        }
+        
         body{
             height: 100%;
             width: 100%;
         }
         
+        .header{
+            grid-area: header;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .header-tags{
+            display: flex;
+            justify-content: space-between;
+            width: inherit;
+            font-size: 18px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        table, td, th, tr{
+            border: 1px solid black;
+            padding: 1px;
+        }
+
+        .grid-container{
+            display: grid;
+            height: inherit;
+            border: 10px solid black;
+            grid-template-areas:
+            'header header header header'
+            'sidebar sidebar past-table past-table '
+            'search search . .'
+            'table table table table';
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 10px;
+        }
+                
         .grid-item{
+            border: 2px solid aqua;
             background-color: gray;
             color: white;
         }
 
-        .grid-item .header{
-            grid-area: header;
-            display: flex;
-            justify-content: space-between;
-        }
-        .grid-item .sidebar{
-            grid-area: sidebar;
-        }
-        .grid-item .search{
-            grid-area: search;
-        }
-        .grid-item .main{
-            grid-area: main;
-        }
-        .grid-item .table{
-            grid-area: table;
+
+        .sidebar>ul{
+            background-color:gray;
+            color:white;
+            list-style-type: none;
         }
         
-        .grid-container{
-            display: grid;
-            grid-template-areas:
-            'header header header header'
-            'sidebar main main search'
-            'sidebar main main main'
-            'sidebar table main main'
-            'sidebar table main main'
-            'sidebar main main main'
-            'sidebar main main main';
-            gap: 10px;
-            padding: 10px;
+        .past-table{
+            grid-area: past-table;
+        }
+        .search{
+            grid-area: search;
+            height: 50%;
+            width: 250px;
+        }
+        
+        .table{
+            grid-area: table;
         }
         
     </style>
@@ -60,32 +91,24 @@
     <div class="grid-container">
         <header class="grid-item header">
             <div>
-                <h5>Welcome, Doctor!</h5>
+                <h1>Welcome, Doctor!</h1>
+            </div>
+
+            <ul class="header-tags">
+            <div>
+                <li>Your Patients</li>
             </div>
             <div>
-                <ul>
-                    <li>Your Patients</li>
-                    <li>Your Profile</li>
-                    <li>Log Out</li>
-                </ul>
+                <li>Your Profile</li>
             </div>
-
+            <div>
+                <li><a href="{{ url('/') }}">Log Out</a></li>
+            </div>
+            </ul>
         </header>
         
-        <div class="grid-item sidebar">
-            Sidebar
-        </div>
-
-        <div class="grid-item search">
-            <form action="">
-                <label>Appointments</label>
-                <input type="date">
-                <button>Submit</button>
-            </form>
-        </div>
-
-        <div class="grid-item table">
-            Past 
+        <div class="grid-item past-table">
+            <label>Past History with Patients:</label>
             <table>
                 <thead>
                     <tr>
@@ -98,24 +121,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>9/17/23</td>
-                        <td></td>
-                        <td>Needs cold medicine</td>
-                        <td>Needs cold medicine</td>
-                    </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>9/17/23</td>
+                            <td>None</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="grid-item main">
-            
+        <div class="sidebar">
+            <ul>
+                <li>A</li>
+                <li>A</li>
+                <li>A</li>
+                <li>A</li>
+            </ul>
         </div>
 
-        <div class="grid-item main">
-            Main
+        <div class="grid-item search">
+            <form action="">
+                <label>Appointments</label>
+                <input type="date" value="" >
+                <button>Submit</button>
+            </form>
         </div>
+
+
+        <div class="grid-item table">
+            Patients By Date
+          <form action="" method="POST">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Test1</td>
+                        <td>Test2</td>
+                    </tr>
+                </tbody>
+            </table>
+          </form>
+        </div>
+
     </div>
 </body>
 </html>
