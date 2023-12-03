@@ -14,6 +14,7 @@
         
         html{
             height: 100%;
+            padding: 25px;
             background: linear-gradient(180deg, #EEF5FF, #608ac1,#A25772);
             font-size: 18px;
             font-family: monospace;
@@ -30,42 +31,39 @@
             display: flex;
             justify-content: space-evenly;
         }
-        .header-tags{
-            display: flex;
-            justify-content: space-between;
-            width: inherit;
-            font-size: 18px;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
 
         table, td, th, tr{
+            margin: auto;
             border: 1px solid black;
             padding: 1px;
+        }
+
+        thead, tbody{
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .grid-container{
             display: grid;
             height: inherit;
-            border: 10px solid black;
             grid-template-areas:
             'header header header header'
-            'sidebar sidebar past-table past-table '
-            'search search . .'
-            'table table table table';
+            'sidebar past-table past-table past-table'
+            'sidebar search search search'
+            'sidebar table table table';
             grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 10px;
-            padding: 10px;
+            grid-gap: 8px;
         }
                 
         .grid-item{
-            border: 2px solid aqua;
+            border: 5px solid rgba(255, 255, 255, 0.678);
             background-color: gray;
             color: white;
         }
 
-
+        .sidebar{
+            grid-area: sidebar;
+        }
         .sidebar>ul{
             background-color:gray;
             color:white;
@@ -75,10 +73,12 @@
         .past-table{
             grid-area: past-table;
         }
+
         .search{
             grid-area: search;
-            height: 50%;
-            width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .table{
@@ -94,17 +94,13 @@
                 <h1>Welcome, Doctor!</h1>
             </div>
 
-            <ul class="header-tags">
-            <div>
+            {{-- <div>
                 <li>Your Patients</li>
-            </div>
-            <div>
-                <li>Your Profile</li>
-            </div>
+            </div> --}}
+
             <div>
                 <li><a href="{{ url('/') }}">Log Out</a></li>
             </div>
-            </ul>
         </header>
         
         <div class="grid-item past-table">
@@ -133,7 +129,7 @@
             </table>
         </div>
 
-        <div class="sidebar">
+        <div class="grid-item sidebar">
             <ul>
                 <li>A</li>
                 <li>A</li>
@@ -144,6 +140,7 @@
 
         <div class="grid-item search">
             <form action="">
+                @csrf
                 <label>Appointments</label>
                 <input type="date" value="" >
                 <button>Submit</button>
@@ -154,6 +151,7 @@
         <div class="grid-item table">
             Patients By Date
           <form action="" method="POST">
+            @csrf
             <table>
                 <thead>
                     <tr>

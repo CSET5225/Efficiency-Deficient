@@ -58,6 +58,7 @@ class ViewController extends Controller
     }
 
     public function doctorsHomeView(){
+        
         return view("doctorsHome");
     }
 
