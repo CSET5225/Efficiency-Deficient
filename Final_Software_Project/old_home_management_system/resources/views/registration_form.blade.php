@@ -106,7 +106,7 @@ a:hover{
                     @csrf
                     <div class="p-1 d-table w-100 text-center">
                         <label for="role_id" class="w-100 text-center">Role:</label>
-                        <select name="role_id" id="role_id" onchange="showDiv()" class="d-block justify-content-center w-100">
+                        <select name="role_id" id="role_id" onchange="showDiv()" class="d-block justify-content-center w-100" required>
                             <option value=1>Patient</option>
                             <option value=2>Caregiver</option>
                             <option value=3>Doctor</option>
@@ -117,7 +117,7 @@ a:hover{
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="first_name" class="w-50">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name">
+                        <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name" required>
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
@@ -127,28 +127,28 @@ a:hover{
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="DOB" class="w-50">Date of Birth:</label>
-                        <input type="DOB" name="DOB" id="DOB" placeholder="0000-00-00" class="w-100">
+                        <input type="DOB" name="DOB" id="DOB" placeholder="0000-00-00" class="w-100" required>
                     </div>
                             
                     <div class="p-1 d-table w-100 text-center">
                         <label for="email" class="w-50">Email:</label>
-                        <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com">
+                        <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com" required>
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="password" class="w-50">Password:</label>
-                        <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password">
+                        <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password" required>
                     </div>  
                             
                     <div id="hidden_information">
                         <div class="p-1 d-table w-100 text-center">
                             <label for="family_code" class="w-50">Family Code:</label>
-                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100">
+                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100" required>
                         </div>
                                     
                         <div class="p-1 d-table w-100 text-center">
                             <label for="emergency_contact" class="w-50">Emergency Contact:</label>  
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890">
+                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890" required>
                         </div>
                     </div>
                             

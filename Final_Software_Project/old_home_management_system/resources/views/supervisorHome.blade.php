@@ -81,6 +81,7 @@ button {
   padding: 50px;
   width: 50%; 
 }
+
 h1{
         /* margin-top: 50px; */
         position: absolute; 
@@ -165,8 +166,6 @@ h1{
         </button>
         <br>
        </div>
-        
-       
-</div>
+  </div>
 </body>
 </html>
