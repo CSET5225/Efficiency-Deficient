@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
 </head>
-    <body>
-    <style>
+<style>
     body {
       margin: 0;
       overflow: hidden;
@@ -19,13 +18,7 @@
 
 
 
-    @keyframes border {
-      0%, 100% { background-color: #EEF5FF; }
-      20% { background-color: #9EB8D9; }
-      40% { background-color: #8fadd3; }
-      60% { background-color: #799DCB; }
-      80% { background-color: #e7d2da }
-    }
+
 form{
   background-color:#EEF5FF;
   padding: 20px;
@@ -99,11 +92,24 @@ h1{
       border-radius: 10px;
     }
 
-  
+    .logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            background-color: black;
+        }
+
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
+        }
 </style>
+    <body>
 
-
-
+<button class='logout'>Log Out</button>
                 <h1>Family Member</h1>
 
 <div id="form">
