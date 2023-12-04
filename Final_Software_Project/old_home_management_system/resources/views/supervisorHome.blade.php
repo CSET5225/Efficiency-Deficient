@@ -14,25 +14,29 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  font-size: larger;
+      font-family: 'Courier New', Courier, monospace;
 }
 
 .a {
   text-decoration: none;
   color: white;
+font-family: 'Courier New', Courier, monospace;
 }
 
 button {
   border: none;
   background-color: #9EB8D9;
-  width: 130%;
+  width: 100%;
   font-size: 25pt;
   height: 175px; 
   margin: 10px 0; 
   color: white;
+  border-radius: 20px;
 }
 
 .form {
- padding: 20px; 
+ /* padding: 20px;  */
    box-sizing: border-box;
   z-index: 1;
   width: auto;
@@ -41,6 +45,7 @@ button {
   flex-direction: row;
   justify-content: center; 
   background-color: white; 
+  border-radius: 20px;
 }
 
 
@@ -57,8 +62,8 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 50px;
-  width: 50%; 
+   padding: 50px;
+   width: 50%;  
 }
 .div3{
   display: flex;
@@ -78,13 +83,14 @@ button {
 }
 
 h1{
-        margin-top: 50px;
+        /* margin-top: 50px; */
         position: absolute; 
         top: 20px; 
         left: 54%; 
         transform: translateX(-50%); 
         z-index: 2; 
-      padding: 10px
+      padding: 10px;
+      font-size:40pt ;
     }
     button:hover{
         transition-duration: 2s;
@@ -95,9 +101,27 @@ h1{
         transition-duration: 2s;
         color: black;
     }
+
+
+    .logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            background-color: black;
+        }
+
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
+        }
+
+
 </style>
 <body>
-    
+    <button class="logout">Log Out</button>
    <div class="form">
    <h1>Welcome Supervisor</h1>
     <div class="div1">
@@ -118,7 +142,7 @@ h1{
         </button>
         <br>
         <button>
-            <a href="" class="a">Patients Home</a>
+            <a href="./patientHome" class="a">Patients Home</a>
         </button>
         <br>
         </div>
@@ -129,18 +153,18 @@ h1{
         </button>
         <br>
         <button>
-            <a href="" class="a">Roster</a>
+            <a href="./roster" class="a">Roster</a>
         </button>
         <br>
        </div>
 
        <div class="div4">
        <button>
-            <a href="" class="a">New Roster</a>
+            <a href="./newRoster" class="a">New Roster</a>
         </button>
         <br>
         <button>
-            <a href="" class="a">Admin's Report</a>
+            <a href="/adminReport" class="a">Admin's Report</a>
         </button>
         <br>
        </div>

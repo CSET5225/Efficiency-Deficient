@@ -14,15 +14,24 @@
         html{
             height: 100%;
             background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
-            font-size:20px;
+            font-size: larger;
+      font-family: 'Courier New', Courier, monospace;
+      width: auto;
         }
         .main-content{
-            height: 100pt;
-            width: inherit;
+            background-color: #EEF5FF;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1;
+            width: 70%;
+            max-width: 130%;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            border-radius: 20px;
             margin: auto;
-            display: flex;
-            flex-direction: column;
             justify-content: space-between;
+            margin-top: 15%;
         }
 
         .caregiver-table{
@@ -31,12 +40,19 @@
             font-size: 30px;
             background-image: linear-gradient(to right, goldenrod, gold);
             border: 8px inset gold;
+            
         }
 
         label{
-            border: 1px solid black;
-            background: rgb(98, 98, 255);
-            color: white;
+            position: absolute; 
+        top: 20px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 2; 
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 40pt;
+      margin-top:80px;
         }
 
         table, tr, th, td{
@@ -46,19 +62,46 @@
         }
         
         button{
-            float: right;
-            width: 150px;
-            height: 50px;
+        margin: auto;
+        width: 25%;
+        background-color:#9EB8D9; 
+        font-size: large;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-left: 35%;
+}
+
+button:hover{
+  transition-duration: 2s;
+        background-color: #EEF5FF;
+        color:black;   
+}
+.logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            background-color: black;
+        }
+
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
         }
     </style>
 </head>
 <body>
-    <div class="main-content">
-        <div class="">
+<button class="logout">Log Out</button>
+<div class="">
             <label>List of Patients' duty today</label>
         </div>
+    <div class="main-content">
+        
         <div class="caregiver-table">
-        <form action="" method="POST">
+        <form action="{{ url('/caregiversHome')}}" method="POST">
                 <table>
                     <thead>
                         <tr>
@@ -85,6 +128,7 @@
             </table>
             <button>Submit</button>
         </form>
+        
     </div>
     </div>
 </body>
