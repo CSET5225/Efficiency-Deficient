@@ -25,6 +25,10 @@
             width: 100%;
         }
         
+        label{
+            background-color: darkblue;
+        }
+        
         .header{
             grid-area: header;
             width: 100%;
@@ -56,7 +60,6 @@
         }
                 
         .grid-item{
-            border: 5px solid rgba(255, 255, 255, 0.678);
             background-color: gray;
             color: white;
         }
@@ -141,15 +144,15 @@
         <div class="grid-item search">
             <form action="">
                 @csrf
-                <label>Appointments</label>
-                <input type="date" value="" >
+                <label>Appointments Search:</label>
+                <input type="date" name="date" >
                 <button>Submit</button>
             </form>
         </div>
 
 
         <div class="grid-item table">
-            Patients By Date
+            <label>Available Appointments until the Specified Date:</label>
           <form action="" method="POST">
             @csrf
             <table>
