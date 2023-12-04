@@ -34,8 +34,50 @@ class ViewController extends Controller
     public function loginView(){
     return view("login");
     }
-  
-    public function familyHomeView(Request $request){
+
+
+    public function supervisorHomeView(){
+        return view("supervisorHome");
+    }
+
+    public function regOrLogin(){
+        if(isset($_GET["home-login-button"])){
+            return $this->loginView();
+        }
+        elseif(isset($_GET["home-register-button"])){
+            return $this->registrationFormView();
+        }
+    }
+    
+    public function patientHomeView(){
+        return view("patientsHome");
+    }
+
+    public function adminHomeView(){
+        return view("adminsHome");
+    }
+
+    public function doctorsHomeView(){
+        return view("doctorsHome");
+    }
+
+    public function doctorsDashboardView(){
+        return view("doctorDashboard");
+    }
+
+    public function caregiversHomeView(){
+        return view("caregiversHome");
+    }
+
+    public function doctorPatientsView(){
+        return view("doctorPatients");
+    }
+
+    public function rosterView(){
+        return view("roster");
+    }
+    
+   public function familyHomeView(Request $request){
     $request -> validate([
     'family_code'=>'required',
     'emergency_contact'=>'required',
