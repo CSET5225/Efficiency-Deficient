@@ -23,7 +23,7 @@ class ViewController extends Controller
         return $family_code;
     }
 
-    public function familyMember(){
+    public function familyMemberView(){
     return view("FamilyMembers_home");
     }
 

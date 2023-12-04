@@ -26,7 +26,7 @@ Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+Route::get('/familyMembers_home', [ViewController::class, 'familyMemberView']);
 
 Route::get('/patientsHome', function () {
     return view('patientsHome');

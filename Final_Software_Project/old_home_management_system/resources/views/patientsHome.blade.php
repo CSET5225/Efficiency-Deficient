@@ -36,6 +36,7 @@
     </style>
 </head>
 <body>
+    @auth
     <div>
         <section>
             <form action="">
@@ -44,12 +45,12 @@
                     <label>Patient ID</label>
                     <p name= "patient_id">#1415151</p>
                 </div>
-
+                
                 <div class="patient-info">
                     <label>Patient Name</label>
                     <p name="patient_name">Test</p>
                 </div>
-
+                
                 <div>
                     <label>Date</label>
                     <input type="date">
@@ -88,5 +89,12 @@
             </table>
         </section>
     </div>
+
+    @else
+    <script>
+    alert("Please log in.");
+    window.location.href = "/login";
+    </script>
+    @endauth
 </body>
 </html>
