@@ -69,6 +69,59 @@ class ViewController extends Controller
         return view("caregiversHome");
     }
 
+
+    public function rosterview(){
+        return view("roster");
+    }
+
+    public function newRosterview(){
+        return view("newRoster");
+    }
+
+    public function adminReport(){
+        return view('adminReport');
+    }
+    
+    public function login(Request $request){
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:12']
+        ]);
+
+        $role_id = DB::table('roles')
+        ->join('admins', 'roles.role_id', '=', 'admins.role_id')
+        ->join('caregivers', 'roles.role_id', '=', 'caregivers.role_id')
+        ->join('patients', 'roles.role_id', '=', 'patients.role_id')
+        ->join('doctors', 'roles.role_id', '=', 'doctors.role_id')
+        ->join('supervisors', 'roles.role_id', '=', 'supervisors.role_id')
+        ->select('roles.role_id')
+        ->where('admins.email', '=', $credentials['email'])
+        ->orWhere('caregivers.email', '=', $credentials['email'])
+        ->orWhere('patients.email', '=', $credentials['email'])
+        ->orWhere('doctors.email', '=', $credentials['email'])
+        ->orWhere('supervisors.email', '=', $credentials['email'])
+        ->first();
+
+        if($this->$role_id = 1){
+            
+            return $this->patientHomeView();
+        }
+        elseif($this->$role_id = 2){
+            return $this->caregiversHomeView();
+        }
+        elseif($this->$role_id = 3){
+            return $this->doctorsHomeView();
+        }
+        elseif($this->$role_id = 4){
+            // return $this->familyHomeView([DB::select('family_code')]);
+        }
+        elseif($this->$role_id = 5){
+            return $this->adminHomeView();
+        }
+        return "Sorry, this account does not exist.";
+    }
+    
+    
     public function doctorPatientsView(){
         return view("doctorPatients");
     }
@@ -96,4 +149,5 @@ class ViewController extends Controller
     $data = patient::all();
     return view('familyMembers_home',['a'=>$data]);
     }
+
 }
