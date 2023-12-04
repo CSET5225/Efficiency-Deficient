@@ -81,6 +81,7 @@ button {
   padding: 50px;
   width: 50%; 
 }
+
 h1{
         /* margin-top: 50px; */
         position: absolute; 
@@ -101,6 +102,7 @@ h1{
         color: black;
     }
 
+
     .logout {
             position: absolute;
             top: 10px;
@@ -115,6 +117,7 @@ h1{
             transition-duration: 2s;
             color: black;
         }
+
 
 </style>
 <body>
@@ -165,8 +168,6 @@ h1{
         </button>
         <br>
        </div>
-        
-       
-</div>
+  </div>
 </body>
 </html>
