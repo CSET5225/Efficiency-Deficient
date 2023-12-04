@@ -54,12 +54,12 @@
                     <div id="hidden_information">
                         <div class="p-1 d-table w-100 text-center">
                             <label for="family_code" class="w-50">Family Code:</label>
-                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100" required>
+                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100">
                         </div>
                                     
                         <div class="p-1 d-table w-100 text-center">
                             <label for="emergency_contact" class="w-50">Emergency Contact:</label>  
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" required>
+                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100">
                         </div>
                     </div>
                             
