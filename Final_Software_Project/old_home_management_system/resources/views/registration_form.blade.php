@@ -117,18 +117,12 @@ a:hover{
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="first_name" class="w-50">First Name:</label>
-
-                        <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name">
-=======
                         <input type="text" id="first_name" name="first_name" class="w-100" required>
 
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="last_name" class="w-50">Last Name:</label>
-
-                        <input type="text" id="last_name" name="last_name" class="w-100" placeholder="Last Name">
-=======
                         <input type="text" id="last_name" name="last_name" class="w-100" required>
 
                     </div>
@@ -142,16 +136,11 @@ a:hover{
                         <label for="email" class="w-50">Email:</label>
 
                         <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com">
-=======
-                        <input type="text" id="email" name="email" class="w-100" required>
 
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="password" class="w-50">Password:</label>
-
-                        <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password">
-=======
                         <input type="text" name="password" id="password" maxlength="12" class="w-100" required>
 
                     </div>  
@@ -159,15 +148,14 @@ a:hover{
                     <div id="hidden_information">
                         <div class="p-1 d-table w-100 text-center">
                             <label for="family_code" class="w-50">Family Code:</label>
-                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100" required>
+                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100">
                         </div>
                                     
                         <div class="p-1 d-table w-100 text-center">
                             <label for="emergency_contact" class="w-50">Emergency Contact:</label>  
 
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890">
-=======
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" required>
+                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100">
+
 
                         </div>
                     </div>
