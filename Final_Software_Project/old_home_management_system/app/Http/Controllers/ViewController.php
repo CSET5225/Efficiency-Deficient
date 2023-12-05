@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\patient;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ViewController extends Controller
 {
@@ -51,6 +52,33 @@ class ViewController extends Controller
     
     public function patientHomeView(){
         return view("patientsHome");
+    }
+
+    public function patientAddInfoView(){
+        return view("patientAdditionalInfo");
+    }
+
+    public function patientSearch(Request $request){
+        if(isset($_POST['patientID'])){
+            $patientID = $request->validate([
+                'patientID' => ['required']
+            ]);
+
+            $data = DB::table('patients')
+            ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
+            ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), "admission_date", "patient_groups.group_id")
+            ->where('patient_id', '=', $patientID)
+            ->first();
+
+            if($data){
+                Carbon::parse($data->admission_date)->format('m/d/Y');
+                return view("patientAdditionalInfo", compact('data'));
+            }
+
+        }
+        if(isset($_POST['patient_add_info_cancel'])){
+            return view("patientAdditionalInfo");
+        }
     }
 
     public function adminHomeView(){

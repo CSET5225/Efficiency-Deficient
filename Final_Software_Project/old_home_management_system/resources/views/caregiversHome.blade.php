@@ -53,12 +53,14 @@
     </style>
 </head>
 <body>
+    @auth
+        
     <div class="main-content">
         <div class="">
             <label>List of Patients' duty today</label>
         </div>
         <div class="caregiver-table">
-        <form action="" method="POST">
+            <form action="" method="POST">
                 <table>
                     <thead>
                         <tr>
@@ -79,13 +81,19 @@
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
+                            <td><input type="checkbox"></td>
+                        </tr>
                     </tbody>
-            </table>
-            <button>Submit</button>
-        </form>
+                </table>
+                <button>Submit</button>
+            </form>
     </div>
     </div>
+    @else
+    <script>
+        alert("Please log in.");
+        window.location.href = "/login";
+    </script>
+    @endauth
 </body>
 </html>

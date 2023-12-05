@@ -28,6 +28,8 @@ Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
 Route::get('/familyMembers_home', [ViewController::class, 'familyMemberView']);
 
+Route::get('/patientAddInfo', [ViewController::class, 'patientAddInfoView']);
+
 Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
@@ -51,4 +53,4 @@ Route::get('/caretakersHome', function () {
     return view('caretakersHome');
 });
 
-
+Route::post('/patientInfoSearch', [ViewController::class, 'patientSearch']);
