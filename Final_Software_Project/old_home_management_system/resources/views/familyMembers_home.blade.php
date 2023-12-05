@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
     
     
     
@@ -59,9 +50,43 @@
     width: 100%; 
     margin: 10px 0; 
     }
-    
-    
-    
+
+    form{
+      background-color:#EEF5FF;
+      padding: 20px;
+      border-radius: 20px;
+      z-index: 1;
+      width: 150%;
+      max-width: 420px;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      
+    }
+    .date{
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+      margin: 10px 0; 
+    }
+
+    .code{
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+      margin: 10px 0; 
+    }
+
+    .emergency_contact{
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+      margin: 10px 0; 
+    }
+
      input {
       margin: 10px;
       width: 100%;
@@ -77,12 +102,10 @@
         font-size: large;
         color: white;
         border: none;
-        border-radius: 20px;
         
-    }
-    
-    button:hover{
-    transition-duration: 2s;
+
+button:hover{
+  transition-duration: 2s;
         background-color: #EEF5FF;
         color:black;   
     }
@@ -96,8 +119,6 @@
       padding: 10px;
       border-radius: 10px;
     }
-    
-    
     </style>
 </head>
 <body>
