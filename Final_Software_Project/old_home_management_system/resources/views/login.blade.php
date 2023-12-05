@@ -7,6 +7,7 @@
     <title>Login</title>
     <style>
         body {
+
       margin: 0;
       overflow: hidden;
       background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
@@ -16,6 +17,12 @@
       height: 100vh;
       font-family: monospace;
     }
+
+        #login {
+            font-size:60px;
+        }
+        
+
         div{
             display: flex;
             margin: auto;
@@ -54,56 +61,52 @@
         button:hover{
             background-color: #EEF5FF;
             color: black;
-            transition-duration: 2s;
+            transition-duration: 1s;
 
         }
-        .form{
-            background-color: #EEF5FF;
-            padding: 20px;
+        .background{
+            background-color: white;
             box-sizing: border-box;
             z-index: 1;
-            width: 150%;
-            max-width: 50%;
+            width: 100%;
+            max-width: 675px;
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             border-radius: 20px;
             }
 
-.header{
-        position: absolute; 
-        top: 20px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 2; 
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 25pt;
-}
+        .background{
+            background-color: white;
+        }
     </style>
 </head>
 <body>
-    <div class='header'>
-      <h1>Login</h1>
-    </div> 
-    <div class="form">
-    <form action="{{ url('/loginCheck')}}" method="GET">
-        @csrf
+    <div class="background">
         <div>
-            <label style="padding-top: 5px;">Email</label>
-            <input id="email" name="email" type="email" placeholder="example@example.com">
-        </div>
+            <h1 id ="login">Login</h1>
+        </div> 
+        <form action="{{ url('/loginCheck')}}" method="GET">
+            @csrf
+            <div>
+                <label style="padding-top: 5px;">Email</label>
+                <input id="email" name="email" type="email" placeholder="example@example.com">
+            </div>
+                
+            <div>
+                <label style="padding-top: 5px;">Password</label>
+                <input id="password" name="password" type="password" placeholder="password">
+            </div>
             
-        <div>
-            <label style="padding-top: 5px;">Password</label>
-            <input id="password" name="password" type="password" placeholder="password">
-        </div>
-            
-        <div>
-            <button name="login-ok">Ok</button>
-            <button name="login-cancel">Cancel</button>
-        </div>
-    </form>
+            <div>
+                <button name="login-ok">Ok</button>
+            </div>
+
+            </form>
+
+            <form action="{{ url('/') }}">
+                <button>Cancel</button>
+        </form>
     </div>
 </body>
 </html>

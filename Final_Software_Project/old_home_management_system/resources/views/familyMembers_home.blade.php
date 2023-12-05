@@ -6,6 +6,7 @@
     <title>Registration</title>
 </head>
 <style>
+
 body {
         margin: 0;
         overflow: hidden;
@@ -55,6 +56,7 @@ body {
         border: none;
         border-radius: 20px;
     }
+
 
     button:hover {
         transition-duration: 2s;
@@ -122,6 +124,7 @@ body {
     flex-direction: row;
 }
 </style>
+
 
 <body>
   <div class='body'>
