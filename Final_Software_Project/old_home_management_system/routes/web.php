@@ -20,6 +20,7 @@ Route::get('/', [ViewController::class, 'homeView']);
 Route::get('/registration', [ViewController::class,  'registrationFormView']);
 
 Route::get('/login', [ViewController::class, 'loginView']);
+
 Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView']);
 Route::get('/rosterHome', [ViewController::class, 'rosterView']);
 Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);

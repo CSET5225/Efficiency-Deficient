@@ -106,6 +106,7 @@ h1{
         color: black;
     }
 
+
     .logout {
             position: absolute;
             top: 10px;
