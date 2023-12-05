@@ -6,7 +6,7 @@ use App\Models\patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Db;
 
-class fmailyMemberAPI extends Controller
+class familyMemberAPI extends Controller
 {
     /**
      * Display a listing of the resource.

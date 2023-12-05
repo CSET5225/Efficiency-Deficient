@@ -40,16 +40,7 @@ class ViewController extends Controller
     public function supervisorHomeView(){
         return view("supervisorHome");
     }
-
-    public function regOrLogin(){
-        if(isset($_GET["home-login-button"])){
-            return $this->loginView();
-        }
-        elseif(isset($_GET["home-register-button"])){
-            return $this->registrationFormView();
-        }
-    }
-    
+   
     public function patientHomeView(){
         return view("patientsHome");
     }
@@ -66,7 +57,9 @@ class ViewController extends Controller
 
             $data = DB::table('patients')
             ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
-            ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), "admission_date", "patient_groups.group_id")
+            ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
+            "admission_date", 
+            "patient_groups.group_id")
             ->where('patient_id', '=', $patientID)
             ->first();
 
@@ -98,7 +91,7 @@ class ViewController extends Controller
     }
 
 
-    public function rosterview(){
+    public function rosterView(){
         return view("roster");
     }
 
@@ -110,52 +103,10 @@ class ViewController extends Controller
         return view('adminReport');
     }
     
-    public function login(Request $request){
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:12']
-        ]);
-
-        $role_id = DB::table('roles')
-        ->join('admins', 'roles.role_id', '=', 'admins.role_id')
-        ->join('caregivers', 'roles.role_id', '=', 'caregivers.role_id')
-        ->join('patients', 'roles.role_id', '=', 'patients.role_id')
-        ->join('doctors', 'roles.role_id', '=', 'doctors.role_id')
-        ->join('supervisors', 'roles.role_id', '=', 'supervisors.role_id')
-        ->select('roles.role_id')
-        ->where('admins.email', '=', $credentials['email'])
-        ->orWhere('caregivers.email', '=', $credentials['email'])
-        ->orWhere('patients.email', '=', $credentials['email'])
-        ->orWhere('doctors.email', '=', $credentials['email'])
-        ->orWhere('supervisors.email', '=', $credentials['email'])
-        ->first();
-
-        if($this->$role_id = 1){
-            
-            return $this->patientHomeView();
-        }
-        elseif($this->$role_id = 2){
-            return $this->caregiversHomeView();
-        }
-        elseif($this->$role_id = 3){
-            return $this->doctorsHomeView();
-        }
-        elseif($this->$role_id = 4){
-            // return $this->familyHomeView([DB::select('family_code')]);
-        }
-        elseif($this->$role_id = 5){
-            return $this->adminHomeView();
-        }
-        return "Sorry, this account does not exist.";
-    }
-    
+        
     
     public function doctorPatientsView(){
         return view("doctorPatients");
-    }
-
-    public function rosterView(){
-        return view("roster");
     }
     
    public function familyHomeView(Request $request){

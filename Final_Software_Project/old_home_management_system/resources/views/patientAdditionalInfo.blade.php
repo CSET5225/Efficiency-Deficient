@@ -70,15 +70,15 @@
             </section>
             <section class="group">
                 <label>Group</label>
-                <input type="text" placeholder="Group..." name="group" value="{{ $data->group_id }}" readonly>
+                <input type="text" placeholder="Group..." name="group" value="{{ isset($_POST['patientID']) ? $data->group_id : "" }}" readonly>
             </section>
             <section class="admissionDate">
                 <label>Admission Date</label>
-                <input type="date" name="date" value="{{ $data->admission_date }}" readonly>
+                <input type="date" name="date" value="{{ isset($_POST['patientID']) ? $data->admission_date : "" }}" readonly>
             </section>
             <section class="patientName">
                 <label>Patient Name</label>
-                <input type="text" name="patientName" value="{{ $data->full_name }}" readonly>
+                <input type="text" name="patientName" value="{{ isset($_POST['patientID']) ? $data->full_name : ""}}" readonly>
             </section>
             <section class="button-container">
                 <button name="patient_add_info_confirm">OK</button>
