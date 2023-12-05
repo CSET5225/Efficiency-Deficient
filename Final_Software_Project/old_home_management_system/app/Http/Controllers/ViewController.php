@@ -76,10 +76,7 @@ class ViewController extends Controller
     public function rosterView(){
         return view("roster");
 
-    public function rosterview(){
-        return view("roster");
-    }
-
+}
     public function newRosterview(){
         return view("newRoster");
     }
@@ -127,24 +124,91 @@ class ViewController extends Controller
         return "Sorry, this account does not exist.";
     }
     
-    public function familyHomeView(Request $request){
-        $request -> validate([
-            'family_code'=>'required',
-            'emergency_contact'=> 'required',
-        ]);
-        $person = DB::select(
-            'SELECT CONCAT(doctors.first_name, doctors.last_name) 
-            AS doctors_name, CONCAT(appointments.scheduled_date,appointments.appointment_id) 
-            AS doctors_appointments,
-            CONCAT(caregivers.first_name, caregivers.last_name) AS caregivers_name,
-            morning_medicine, afternoon_medicine, night_medicine, breakfast, lunch, dinner FROM patients
-            JOIN appointments ON patients.appointment_id = appointments.appointment_id
-            JOIN doctors ON appointments.doctor_id = doctors.doctor_id
-            JOIN caregivers ON patients.caregiver_id = caregivers.caregiver_id; '
-        );
-         patient::create($person);
-         $data = patient::all();
-         return view('familyMembers_home',['a'=>$data]);;
+    public function familyHomeView(Request $request)
+    {
+        $patients = Patient::join('appointments', 'appointments.appointment_id', '=', 'appointments.appointment_id')
+            ->join('doctors', 'appointments.doctor_id', '=', 'doctors.doctor_id')
+            ->join('caregivers', 'caregivers.caregiver_id', '=', 'caregivers.caregiver_id')
+            ->select(
+                'patients.patient_id',
+                DB::raw('CONCAT(doctors.first_name, " ", doctors.last_name) AS doctors_name'),
+                DB::raw('CONCAT(appointments.scheduled_date, appointments.appointment_id) AS doctors_appointments'),
+                DB::raw('CONCAT(caregivers.first_name, " ", caregivers.last_name) AS caregivers_name'),
+            )
+            ->get();
+
+        foreach ($patients as $patient) {
+            Patient::create([
+                'patient_id' => $patient->patient_id,
+                'full_name' => $patient->doctors_name,
+                'doctors_appointments' => $patient->doctors_appointments,
+                'caregivers_name' => $patient->caregivers_name,
+                'morning_medicine' => $patient->morning_medicine,
+                'afternoon_medicine' => $patient->afternoon_medicine,
+                'night_medicine' => $patient->night_medicine,
+                'breakfast' => $patient->breakfast,
+                'lunch' => $patient->lunch,
+                'dinner' => $patient->dinner,
+            ]);
         }
-        
-}
+      
+        $data = Patient::all();
+        return view('familyMembers_home', ['a' => $data]);
+    }
+
+
+        public function check()
+        {
+
+
+    
+    $patients = Patient::select('patient_id', 'first_name', 'last_name','DOB','emergency_contact','admission_date')->get();
+
+   
+    $patients->each(function ($patient) {
+        $patient->full_name = $patient->first_name . ' ' . $patient->last_name;
+    });
+
+    return view('Patients', ['patients' => $patients]);
+
+
+        }
+
+
+        // public function familyHomeView(Request $request)
+        // {
+        //     $request->validate([
+        //         'date' => 'required|date',
+        //         'family_code' => 'required',
+        //         'emergency_contact' => 'required',
+        //     ]);
+        //     $person =     $patients = Patient::join('appointments', 'appointments.appointment_id', '=', 'appointments.appointment_id')
+        //     ->join('doctors', 'appointments.doctor_id', '=', 'doctors.doctor_id')
+        //     ->join('caregivers', 'caregivers.caregiver_id', '=', 'caregivers.caregiver_id')
+        //     ->select(
+        //         'patients.patient_id',
+        //         DB::raw('CONCAT(doctors.first_name, " ", doctors.last_name) AS doctors_name'),
+        //         DB::raw('CONCAT(appointments.scheduled_date, appointments.appointment_id) AS doctors_appointments'),
+        //         DB::raw('CONCAT(caregivers.first_name, " ", caregivers.last_name) AS caregivers_name'),
+        //     )
+        //     ->get();
+
+        // foreach ($patients as $patient) {
+        //     Patient::create([
+        //         'patient_id' => $patient->patient_id,
+        //         'full_name' => $patient->doctors_name,
+        //         'doctors_appointments' => $patient->doctors_appointments,
+        //         'caregivers_name' => $patient->caregivers_name,
+        //         'morning_medicine' => $patient->morning_medicine,
+        //         'afternoon_medicine' => $patient->afternoon_medicine,
+        //         'night_medicine' => $patient->night_medicine,
+        //         'breakfast' => $patient->breakfast,
+        //         'lunch' => $patient->lunch,
+        //         'dinner' => $patient->dinner,
+        //     ]);
+        // }
+        //     Patient::create($person);
+        //     $data = Patient::all();
+        //     return view('familyMembers_home', ['a' => $data]);
+        // }
+    }

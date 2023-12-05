@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-     body {
+</head>
+<style>
+        body {
       margin: 0;
       overflow: hidden;
       background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
@@ -16,6 +16,7 @@
       height: 100vh;
       font-family: monospace;
     }
+
 
 #form{
   background-color:#EEF5FF;
@@ -100,40 +101,48 @@ a:hover{
             transition-duration: 2s;
             color: black;
         }
-    </style>
-</head>
+        #buttons{
+    display: flex;
+    flex-direction: row;
+}
+</style>
 <body>
 <form action="{{url('/logout')}}" method="GET">
     <button class="logout">Log Out</button>
     </form>
-    <h1>New Roster</h1>
-    <form action="{{ url('api/newRoster') }}" method="POST" id="form">
-        @csrf
-        <label>Date</label>
-        <input type="text" name="scheduled_date">
-        
-        <label>Supervisor</label>
-        <input type="text" name="supervisor_name">
-        
-        <label>Doctor</label>
-        <input type="text" name="doctor_name">
-        
-        <label>Caregiver1</label>
-        <input type="text" name="caregiver1_name">
-        
-        <label>Caregiver2</label>
-        <input type="text" name="caregiver2_name">
-        
-        <label>Caregiver3</label>
-        <input type="text" name="caregiver3_name">
-        
-        <label>Caregiver4</label>
-        <input type="text" name="caregiver4_name">
+    <h1>Docotor's Appointments</h1>
+    <form action="{{url('/doctorsAppointment')}}" method="get">
+    <label for="">Patient Id</label>
+    <input type="text">
+    <br>
+    <br>
+    <label for="">Patient Name</label>
+    <input type="text">
+    <br><br>
+    <label for="">date</label>
+    <input type="date">
+    <br><br>
+    <label for="">Doctor</label>
+    <select name="Doctors" id="doctor">
+        <option value="doc1">
+        doc1
+        </option>
+        <option value="doc2">
+        doc2
+        </option>
+        <option value="doc3">
+        doc3
+        </option>
+        <option value="doc4">
+        doc4
+        </option>
 
-        <section id="buttons">
-            <button name="submit" >OK</button>
-            <button name="cancel" >Cancel</button>
-        </section>
+    </select>
+    <div id="buttons">
+    <button>Ok</button>
+    <button>cancel</button>
+    </div>
+
     </form>
 </body>
 </html>

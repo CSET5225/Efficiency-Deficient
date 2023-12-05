@@ -16,15 +16,9 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      font-family: monospace;
     }
 
-    @keyframes border {
-      0%, 100% { background-color: #EEF5FF; }
-      20% { background-color: #9EB8D9; }
-      40% { background-color: #8fadd3; }
-      60% { background-color: #799DCB; }
-      80% { background-color: #e7d2da }
-    }
 
 #form{
   background-color:#EEF5FF;
@@ -88,6 +82,7 @@ h1{
     a {
   text-decoration: none;
   color: white;
+  font-family: monospace;
 }
 a:hover{
     color: black;
