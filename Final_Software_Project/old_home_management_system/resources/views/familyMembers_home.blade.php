@@ -55,13 +55,11 @@ body {
         border: none;
         border-radius: 20px;
     }
-
     button:hover {
         transition-duration: 2s;
         background-color: #EEF5FF;
         color: black;
     }
-
     h1 {
         position: absolute;
         top: 10px;
@@ -70,7 +68,6 @@ body {
         z-index: 2;
         border-radius: 10px;
     }
-
     .logout {
         position: absolute;
         top: 10px;
@@ -79,19 +76,16 @@ body {
         height: auto;
         background-color: black;
     }
-
     .logout:hover {
         background-color: white;
         transition-duration: 2s;
         color: black;
     }
-
     .table-container {
         width: 100%; 
         display: flex;
         justify-content: center; 
     }
-
     table {
         display: none; 
         width: 80%;
@@ -101,22 +95,18 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-left: 10%;
     } 
-
     th, td {
         border: 1px solid #dddddd;
         text-align: left;
         padding: 12px;
     }
-
     th {
         background-color: #608ac1;
         color: white;
     }
-
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
-
     #buttons{
     display: flex;
     flex-direction: row;
@@ -138,12 +128,10 @@ body {
                 <input type="date" name="date" id="date">
             </div>
             <br><br>
-
             <div class="code">
                 <label>Family Code:</label><br>
                 <input type="text" name="family_code" id="family_code" placeholder="Enter Family Code" required>
             </div>
-
             <br><br>
             <div class='emergency_contact'>
                 <label>Emergency Contact:</label><br>
