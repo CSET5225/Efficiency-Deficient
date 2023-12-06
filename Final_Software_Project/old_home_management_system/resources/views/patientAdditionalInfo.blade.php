@@ -40,6 +40,7 @@
             margin: 8px 0;
         }
 
+        
         .patientID{
             grid-area: patientID;
         }
@@ -51,40 +52,65 @@
             grid-area: admissionDate;
         }
         .patientName{
-            display: none;
+            /* display: none; */
             grid-area: patientName;
         }
         .button-container{
             grid-area: buttons;
         }
+        .button-container > button{
+            font-size: 25px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
-    <form action={{ url('/patientInfoSearch') }} method="POST">
+    <form action={{ url('/patientInfoConfirmChange') }} method="POST">
         @csrf
     <div class="container">
             <section class="patientID">
-                <h1>Please insert data into the Patient ID.</h1>
-                <label>Patient ID</label>
-                <input type="text" name="patientID">
+                <label style="color: crimson;">Patient ID</label>
+                <select name="patientID" style="padding: 8px;" required>
+                    <option value=""></option>
+                    @foreach ($data as $item)
+                    <option value="{{ $item->patient_id }}">{{ $item->patient_id }}</option>
+                    @endforeach
+                </select>
             </section>
+            <?php
+            
+            ?>
+            
+            
             <section class="group">
                 <label>Group</label>
-                <input type="text" placeholder="Group..." name="group" value="{{ isset($_POST['patientID']) ? $data->group_id : "" }}" readonly>
+                <input type="text" placeholder="Group..." name="group" value="" readonly>
             </section>
             <section class="admissionDate">
                 <label>Admission Date</label>
-                <input type="date" name="date" value="{{ isset($_POST['patientID']) ? $data->admission_date : "" }}" readonly>
+                <input type="date" name="date" value="" readonly>
             </section>
             <section class="patientName">
                 <label>Patient Name</label>
-                <input type="text" name="patientName" value="{{ isset($_POST['patientID']) ? $data->full_name : ""}}" readonly>
+                <input type="text" name="patientName" value="" readonly>
             </section>
             <section class="button-container">
-                <button name="patient_add_info_confirm">OK</button>
-                <button name="patient_add_info_cancel">Cancel</button>
+                <button name="patient_add_info_submit">Submit</button>
+                <button name="patient_add_info_cancel">
+                    <a style="text-decoration:none;" href="/patientAddInfo">Cancel</a>
+                </button>
             </section>
+        </form>
         </div>
-    </form>
+    <script>
+
+        var x = document.getElementById()
+        // var patient_id = document.getElementByNames("patientID");
+        // patient_id.onchange = function(){
+        //     this.form.submit();
+        // };
+        // document.getElementByNames("group").prop('readonly', false);
+        // document.getElementByNames("group").placeholder = 'Enter a group_id to assign to the patient!';
+    </script>
 </body>
 </html>

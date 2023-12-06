@@ -46,33 +46,60 @@ class ViewController extends Controller
     }
 
     public function patientAddInfoView(){
-        return view("patientAdditionalInfo");
+        $data = DB::table('patients')
+        ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
+        ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
+        "patient_id",
+        "admission_date",
+        "patient_groups.group_id")
+        ->get();
+        // return $data;
+        if($data){
+            return view("patientAdditionalInfo", ['data' => $data]);
+        }
     }
 
-    public function patientSearch(Request $request){
-        if(isset($_POST['patientID'])){
-            $patientID = $request->validate([
-                'patientID' => ['required']
+    public function patientInfoConfirmChange(Request $request){
+        if($_POST['group']){
+            $group_id = $request->validate([
+                'patient_id' => ['required'],
+                'group_id' => ['required']
             ]);
-
-            $data = DB::table('patients')
-            ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
-            ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
-            "admission_date", 
-            "patient_groups.group_id")
-            ->where('patient_id', '=', $patientID)
-            ->first();
-
-            if($data){
-                Carbon::parse($data->admission_date)->format('m/d/Y');
-                return view("patientAdditionalInfo", compact('data'));
-            }
+            DB::table('patient_groups')->insert([
+                'group_id' => $group_id
+            ]);
+            DB::table('patients')
+            ->where('group_id', '=', $group_id)
+            ->update(['group_id' => $group_id]);
 
         }
-        if(isset($_POST['patient_add_info_cancel'])){
-            return view("patientAdditionalInfo");
+        
+        if($_POST['patientID'] = ""){
+            return "Please select a field!";
         }
     }
+    
+    // public function patientInfoConfirmChange(Request $request){
+    //     if(isset($_POST['patientID'])){
+    //         $patientID = $request->validate([
+    //             'patientID' => ['required']
+    //         ]);
+
+    //         $data = DB::table('patients')
+    //         ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
+    //         ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
+    //         "admission_date", 
+    //         "patient_groups.group_id")
+    //         ->where('patient_id', '=', $patientID)
+    //         ->first();
+
+    //         if($data){
+    //             Carbon::parse($data->admission_date)->format('m/d/Y');
+    //             return view("patientAdditionalInfo", compact('data'));
+    //         }
+
+    //     }
+    // }
 
     public function adminHomeView(){
         return view("adminsHome");

@@ -54,4 +54,6 @@ Route::get('/caretakersHome', function () {
     return view('caretakersHome');
 });
 
-Route::post('/patientInfoSearch', [ViewController::class, 'patientSearch']);
+
+
+Route::post('/patientInfoConfirmChange', [ViewController::class, 'patientInfoConfirmChange']);
