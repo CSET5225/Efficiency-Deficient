@@ -15,8 +15,7 @@
       justify-content: center;
       height: 100vh;
       font-size: larger;
-      font-family: 'Courier New', Courier, monospace;
-    }
+      font-family: monospace;    }
         div{
             display: flex;
             margin: auto;
@@ -124,10 +123,10 @@ h1{
     </style>
 </head>
 <body>
-    @auth
-    <div>
-<button class="logout">Log Out</button>
-    <div id='all'>
+<form action="{{url('/logout')}}" method="GET">
+    <button class="logout">Log Out</button>
+    </form>
+        <div id='all'>
         <h1>Patients Page</h1>
         <section>
             <form action="{{ url('/patientHome')}}">

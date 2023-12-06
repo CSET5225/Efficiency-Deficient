@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\patient;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use App\Models\patient;
+use App\Models\supervisor;
+use App\Models\caretaker;
+use App\Models\admin;
+use App\Models\doctor;
 
 class ViewController extends Controller
 {
@@ -36,11 +40,9 @@ class ViewController extends Controller
     return view("login");
     }
 
-
     public function supervisorHomeView(){
         return view("supervisorHome");
     }
-   
     public function patientHomeView(){
         return view("patientsHome");
     }
@@ -117,11 +119,14 @@ class ViewController extends Controller
         return view("caregiversHome");
     }
 
+    public function doctorPatientsView(){
+        return view("doctorPatients");
+    }
 
     public function rosterView(){
         return view("roster");
     }
-
+  
     public function newRosterview(){
         return view("newRoster");
     }
@@ -129,13 +134,43 @@ class ViewController extends Controller
     public function adminReport(){
         return view('adminReport');
     }
+
+    public function registrationApprovalShow(){
+        $query = DB::select("SELECT first_name, last_name, email , role_id, approved
+                             FROM patients
+                             WHERE approved IS NULL
+                             UNION
+                             SELECT first_name, last_name, email, role_id, approved
+                             FROM admins
+                             WHERE approved IS NULL
+                             UNION
+                             SELECT first_name, last_name, email,  role_id, approved
+                             FROM caregivers
+                             WHERE approved IS NULL
+                             UNION
+                             SELECT first_name, last_name, email, role_id, approved
+                             FROM doctors
+                             WHERE approved IS NULL
+                             UNION
+                             SELECT first_name, last_name, email,  role_id, approved
+                             FROM supervisors
+                             WHERE approved IS NULL");
+        return view("registrationApproval",["query"=>$query]);
     
-        
-    
+    public function login(Request $request){
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:12']
+        ]);
+
     public function doctorPatientsView(){
         return view("doctorPatients");
     }
-    
+
+    public function rosterView(){
+        return view("roster");
+    }
+   
    public function familyHomeView(Request $request){
     $request -> validate([
     'family_code'=>'required',
@@ -155,5 +190,3 @@ class ViewController extends Controller
     $data = patient::all();
     return view('familyMembers_home',['a'=>$data]);
     }
-
-}

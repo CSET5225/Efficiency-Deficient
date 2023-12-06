@@ -15,8 +15,8 @@
             height: 100%;
             background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
             font-size: larger;
-      font-family: 'Courier New', Courier, monospace;
-      width: auto;
+            font-family: monospace;
+                  width: auto;
         }
         .main-content{
             background-color: #EEF5FF;
@@ -94,8 +94,10 @@ button:hover{
     </style>
 </head>
 <body>
-<button class="logout">Log Out</button>
-<div class="">
+<form action="{{url('/logout')}}" method="GET">
+    <button class="logout">Log Out</button>
+    </form>
+    <div class="">
             <label>List of Patients' duty today</label>
         </div>
     <div class="main-content">

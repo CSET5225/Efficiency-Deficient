@@ -6,19 +6,9 @@
 
     <title>Document</title>
 </head>
-<body>
-    @auth
+    <body>
+        <button>logout</button>
         <div>
-
-        </div>
-    @else
-    <script>
-        alert("Please log in.");
-        window.location.href = "/login";
-    </script>
-    @endauth
-    <button>logout</button>
-    <div class="form">
             <button><a href="">Additional info of Patient</a></button>
 
             <button><a href="">Docotrs Appiontments</a></button>
@@ -27,7 +17,7 @@
 
             <button><a href="">Patients</a></button>
 
-            <button><a href="">Registration Approval</a></button>
+            <button><a href="registrationApproval">Registration Approval</a></button>
 
             <button><a href="">Roster</a></button>
 
@@ -44,6 +34,5 @@
             <button><a href="">Roster</a></button>
 
             <button><a href="">Cargiver's home</a></button>
-    </div>
-</body>
+    </body>
 </html>
