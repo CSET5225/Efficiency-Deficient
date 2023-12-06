@@ -16,15 +16,9 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      font-family: monospace;
     }
 
-    @keyframes border {
-      0%, 100% { background-color: #EEF5FF; }
-      20% { background-color: #9EB8D9; }
-      40% { background-color: #8fadd3; }
-      60% { background-color: #799DCB; }
-      80% { background-color: #e7d2da }
-    }
 
 #form{
   background-color:#EEF5FF;
@@ -88,6 +82,7 @@ h1{
     a {
   text-decoration: none;
   color: white;
+  font-family: monospace;
 }
 a:hover{
     color: black;
@@ -117,14 +112,15 @@ a:hover{
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="first_name" class="w-50">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" class="w-100" required>
+
+                        <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name" required>
 
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="last_name" class="w-50">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" class="w-100" required>
 
+                        <input type="text" id="last_name" name="last_name" class="w-100" placeholder="Last Name">
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
@@ -135,14 +131,13 @@ a:hover{
                     <div class="p-1 d-table w-100 text-center">
                         <label for="email" class="w-50">Email:</label>
 
-                        <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com">
-
+                        <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com" required>
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="password" class="w-50">Password:</label>
-                        <input type="text" name="password" id="password" maxlength="12" class="w-100" required>
 
+                        <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password" required>
                     </div>  
                             
                     <div id="hidden_information">
@@ -154,9 +149,7 @@ a:hover{
                         <div class="p-1 d-table w-100 text-center">
                             <label for="emergency_contact" class="w-50">Emergency Contact:</label>  
 
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100">
-
-
+                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890" required>
                         </div>
                     </div>
                             

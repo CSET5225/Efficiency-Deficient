@@ -4,39 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Roster</title>
+    
 
     <title>Test</title>
 </head>
 <body>
 <style>
-        /* form{
-            width: 250px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 5px;
-        }
-        thead{
-            background-color: lightgray;
-            width: 50px;
-            height: 25px;
-        }
-        .logout {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 25%;
-            height: auto;
-            background-color: black;
-        }
-
-        .logout:hover{
-            background-color: white;
-            transition-duration: 2s;
-            color: black;
-        } */
-
-
         body {
   margin: 0;
   overflow: hidden;
@@ -46,8 +20,7 @@
   justify-content: center;
   height: 100vh;
   font-size: larger;
-      font-family: 'Courier New', Courier, monospace;
-}
+  font-family: monospace;}
 
 input {
       margin: 10px;
@@ -59,8 +32,7 @@ input {
 .a {
   text-decoration: none;
   color: white;
-font-family: 'Courier New', Courier, monospace;
-}
+  font-family: monospace;}
 
 button {
   border: none;
@@ -137,8 +109,10 @@ h1{
         }
     </style>
 
-<button class="logout">Log Out</button>
-<h1>Roster</h1>
+<form action="{{url('/logout')}}" method="GET">
+    <button class="logout">Log Out</button>
+    </form>
+    <h1>Roster</h1>
 <div class="div1">
     <form action="{{ url('api/roster') }}" method="GET" class="form">
         @csrf

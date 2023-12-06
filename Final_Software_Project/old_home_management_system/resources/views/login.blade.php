@@ -7,20 +7,22 @@
     <title>Login</title>
     <style>
         body {
-            margin: 0;
-            overflow: hidden;
-            background: linear-gradient(180deg, #EEF5FF, #608ac1,#A25772);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family:monospace;
-        }
+
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: monospace;
+    }
 
         #login {
             font-size:60px;
         }
         
+
         div{
             display: flex;
             margin: auto;
