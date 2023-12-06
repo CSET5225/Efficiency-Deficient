@@ -22,12 +22,16 @@ Route::get('/registration', [ViewController::class,  'registrationFormView']);
 Route::get('/login', [ViewController::class, 'loginView']);
 
 Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView']);
+
 Route::get('/rosterHome', [ViewController::class, 'rosterView']);
+
 Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
 Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+
+Route::get('/registrationApproval', [viewController::class, 'registrationApprovalShow']);
 
 Route::get('/patientsHome', function () {
     return view('patientsHome');
@@ -37,19 +41,14 @@ Route::get('/adminsHome', function () {
     return view('adminsHome');
 });
 
-
 Route::get('/doctorsHome', function () {
     return view('doctorsHome');
 });
-
 
 Route::get('/supervisorsHome', function () {
     return view('supervisorsHome');
 });
 
-
 Route::get('/caretakersHome', function () {
     return view('caretakersHome');
 });
-
-

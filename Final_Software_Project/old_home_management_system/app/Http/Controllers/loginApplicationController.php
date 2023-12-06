@@ -24,20 +24,20 @@ class loginApplicationController extends Controller
             $password = $data['password'];
 
 
-            if(DB::SELECT("SELECT * FROM patients WHERE email = '$email' AND password = '$password'")){
+            if(DB::SELECT("SELECT * FROM patients WHERE email = '$email' AND password = '$password' AND approved = 1")){
                 return view('patientsHome');
             }
-            elseif(DB::SELECT("SELECT * FROM admins WHERE email = '$email' AND password = '$password'")){
-                return view('adminsHome');
+            elseif(DB::SELECT("SELECT * FROM caregivers WHERE email = '$email' AND password = '$password' AND approved = 1")){
+                return view('caregiversHome');
             }
-            elseif(DB::SELECT("SELECT * FROM doctors WHERE email = '$email' AND password = '$password'")){
+            elseif(DB::SELECT("SELECT * FROM doctors WHERE email = '$email' AND password = '$password' AND approved = 1")){
                 return view('doctorsHome');
             }
-            elseif(DB::SELECT("SELECT * FROM supervisors WHERE email = '$email' AND password = '$password'")){
-                return view('supervisorsHome');
+            elseif(DB::SELECT("SELECT * FROM admins WHERE email = '$email' AND password = '$password' AND approved = 1")){
+                return view('adminsHome');
             }
-            elseif(DB::SELECT("SELECT * FROM caregivers WHERE email = '$email' AND password = '$password'")){
-                return view('caregiversHome');
+            elseif(DB::SELECT("SELECT * FROM supervisors WHERE email = '$email' AND password = '$password' AND approved = 1")){
+                return view('supervisorsHome');
             }
             else{
                 echo "<script>alert('Account does not exist with this information');</script>";
