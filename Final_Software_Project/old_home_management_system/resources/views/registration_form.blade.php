@@ -8,6 +8,7 @@
         <title>Registration</title>
     </head>
     <style>
+
     body {
       margin: 0;
       overflow: hidden;
@@ -20,19 +21,20 @@
     }
 
 
-#form{
-  background-color:#EEF5FF;
-  padding: 20px;
-  border-radius: 20px;
-  z-index: 1;
-  width: 150%;
-  max-width: 420px;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  
-}
-     input {
+    #form{
+    background-color:#EEF5FF;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 1;
+    width: 150%;
+    max-width: 420px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    
+    }
+
+    input {
       margin: 10px;
       width: 100%;
       font-size: large;
@@ -47,29 +49,28 @@
         font-size: large;
         color: white;
         border: none;
-        border-radius: 20px;
-        
-}
+        border-radius: 20px;    
+    }
 
-button:hover{
-  transition-duration: 2s;
-        background-color: #EEF5FF;
-        color:black;   
-}
+        button:hover{
+        transition-duration: 2s;
+                background-color: #EEF5FF;
+                color:black;   
+        }
 
-#buttons{
-    display: flex;
-    flex-direction: row;
-}
+    #buttons{
+        display: flex;
+        flex-direction: row;
+    }
 
-h1{
+    h1{
         position: absolute; 
         top: 20px; 
         left: 50%; 
         transform: translateX(-50%); 
         z-index: 2; 
-      padding: 10px;
-      border-radius: 10px;
+        padding: 10px;
+        border-radius: 10px;
     }
 
     select{
@@ -79,18 +80,19 @@ h1{
       border-radius: 20px; 
       border :1px solid black;
     }
+    
     a {
   text-decoration: none;
   color: white;
   font-family: monospace;
-}
-a:hover{
-    color: black;
-    transition-duration: 2s;
-}
+  }
 
-
-</style>
+    a:hover{
+        color: black;
+        transition-duration: 2s;
+    }
+    
+    </style>
     <body>
     <?php if (!empty($error)): ?>
     <div class="error-message">
