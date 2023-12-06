@@ -6,6 +6,9 @@
     <title>super home</title>
 </head>
 <style>
+    html{
+        font-family: monospace;
+    }
 body {
   margin: 0;
   overflow: hidden;
@@ -15,13 +18,13 @@ body {
   justify-content: center;
   height: 100vh;
   font-size: larger;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: monospace;
 }
 
 .a {
   text-decoration: none;
   color: white;
-font-family: 'Courier New', Courier, monospace;
+  font-family: monospace;
 }
 
 button {
@@ -33,6 +36,7 @@ button {
   margin: 10px 0; 
   color: white;
   border-radius: 20px;
+  
 }
 
 .form {
@@ -118,10 +122,11 @@ h1{
             color: black;
         }
 
-
 </style>
 <body>
+    <form action="{{url('/logout')}}" method="GET">
     <button class="logout">Log Out</button>
+    </form>
    <div class="form">
    <h1>Welcome Supervisor</h1>
     <div class="div1">

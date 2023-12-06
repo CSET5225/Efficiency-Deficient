@@ -8,6 +8,7 @@
         <title>Registration</title>
     </head>
     <style>
+
     body {
       margin: 0;
       overflow: hidden;
@@ -16,29 +17,24 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      font-family: monospace;
     }
 
-    @keyframes border {
-      0%, 100% { background-color: #EEF5FF; }
-      20% { background-color: #9EB8D9; }
-      40% { background-color: #8fadd3; }
-      60% { background-color: #799DCB; }
-      80% { background-color: #e7d2da }
+
+    #form{
+    background-color:#EEF5FF;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 1;
+    width: 150%;
+    max-width: 420px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    
     }
 
-#form{
-  background-color:#EEF5FF;
-  padding: 20px;
-  border-radius: 20px;
-  z-index: 1;
-  width: 150%;
-  max-width: 420px;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  
-}
-     input {
+    input {
       margin: 10px;
       width: 100%;
       font-size: large;
@@ -53,29 +49,28 @@
         font-size: large;
         color: white;
         border: none;
-        border-radius: 20px;
-        
-}
+        border-radius: 20px;    
+    }
 
-button:hover{
-  transition-duration: 2s;
-        background-color: #EEF5FF;
-        color:black;   
-}
+        button:hover{
+        transition-duration: 2s;
+                background-color: #EEF5FF;
+                color:black;   
+        }
 
-#buttons{
-    display: flex;
-    flex-direction: row;
-}
+    #buttons{
+        display: flex;
+        flex-direction: row;
+    }
 
-h1{
+    h1{
         position: absolute; 
         top: 20px; 
         left: 50%; 
         transform: translateX(-50%); 
         z-index: 2; 
-      padding: 10px;
-      border-radius: 10px;
+        padding: 10px;
+        border-radius: 10px;
     }
 
     select{
@@ -85,17 +80,19 @@ h1{
       border-radius: 20px; 
       border :1px solid black;
     }
+    
     a {
   text-decoration: none;
   color: white;
-}
-a:hover{
-    color: black;
-    transition-duration: 2s;
-}
+  font-family: monospace;
+  }
 
-
-</style>
+    a:hover{
+        color: black;
+        transition-duration: 2s;
+    }
+    
+    </style>
     <body>
         <div class="justify-content-center">
             <div class="w-100 d-flex justify-content-center">
@@ -118,9 +115,7 @@ a:hover{
                     <div class="p-1 d-table w-100 text-center">
                         <label for="first_name" class="w-50">First Name:</label>
 
-                        <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name">
-=======
-                        <input type="text" id="first_name" name="first_name" class="w-100" required>
+                        <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name" required>
 
                     </div>
 
@@ -128,9 +123,6 @@ a:hover{
                         <label for="last_name" class="w-50">Last Name:</label>
 
                         <input type="text" id="last_name" name="last_name" class="w-100" placeholder="Last Name">
-=======
-                        <input type="text" id="last_name" name="last_name" class="w-100" required>
-
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
@@ -141,34 +133,25 @@ a:hover{
                     <div class="p-1 d-table w-100 text-center">
                         <label for="email" class="w-50">Email:</label>
 
-                        <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com">
-=======
-                        <input type="text" id="email" name="email" class="w-100" required>
-
+                        <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com" required>
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="password" class="w-50">Password:</label>
 
-                        <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password">
-=======
-                        <input type="text" name="password" id="password" maxlength="12" class="w-100" required>
-
+                        <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password" required>
                     </div>  
                             
                     <div id="hidden_information">
                         <div class="p-1 d-table w-100 text-center">
                             <label for="family_code" class="w-50">Family Code:</label>
-                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100" required>
+                            <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100">
                         </div>
                                     
                         <div class="p-1 d-table w-100 text-center">
                             <label for="emergency_contact" class="w-50">Emergency Contact:</label>  
 
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890">
-=======
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" required>
-
+                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890" required>
                         </div>
                     </div>
                             

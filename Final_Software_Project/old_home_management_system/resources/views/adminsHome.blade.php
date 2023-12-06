@@ -6,9 +6,9 @@
 
     <title>Document</title>
 </head>
-<body>
-    <button>logout</button>
-    <div class="form">
+    <body>
+        <button>logout</button>
+        <div>
             <button><a href="">Additional info of Patient</a></button>
 
             <button><a href="">Docotrs Appiontments</a></button>
@@ -17,7 +17,7 @@
 
             <button><a href="">Patients</a></button>
 
-            <button><a href="">Registration Approval</a></button>
+            <button><a href="registrationApproval">Registration Approval</a></button>
 
             <button><a href="">Roster</a></button>
 
@@ -34,6 +34,5 @@
             <button><a href="">Roster</a></button>
 
             <button><a href="">Cargiver's home</a></button>
-    </div>
-</body>
+    </body>
 </html>
