@@ -60,7 +60,6 @@
                 background-color: #EEF5FF;
                 color: black;
                 transition-duration: 1s;
-
             }
             .background{
                 background-color: white;

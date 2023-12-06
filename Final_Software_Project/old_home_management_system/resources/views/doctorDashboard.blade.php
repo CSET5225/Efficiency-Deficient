@@ -51,7 +51,10 @@
     </style>
 </head>
 <body>
-    <h1>Welcome!</h1>
+    <h1>Welcome Doctors!</h1>
+    <form action="{{url('/logout')}}" method="GET">
+    <button class="logout">Log Out</button>
+    </form>
     <section class="flex-container">
             <div class="dashboard-links">
                 <a href="{{ url('/doctorsHome') }}"><button name="">Your Homepage</button></a>

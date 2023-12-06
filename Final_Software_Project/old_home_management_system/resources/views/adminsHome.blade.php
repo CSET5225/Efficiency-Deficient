@@ -34,6 +34,5 @@
             <button><a href="">Roster</a></button>
 
             <button><a href="">Cargiver's home</a></button>
-        </div>
     </body>
 </html>
