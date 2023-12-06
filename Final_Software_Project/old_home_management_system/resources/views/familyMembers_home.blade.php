@@ -6,6 +6,7 @@
     <title>Registration</title>
 </head>
 <style>
+
 body {
         margin: 0;
         overflow: hidden;
@@ -112,6 +113,7 @@ body {
     flex-direction: row;
 }
 </style>
+
 
 <body>
   <div class='body'>
