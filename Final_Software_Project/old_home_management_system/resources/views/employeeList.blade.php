@@ -93,7 +93,7 @@ h1{
     </style>
 </head>
 <body>
-    <h1>Payment</h1>
+    <h1>Employees</h1>
     <form action="{{ url('')}}" method="post">
         @csrf
         <div class= 'date'>
@@ -101,20 +101,25 @@ h1{
             <input type="date" name="date" id="date" >
         </div>
         <div>
-            <label>Patient ID</label>
-            <input type="text" id="patientID" name="patientID" required>
-        </div>
-        <div>
-            <label>Total Due</label>
-            <input type="text" id="totaldue" name="totaldue" required>
-        </div>
-        <div>
-            <label>New Payment</label>
-            <input type="text" id="newpayment" name="newpayment" required>
-        </div>
+        <label for="ID">ID</label>
+        <input type="hidden" name="ID" id="ID">
+        <label for="name">Name</label>
+        <input type="hidden" name="name" id="name">
+        <label for="role">Role</label>
+        <input type="hidden" name="role" id="role">
+        <label for="salary">Salary</label>
+        <input type="hidden" name="salary" id="salary">
+    </div>
+    <div>
+        <label for="empID">Emp ID</label>
+        <input type="text" name="empID" id="empID">
+    </div>
+    <div>
+        <label for="newSalary">New Salary</label>
+        <input type="text" name="newSalary" id="newSalary">
+    </div>
     <button name = "register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
-    <button type="reset"></button>
 </form>
 </body>
 </html>

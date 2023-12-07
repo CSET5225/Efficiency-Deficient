@@ -93,28 +93,31 @@ h1{
     </style>
 </head>
 <body>
-    <h1>Payment</h1>
+    <h1>Roles</h1>
     <form action="{{ url('')}}" method="post">
         @csrf
         <div class= 'date'>
             <label>Date:</label><br>
-            <input type="date" name="date" id="date" >
+            <input type="date" name="date" id="date">
         </div>
         <div>
-            <label>Patient ID</label>
-            <input type="text" id="patientID" name="patientID" required>
+            <label>Role</label>
+            <input type="hidden" id="role" name="role">
         </div>
         <div>
-            <label>Total Due</label>
-            <input type="text" id="totaldue" name="totaldue" required>
+            <label>Access Level</label>
+            <input type="hidden" id="accesslevel" name="accesslevel">
         </div>
         <div>
-            <label>New Payment</label>
-            <input type="text" id="newpayment" name="newpayment" required>
+            <label>New Role</label>
+            <input type="text" id="newrole" name="newrole">
+        </div>
+        <div>
+            <label>Access Level</label>
+            <input type="text" id="accesslevel" name="accesslevel">
         </div>
     <button name = "register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
-    <button type="reset"></button>
 </form>
 </body>
 </html>
