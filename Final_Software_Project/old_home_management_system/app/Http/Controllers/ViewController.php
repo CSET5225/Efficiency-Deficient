@@ -55,7 +55,6 @@ class ViewController extends Controller
         "admission_date",
         "patient_groups.group_id")
         ->get();
-        // return $data;
         if($data){
             return view("patientAdditionalInfo", ['data' => $data]);
         }
@@ -73,7 +72,6 @@ class ViewController extends Controller
             DB::table('patients')
             ->where('group_id', '=', $group_id)
             ->update(['group_id' => $group_id]);
-
         }
         
         if($_POST['patientID'] = ""){
@@ -102,6 +100,22 @@ class ViewController extends Controller
 
     //     }
     // }
+
+    public function patientSearch(Request $request){
+        $data = DB::table('patients')
+        ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
+        ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
+        "patient_id",
+        "admission_date",
+        "patient_groups.group_id")
+        ->get();
+
+        $id = $request->input('patientID');
+        $firstName = DB::SELECT("SELECT first_name FROM patients WHERE patient_id = $id");
+        $group = DB::SELECT("SELECT p.group_id FROM patients p JOIN patient_groups pg ON pg.group_id = p.group_id WHERE patient_id = $id");
+
+        return view('patientAdditionalInfo', ['data' => $data], ['patientName' => $firstName],  ['group_id' => $group]);
+    }
 
     public function adminHomeView(){
         return view("adminsHome");
@@ -156,19 +170,12 @@ class ViewController extends Controller
                              FROM supervisors
                              WHERE approved IS NULL");
         return view("registrationApproval",["query"=>$query]);
-    
+    }
     public function login(Request $request){
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:12']
         ]);
-
-    public function doctorPatientsView(){
-        return view("doctorPatients");
-    }
-
-    public function rosterView(){
-        return view("roster");
     }
    
    public function familyHomeView(Request $request){
@@ -190,3 +197,4 @@ class ViewController extends Controller
     $data = patient::all();
     return view('familyMembers_home',['a'=>$data]);
     }
+}

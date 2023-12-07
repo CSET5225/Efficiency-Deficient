@@ -37,13 +37,11 @@ Route::get('/registrationApproval', [viewController::class, 'registrationApprova
 
 Route::get('/Patients', [ViewController::class, 'check']);
 
+Route::post('/patientSearch', [ViewController::class, 'patientsearch']);
+
 Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
-
-// Route::get('/familyHome', function () {
-//     return view('familyMembers_home');
-// });
 
 Route::get('/adminsHome', function () {
     return view('adminsHome');
@@ -59,6 +57,7 @@ Route::get('/supervisorsHome', function () {
 
 Route::get('/caretakersHome', function () {
     return view('caretakersHome');
+});
 
 Route::get('/adminReport', function () {
     return view('adminreport');
