@@ -94,6 +94,12 @@
     
     </style>
     <body>
+    <?php if (!empty($error)): ?>
+    <div class="error-message">
+        <?php echo $error; ?>
+    </div>
+<?php endif; ?>
+
         <div class="justify-content-center">
             <div class="w-100 d-flex justify-content-center">
                 <h1>Registration</h1>
@@ -127,7 +133,7 @@
 
                     <div class="p-1 d-table w-100 text-center">
                         <label for="DOB" class="w-50">Date of Birth:</label>
-                        <input type="DOB" name="DOB" id="DOB" placeholder="0000-00-00" class="w-100" required>
+                        <input type="date" name="DOB" id="DOB" placeholder="0000-00-00" class="w-100" required>
                     </div>
                             
                     <div class="p-1 d-table w-100 text-center">
