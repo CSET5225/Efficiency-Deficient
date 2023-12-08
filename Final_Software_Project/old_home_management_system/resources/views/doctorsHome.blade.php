@@ -14,7 +14,7 @@
         
         html{
             height: 100%;
-            padding: 25px;
+            padding: 20px;
             background: linear-gradient(180deg, #EEF5FF, #608ac1,#A25772);
             font-size: 18px;
             font-family: monospace;
@@ -112,10 +112,10 @@ font-family: 'Courier New', Courier, monospace;
 button {
   border: none;
   background-color: #9EB8D9;
-  width: 100%;
+  width: 50%;
   font-size: 25pt;
-  height: 175px; 
-  margin: 10px 0; 
+  height: 70px;
+  margin: 10px 0;
   color: white;
   border-radius: 20px;
 }
@@ -146,24 +146,22 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-   padding: 50px;
-   width: auto;  
+  justify-content: space-between;
+  padding: 50px;
+  width: auto;
 }
 h1{
-        /* margin-top: 50px; */
-        position: absolute; 
-        top: 20px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 2; 
-      padding: 10px;
-      font-size:40pt ;
-    }
+    position: absolute; 
+    top: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 2; 
+    padding: 10px;
+    font-size:40pt ;
+}
     button:hover{
         transition-duration: 2s;
         background-color: #EEF5FF;
-
     }
     .a:hover{
         transition-duration: 2s;
@@ -193,10 +191,6 @@ h1{
                 <h1>Welcome, Doctor!</h1>
             </div>
 
-            {{-- <div>
-                <li>Your Patients</li>
-            </div> --}}
-
             <div>
                 <li><a href="{{ url('/') }}">Log Out</a></li>
             </div>
@@ -216,14 +210,24 @@ h1{
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($pastHistory as $pastPatients)
                         <tr>
+                            <td>{{ $pastPatients->full_name}}</td>
+                            <td>{{ $pastPatients->medicine_date }}</td>
+                            <td>{{ $pastPatients->comment }}</td>
+                            <td>{{ $pastPatients->morning_medicine }}</td>
+                            <td>{{ $pastPatients->afternoon_medicine }}</td>
+                            <td>{{ $pastPatients->night_medicine }}</td>
+                        </tr>
+                    @endforeach
+                        {{-- <tr>
                             <td>John Doe</td>
                             <td>9/17/23</td>
                             <td>None</td>
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
-                        </tr>
+                        </tr> --}}
                 </tbody>
             </table>
         </div>
@@ -249,8 +253,6 @@ h1{
 
         <div class="grid-item table">
             <label>Available Appointments until the Specified Date:</label>
-          <form action="" method="POST">
-            @csrf
             <table>
                 <thead>
                     <tr>
@@ -259,13 +261,14 @@ h1{
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($currentHistory as $currentPatients)
                     <tr>
-                        <td>Test1</td>
-                        <td>Test2</td>
+                        <td>{{ $currentPatients->full_name }}</td>
+                        <td>{{ $currentPatients->medicine_date }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
-          </form>
         </div>
 
 

@@ -121,9 +121,54 @@ class ViewController extends Controller
         return view("adminsHome");
     }
 
-    public function doctorsHomeView(){
-        return view("doctorsHome");
+    public function pastPatientHistory(){
+        return DB::table('patients')
+        ->join('patient_medications as pm', 'pm.patient_id', '=', 'patients.patient_id')
+        ->join('medications as morning_meds', 'pm.morning_medicine', '=', 'morning_meds.medicine_id')
+        ->join('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
+        ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
+        ->select(
+            DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
+            'comment', 'medicine_date',
+            'morning_meds.medicine_name AS morning_medicine',
+            'afternoon_meds.medicine_name AS afternoon_medicine',
+            'night_meds.medicine_name AS night_medicine'
+    )
+        ->where('medicine_date', '<', now())
+        ->get();
     }
+
+    public function presentPatientHistory(){
+        return DB::table('patients')
+        ->join('patient_medications as pm', 'pm.patient_id', '=', 'patients.patient_id')
+        ->join('medications as morning_meds', 'pm.morning_medicine', '=', 'morning_meds.medicine_id')
+        ->join('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
+        ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
+        ->select(
+            DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
+            'comment', 'medicine_date',
+            'morning_meds.medicine_name AS morning_medicine',
+            'afternoon_meds.medicine_name AS afternoon_medicine',
+            'night_meds.medicine_name AS night_medicine'
+    )
+        ->get();
+    }
+    
+    
+    public function doctorsHomeView(){
+        $pastHistory = $this->pastPatientHistory();
+        $currentHistory = $this->presentPatientHistory();
+        return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
+    }
+
+    // public function appointmentFilter(Request $request){
+    //     $pastHistory = $this->pastPatientHistory();
+    //     $currentHistory = $this->presentPatientHistory();
+
+    //     $date = 
+        
+    //     return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
+    // }
 
     public function doctorsDashboardView(){
         return view("doctorDashboard");
@@ -171,20 +216,6 @@ class ViewController extends Controller
                              WHERE approved IS NULL");
         return view("registrationApproval",["query"=>$query]);
     }
-    public function login(Request $request){
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:12']
-        ]);
-
-    public function doctorPatientsView(){
-        return view("doctorPatients");
-    }
-
-    public function rosterView(){
-        return view("roster");
-    }
-
     
     public function familyHomeView(Request $request)
     {
@@ -217,6 +248,4 @@ class ViewController extends Controller
         $data = Patient::all();
         return view('familyMembers_home', ['a' => $data]);
     }
-        
-        
-    }
+}

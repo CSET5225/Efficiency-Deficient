@@ -109,15 +109,6 @@
     <script>
         function searchPatient(){
             document.getElementById('patientForm').submit();
-            document.getElementById('patientForm').readOnly = true;
-
-            // document.getElementById('patientForm').value = {{ $item->patient_id }};
-            
-            // localStorage.setItem('storedOption', document.getElementById('patientForm').value);
-            // if(localStorage.getItem('storedOption')){
-            //     document.getElementById('storedOption').options[localStorage.getItem('storedOption')].selected = true;
-            // }
-                
         }
     </script>
 </body>

@@ -49,9 +49,7 @@ Route::get('/adminsHome', function () {
     return view('adminsHome');
 });
 
-Route::get('/doctorsHome', function () {
-    return view('doctorsHome');
-});
+Route::get('/doctorsHome', [ViewController::class, 'doctorsHomeView']);
 
 Route::get('/supervisorsHome', function () {
     return view('supervisorHome');
