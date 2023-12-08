@@ -23,6 +23,8 @@ Route::get('/login', [ViewController::class, 'loginView']);
 
 Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView']);
 
+Route::post('/appointmentSearch', [ViewController::class, 'appointmentSearch']);
+
 Route::get('/rosterHome', [ViewController::class, 'rosterView']);
 
 Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
@@ -35,7 +37,7 @@ Route::get('/registrationApproval', [viewController::class, 'registrationApprova
 
 Route::get('/Patients', [ViewController::class, 'check']);
 
-Route::post('/patientSearch', [ViewController::class, 'patientsearch']);
+Route::post('/patientSearch', [ViewController::class, 'patientSearch']);
 
 Route::get('/patientsHome', function () {
     return view('patientsHome');
@@ -66,6 +68,8 @@ Route::get('/adminReport', function () {
 Route::get('/doctorsAppointment', function () {
     return view('doctorsAppointment');
 });
+
+Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 
 Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 
