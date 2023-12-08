@@ -34,8 +34,6 @@ Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
-
 Route::get('/registrationApproval', [viewController::class, 'registrationApprovalShow']);
 
 Route::get('/Patients', [ViewController::class, 'check']);
@@ -44,9 +42,6 @@ Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
 
-// Route::get('/familyHome', function () {
-//     return view('familyMembers_home');
-// });
 
 Route::get('/adminsHome', function () {
     return view('adminsHome');

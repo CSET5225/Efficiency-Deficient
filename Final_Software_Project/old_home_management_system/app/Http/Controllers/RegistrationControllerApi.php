@@ -10,6 +10,7 @@ use App\Models\caregiver;
 use App\Models\doctor;
 use App\Models\supervisor;
 use App\Models\admin;
+use Illuminate\Support\Facades\DB;
 
 class RegistrationControllerApi extends Controller
 {
@@ -28,8 +29,11 @@ class RegistrationControllerApi extends Controller
     {
         if(isset($_POST['register_button'])){
 
-            //This is for all other roles since their columns are the same
             $data = request()->all();
+
+            if ($this->emailExists($data['email'])) {
+                echo "<script>alert('Email already exists. Please use a different email address.');</script>";
+                return view("homePage"); 
 
             if($data['role_id']==1){
                 patient::create($data);
@@ -59,6 +63,12 @@ class RegistrationControllerApi extends Controller
             
         }
     }
+    }
+    public function emailExists($email)
+{
+    $user = DB::table('patients')->where('email', $email)->first();
+    return $user !== null;
+}
 
     /**
      * Display the specified resource.
