@@ -60,6 +60,7 @@ class RegistrationControllerApi extends Controller
                 echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
                 return view("/login");
             }
+            
         }
     }
     }

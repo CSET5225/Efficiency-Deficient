@@ -40,10 +40,10 @@
 
                         @csrf
                         @method('PUT')
-                        <td> <input name="first_name" value = {{ $account->first_name }}></td> 
-                        <td><input name="last_name" value = {{ $account->last_name }}></td> 
-                        <td><input name="email" value = {{ $account->email }} ></td>
-                        <td><input name="role_id" value = {{ $account->role_id }}></td> 
+                        <td> <input name="first_name" value = {{ $account->first_name }} readonly></td> 
+                        <td><input name="last_name" value = {{ $account->last_name }} readonly></td> 
+                        <td><input name="email" value = {{ $account->email }} readonly></td>
+                        <td><input name="role_id" value = {{ $account->role_id }} readonly></td> 
                         <td><button name="accountApprove">Approve</button></td>
 
                     </form>

@@ -23,7 +23,6 @@ class loginApplicationController extends Controller
             $email = $data['email'];
             $password = $data['password'];
 
-
             if(DB::SELECT("SELECT * FROM patients WHERE email = '$email' AND password = '$password' AND approved = 1")){
                 return view('patientsHome');
             }
@@ -46,9 +45,8 @@ class loginApplicationController extends Controller
         }
     }
 
-
     public function logout(){
         session_destroy(); 
-return view('homePage'); 
+    return view('homePage'); 
     }
 }

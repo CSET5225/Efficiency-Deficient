@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\ViewController;
 use App\Http\Controllers\loginApplicationController;
+use App\Http\Controllers\RosterControllerAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,11 @@ Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView'])
 
 Route::post('/appointmentSearch', [ViewController::class, 'appointmentSearch']);
 
-Route::get('/rosterHome', [ViewController::class, 'rosterView']);
+Route::get('/newRoster', [ViewController::class, 'rosterInfoShow']);
+
+Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
+
+Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
 Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
 
@@ -69,9 +74,10 @@ Route::get('/doctorsAppointment', function () {
     return view('doctorsAppointment');
 });
 
+
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+Route::post('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 

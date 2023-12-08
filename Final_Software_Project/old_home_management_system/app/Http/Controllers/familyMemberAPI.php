@@ -33,26 +33,26 @@ class familyMemberAPI extends Controller
             'emergency_contact'=> 'required',
         ]);
         $person = DB::select('SELECT CONCAT(doctors.first_name, , doctors.last_name) AS doctors_name,
-            CONCAT(appointments.scheduled_date,appointments.appointment_id) AS doctors_appointments,
-            CONCAT(caregivers.first_name, caregivers.last_name) AS caregivers_name,
-            morning_medicine,
-            afternoon_medicine,
-            night_medicine,
-            breakfast,
-            lunch,
-            dinner
+        CONCAT(appointments.scheduled_date,appointments.appointment_id) AS doctors_appointments,
+        CONCAT(caregivers.first_name, caregivers.last_name) AS caregivers_name,
+        morning_medicine,
+        afternoon_medicine,
+        night_medicine,
+        breakfast,
+        lunch,
+        dinner
         FROM
-            patients
+        patients
         JOIN
-            appointments ON patients.appointment_id = appointments.appointment_id
+        appointments ON patients.appointment_id = appointments.appointment_id
         JOIN
-            doctors ON appointments.doctor_id = doctors.doctor_id
+        doctors ON appointments.doctor_id = doctors.doctor_id
         JOIN
-            caregivers ON patients.caregiver_id = caregivers.caregiver_id; ');
-         patient::create($person);
-         $data = patient::all();
-         return view('familyMembers_home',['a'=>$data]);;
-        }
+        caregivers ON patients.caregiver_id = caregivers.caregiver_id; ');
+        patient::create($person);
+        $data = patient::all();
+        return view('familyMembers_home',['a'=>$data]);
+    }
 
     /**
      * Update the specified resource in storage.

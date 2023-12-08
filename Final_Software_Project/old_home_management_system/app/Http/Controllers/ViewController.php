@@ -19,7 +19,6 @@ class ViewController extends Controller
     return view("registration_form",["family_code"=>$family_code]);
     }
 
-    //Generates the family code
     public function generateCode(){
     $family_code = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'), 0, 10);
     if(DB::select("SELECT 'family_code' FROM Patients WHERE 'family_code' = '$family_code'")){
