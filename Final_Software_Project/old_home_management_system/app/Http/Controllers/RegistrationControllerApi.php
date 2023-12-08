@@ -10,7 +10,6 @@ use App\Models\caregiver;
 use App\Models\doctor;
 use App\Models\supervisor;
 use App\Models\admin;
-use Illuminate\Support\Facades\DB;
 
 class RegistrationControllerApi extends Controller
 {

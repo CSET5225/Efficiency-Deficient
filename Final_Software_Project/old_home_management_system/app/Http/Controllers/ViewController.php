@@ -10,6 +10,7 @@ use App\Models\supervisor;
 use App\Models\caretaker;
 use App\Models\admin;
 use App\Models\doctor;
+use App\Models\Roster;
 
 class ViewController extends Controller
 {
@@ -143,7 +144,6 @@ class ViewController extends Controller
     }
 
     public function getRosterInfo(Request $request){
-
         $date = strtotime($request->scheduled_date);
         $date = date('Y-m-d', $date);
         $data = DB::SELECT("SELECT * FROM rosters WHERE scheduled_date = '$request->scheduled_date'");
