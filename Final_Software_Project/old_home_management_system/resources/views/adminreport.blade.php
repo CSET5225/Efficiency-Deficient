@@ -8,7 +8,7 @@
 </head>
 <body>
     <style>
-              body {
+    body {
       margin: 0;
       overflow: hidden;
       background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
@@ -19,18 +19,18 @@
       font-family: monospace;
     }
 
-#form{
-  background-color:#EEF5FF;
-  padding: 20px;
-  border-radius: 20px;
-  z-index: 1;
-  width: 150%;
-  max-width: 420px;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  
-}
+    #form{
+      background-color:#EEF5FF;
+      padding: 20px;
+      border-radius: 20px;
+      z-index: 1;
+      width: 150%;
+      max-width: 420px;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;  
+    }
+
      input {
       margin: 10px;
       width: 100%;
@@ -162,8 +162,7 @@ a:hover{
            <input type="text" name="Lunch">
            <br><br>
            </div>
-           <div>
-                 
+           <div>  
            <label for="dinner">Dinner</label>
            <br>
            <input type="text" name="dinner">

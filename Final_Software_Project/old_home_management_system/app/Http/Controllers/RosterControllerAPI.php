@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Supervisor;
 use App\Models\Doctor;
 use App\Models\Caregiver;
+use App\Models\Roster;
 
 
 class RosterControllerAPI extends Controller
@@ -15,11 +16,8 @@ class RosterControllerAPI extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    { //Work in progress, need to implement the ability to create a roster first
-        //  $users = DB::table('supervisors') 
-        //  ->join('appointments', 'role_id', '=', 'supervisors.role_id')
-        //  ->select("CONCAT('first_name', ' ', 'last_name') AS name")
-        //  ->get();
+    { 
+
     }
 
     /**
@@ -27,7 +25,11 @@ class RosterControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(isset($_POST["submitRoster"])){
+            $data = $request->all();
+            Roster::create($data);
+            return redirect()->back()->with('Roster has been successfully created!');
+        }
     }
 
     /**
@@ -35,7 +37,7 @@ class RosterControllerAPI extends Controller
      */
     public function show(string $id)
     {
-        //
+    
     }
 
     /**
@@ -43,7 +45,7 @@ class RosterControllerAPI extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
@@ -51,6 +53,7 @@ class RosterControllerAPI extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
+
 }
