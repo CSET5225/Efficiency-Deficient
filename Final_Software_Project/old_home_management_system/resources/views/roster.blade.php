@@ -86,15 +86,15 @@
                 background-color: black;
             }
 
-            .logout:hover{
-                background-color: white;
-                transition-duration: 2s;
-                color: black;
-            }
-            table, tr, th, td{
-                border: 1px solid white;
-                background-color: lightgray;
-            }
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
+        }
+        table, tr, th, td{
+            border: 1px solid white;
+            background-color: lightgray;
+        }
         </style>
     </head>
     <body>

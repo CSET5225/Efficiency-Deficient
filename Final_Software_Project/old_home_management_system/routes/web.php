@@ -42,6 +42,9 @@ Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
 
+Route::get('/newRoleForm', function () {
+    return view('roleAddForm');
+});
 
 Route::get('/adminsHome', function () {
     return view('adminsHome');
