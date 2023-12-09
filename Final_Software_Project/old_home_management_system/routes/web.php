@@ -32,7 +32,7 @@ Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
 
 Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
-Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
+Route::post('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 

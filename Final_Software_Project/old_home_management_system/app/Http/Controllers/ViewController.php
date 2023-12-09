@@ -136,6 +136,7 @@ class ViewController extends Controller
             'night_meds.medicine_name AS night_medicine'
     )
         ->where('scheduled_date', '<', now())
+        ->orderBy('scheduled_date')
         ->get();
     }
 
@@ -156,16 +157,10 @@ class ViewController extends Controller
             'night_meds.medicine_name AS night_medicine'
     )
     ->where('scheduled_date', '=', $current_date)
+    ->orderBy('scheduled_date')
     ->get();
     }
     
-    
-    public function doctorsHomeView(){
-        $pastHistory = $this->pastPatientAppointments();
-        $currentHistory = $this->presentPatientAppointments();
-        return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
-    }
-
     public function appointmentFilter(Request $request){
         $pastHistory = $this->pastPatientAppointments();
         $current_date = Carbon::now()->format('Y-m-d');
@@ -177,8 +172,14 @@ class ViewController extends Controller
         ->select(DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"), 'scheduled_date')
         ->where('scheduled_date', '>=', $current_date)
         ->where('scheduled_date', '<', $appointmentDate)
+        ->orderBy('scheduled_date')
         ->get();
-        
+        return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
+    }
+    
+    public function doctorsHomeView(){
+        $pastHistory = $this->pastPatientAppointments();
+        $currentHistory = $this->presentPatientAppointments();
         return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
     }
 
@@ -191,7 +192,23 @@ class ViewController extends Controller
     }
 
     public function doctorPatientsView(){
+        // $data = DB::table('appointments AS a')
+        // ->join('doctors AS d', 'd.doctor_id', '=', 'a.doctor_id')
+        // ->join('patients AS p', 'p.patient_id', '=', 'a.patient_id')
+        // ->join('patient_medications as pm', 'pm.patient_id', '=', 'p.patient_id')
+        // ->join('medications as morning_meds', 'pm.morning_medicine', '=', 'morning_meds.medicine_id')
+        // ->join('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
+        // ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
+        // ->select('scheduled_date', 'comment', 'morning_meds.medicine_name AS morning_medicine',
+        // 'afternoon_meds.medicine_name AS afternoon_medicine',
+        // 'night_meds.medicine_name AS night_medicine')
+        // ->first();
+        
         return view("doctorPatients");
+    }
+
+    public function addNewMeds(){
+        
     }
 
     public function rosterView(){

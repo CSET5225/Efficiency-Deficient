@@ -88,101 +88,32 @@
             grid-area: table;
         }
         
+        .logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            background-color: black;
+        }
+        
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
+        }
+        .patient-submit{
+          border: none;
+          background-color: #9EB8D9;
+          width: 50%;
+          font-size: 25pt;
+          height: 70px;
+          margin: 10px 0;
+          color: white;
+          border-radius: 20px;
+        }
     </style>
 </head>
-<style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #EEF5FF, #608ac1, #A25772);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  font-size: larger;
-      font-family: 'Courier New', Courier, monospace;
-}
-
-.a {
-  text-decoration: none;
-  color: white;
-font-family: 'Courier New', Courier, monospace;
-}
-
-button {
-  border: none;
-  background-color: #9EB8D9;
-  width: 50%;
-  font-size: 25pt;
-  height: 70px;
-  margin: 10px 0;
-  color: white;
-  border-radius: 20px;
-}
-
-.form {
-    box-sizing: border-box;
-    z-index: 1;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: white;
-    border-radius: 20px;
-}
-
-
-.div1{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 50px;
-  width:auto;
-}
-.div2{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px;
-  width: auto;
-}
-h1{
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    padding: 10px;
-    font-size:40pt ;
-}
-    button:hover{
-        transition-duration: 2s;
-        background-color: #EEF5FF;
-    }
-    .a:hover{
-        transition-duration: 2s;
-        color: black;
-    }
-
-    .logout {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: auto;
-        height: auto;
-        background-color: black;
-    }
-
-    .logout:hover{
-        background-color: white;
-        transition-duration: 2s;
-        color: black;
-    }
-</style>
-
 <body>
     <div class="grid-container">
         <header class="grid-item header">
@@ -209,16 +140,22 @@ h1{
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pastHistory as $pastPatients)
+                    <form action="/doctorPatients" method="POST">
+                        @foreach ($pastHistory as $pastPatients)
                         <tr>
-                            <td>{{ $pastPatients->patient_name}}</td>
+                            <td>
+                                <button name="">
+                                    {{ $pastPatients->patient_name}}
+                                </button>
+                            </td>
                             <td>{{ $pastPatients->scheduled_date }}</td>
                             <td>{{ $pastPatients->comment }}</td>
                             <td>{{ $pastPatients->morning_medicine }}</td>
                             <td>{{ $pastPatients->afternoon_medicine }}</td>
                             <td>{{ $pastPatients->night_medicine }}</td>
                         </tr>
-                    @endforeach
+                        @endforeach
+                    </form>
                 </tbody>
             </table>
         </div>
@@ -226,9 +163,6 @@ h1{
         <div class="grid-item sidebar">
             <ul>
                 <li><a href="{{ url('/doctorsDashboard') }}">Dashboard</a></li>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
             </ul>
         </div>
 
@@ -237,7 +171,7 @@ h1{
                 @csrf
                 <label>Appointments Search:</label>
                 <input type="date" name="date" >
-                <button>Submit</button>
+                <button class="patient-submit">Submit</button>
             </form>
         </div>
 
@@ -261,8 +195,6 @@ h1{
                 </tbody>
             </table>
         </div>
-
-
     </div>
 </body>
 </html>
