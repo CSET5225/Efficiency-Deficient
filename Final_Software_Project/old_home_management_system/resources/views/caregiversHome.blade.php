@@ -16,7 +16,7 @@
             background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
             font-size: larger;
             font-family: monospace;
-                  width: auto;
+            width: auto;
         }
         .main-content{
             background-color: #EEF5FF;

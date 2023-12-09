@@ -11,6 +11,7 @@ use App\Models\supervisor;
 use App\Models\caretaker;
 use App\Models\admin;
 use App\Models\doctor;
+use App\Models\Roster;
 
 class ViewController extends Controller
 {
