@@ -48,6 +48,9 @@ Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
 
+
+Route::get('/employeeList', [ViewController::class, 'employeeListView']);
+
 Route::get('/newRoleForm', function () {
     return view('roleAddForm');
 });

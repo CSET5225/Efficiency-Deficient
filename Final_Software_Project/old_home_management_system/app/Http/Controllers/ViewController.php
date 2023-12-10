@@ -175,13 +175,13 @@ class ViewController extends Controller
         ->where('scheduled_date', '<', $appointmentDate)
         ->orderBy('scheduled_date')
         ->get();
-        return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
+        return view("doctorsHome", compact('pastHistory', 'currentHistory'));
     }
     
     public function doctorsHomeView(){
         $pastHistory = $this->pastPatientAppointments();
         $currentHistory = $this->presentPatientAppointments();
-        return view("doctorsHome", compact('pastHistory'), compact('currentHistory'));
+        return view("doctorsHome", compact('pastHistory', 'currentHistory'));
     }
 
     public function doctorsDashboardView(){
@@ -206,6 +206,44 @@ class ViewController extends Controller
         // ->first();
         
         return view("doctorPatients");
+    }
+
+    public function getAdmins(){
+        return DB::table('admins as a')
+        ->join('roles as r', 'r.role_id', '=', 'a.role_id')
+        ->select('admin_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->get();
+    }
+
+    public function getCaregivers(){
+        return DB::table('caregivers as c')
+        ->join('roles as r', 'r.role_id', '=', 'c.role_id')
+        ->select('caregiver_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->get();
+    }
+
+    public function getSupervisors(){
+        return DB::table('supervisors as s')
+        ->join('roles as r', 'r.role_id', '=', 's.role_id')
+        ->select('supervisor_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->get();
+    }
+
+    public function getDoctors(){
+        return DB::table('doctors as d')
+        ->join('roles as r', 'r.role_id', '=', 'd.role_id')
+        ->select('doctor_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->get();
+    }
+    
+    public function employeeListView(){
+        $adminData = $this->getAdmins();
+        $caregiverData = $this->getCaregivers();
+        $supervisorData = $this->getSupervisors();
+        $doctorData = $this->getDoctors();
+        
+        return view("employeeList",
+        compact('adminData', 'caregiverData', 'supervisorData', 'doctorData'));
     }
 
     public function addNewMeds(){
