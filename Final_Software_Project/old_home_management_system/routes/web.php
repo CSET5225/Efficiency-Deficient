@@ -52,7 +52,7 @@ Route::get('/supervisorsHome', function () {
 
 Route::get('/caretakersHome', function () {
     return view('caretakersHome');
-
+});
 Route::get('/adminReport', function () {
     return view('adminreport');
 });
