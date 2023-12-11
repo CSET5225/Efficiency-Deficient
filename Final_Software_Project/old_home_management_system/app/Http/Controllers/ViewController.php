@@ -272,7 +272,7 @@ class ViewController extends Controller
                              WHERE approved IS NULL");
         return view("registrationApproval",["query"=>$query]);
 
-    
+    }
     public function familyHomeView(Request $request)
     {
         $userInputPatientId = $request->input('patient_id');
