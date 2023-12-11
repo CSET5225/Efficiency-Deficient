@@ -112,9 +112,9 @@
     <form action="{{ url('')}}" method="post">
         @csrf
         <div class= 'date'>
-            <label>Date:</label><br>
-            <input type="date" name="date" id="date" >
+
         </div>
+      </form>
         <div>
           <div class="table-container">
             <table>
@@ -172,6 +172,7 @@
         <label for="salary">Salary</label>
         <input type="hidden" name="salary" id="salary"> --}}
     </div>
+    <form action="" method="POST">
     <div>
         <label for="empID">Emp ID</label>
         <input type="text" name="empID" id="empID">
