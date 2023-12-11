@@ -65,8 +65,8 @@ Route::get('/supervisorsHome', function () {
     return view('supervisorHome');
 });
 
-Route::get('/caretakersHome', function () {
-    return view('caretakersHome');
+Route::get('/caregiversHome', function () {
+    return view('caregiversHome');
 });
 
 Route::get('/adminReport', function () {
@@ -75,6 +75,14 @@ Route::get('/adminReport', function () {
 
 Route::get('/doctorsAppointment', function () {
     return view('doctorsAppointment');
+});
+
+Route::get('/payment', function () {
+    return view('payment');
+});
+
+Route::get('/patient', function () {
+    return view('Patients');
 });
 
 

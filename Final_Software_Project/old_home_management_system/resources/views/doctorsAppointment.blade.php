@@ -17,7 +17,7 @@
       font-family: monospace;
     }
 
-    #form{
+    .form{
       background-color:#EEF5FF;
       padding: 20px;
       border-radius: 20px;
@@ -112,7 +112,7 @@
     <button class="logout">Log Out</button>
     </form>
     <h1>Docotor's Appointments</h1>
-    <form action="{{url('/doctorsAppointment')}}" method="get">
+    <form action="{{url('/doctorsAppointment')}}" method="get" class='form'>
     <label for="">Patient Id</label>
     <input type="text">
     <br>
