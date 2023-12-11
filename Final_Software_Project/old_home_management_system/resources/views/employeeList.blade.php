@@ -19,7 +19,7 @@
         justify-content: center;
         height: 100vh;
       }
-      form{
+      .main{
         background-color:#EEF5FF;
         padding: 20px;
         border-radius: 20px;
@@ -109,69 +109,63 @@
 </head>
 <body>
     <h1>Employees</h1>
-    <form action="{{ url('')}}" method="post">
-        @csrf
-        <div class= 'date'>
+    <div class="main">
+      <form action="{{ url('')}}" method="post">
+
+          @csrf
+
+          <div class= 'date'>
 
         </div>
-      </form>
-        <div>
-          <div class="table-container">
-            <table>
-              <thead>
+        </form>
+          <div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Role</th>
+                    <th>Salary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach ($adminData as $adminData)
                 <tr>
-                  <th>Employee ID</th>
-                  <th>Employee Name</th>
-                  <th>Role</th>
-                  <th>Salary</th>
+                  <td>{{ $adminData->admin_id }}</td>
+                  <td>{{ $adminData->full_name }}</td>
+                  <td>{{ $adminData->role_name }}</td>
+                  <td>{{ $adminData->salary }}</td>
                 </tr>
-              </thead>
-              <tbody>
-              @foreach ($adminData as $adminData)
-              <tr>
-                <td>{{ $adminData->admin_id }}</td>
-                <td>{{ $adminData->full_name }}</td>
-                <td>{{ $adminData->role_name }}</td>
-                <td>{{ $adminData->salary }}</td>
-              </tr>
-              @endforeach
-              @foreach ($supervisorData as $supervisorData)
-              <tr>
-                <td>{{ $supervisorData->supervisor_id }}</td>
-                <td>{{ $supervisorData->full_name }}</td>
-                <td>{{ $supervisorData->role_name }}</td>
-                <td>{{ $supervisorData->salary }}</td>
-              </tr>
-              @endforeach
-              @foreach ($caregiverData as $caregiverData)
-              <tr>
-                <td>{{ $caregiverData->caregiver_id }}</td>
-                <td>{{ $caregiverData->full_name }}</td>
-                <td>{{ $caregiverData->role_name }}</td>
-                <td>{{ $caregiverData->salary }}</td>
-              </tr>
-              @endforeach
-              @foreach ($doctorData as $doctorData)
-              <tr>
-                <td>{{ $doctorData->doctor_id }}</td>
-                <td>{{ $doctorData->full_name }}</td>
-                <td>{{ $doctorData->role_name }}</td>
-                <td>{{ $doctorData->salary }}</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-          
-        {{-- <label for="ID">ID</label>
-        <input type="hidden" name="ID" id="ID">
-        <label for="name">Name</label>
-        <input type="hidden" name="name" id="name">
-        <label for="role">Role</label>
-        <input type="hidden" name="role" id="role">
-        <label for="salary">Salary</label>
-        <input type="hidden" name="salary" id="salary"> --}}
-    </div>
+                @endforeach
+                @foreach ($supervisorData as $supervisorData)
+                <tr>
+                  <td>{{ $supervisorData->supervisor_id }}</td>
+                  <td>{{ $supervisorData->full_name }}</td>
+                  <td>{{ $supervisorData->role_name }}</td>
+                  <td>{{ $supervisorData->salary }}</td>
+                </tr>
+                @endforeach
+                @foreach ($caregiverData as $caregiverData)
+                <tr>
+                  <td>{{ $caregiverData->caregiver_id }}</td>
+                  <td>{{ $caregiverData->full_name }}</td>
+                  <td>{{ $caregiverData->role_name }}</td>
+                  <td>{{ $caregiverData->salary }}</td>
+                </tr>
+                @endforeach
+                @foreach ($doctorData as $doctorData)
+                <tr>
+                  <td>{{ $doctorData->doctor_id }}</td>
+                  <td>{{ $doctorData->full_name }}</td>
+                  <td>{{ $doctorData->role_name }}</td>
+                  <td>{{ $doctorData->salary }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+      </div>
     <form action="" method="POST">
     <div>
         <label for="empID">Emp ID</label>
@@ -184,5 +178,6 @@
     <button name = "register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
 </form>
+  </div>
 </body>
 </html>

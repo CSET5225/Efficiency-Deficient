@@ -193,18 +193,6 @@ class ViewController extends Controller
     }
 
     public function doctorPatientsView(){
-        // $data = DB::table('appointments AS a')
-        // ->join('doctors AS d', 'd.doctor_id', '=', 'a.doctor_id')
-        // ->join('patients AS p', 'p.patient_id', '=', 'a.patient_id')
-        // ->join('patient_medications as pm', 'pm.patient_id', '=', 'p.patient_id')
-        // ->join('medications as morning_meds', 'pm.morning_medicine', '=', 'morning_meds.medicine_id')
-        // ->join('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
-        // ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
-        // ->select('scheduled_date', 'comment', 'morning_meds.medicine_name AS morning_medicine',
-        // 'afternoon_meds.medicine_name AS afternoon_medicine',
-        // 'night_meds.medicine_name AS night_medicine')
-        // ->first();
-        
         return view("doctorPatients");
     }
 
@@ -315,5 +303,40 @@ class ViewController extends Controller
       
         $data = Patient::all();
         return view('familyMembers_home', ['a' => $data]);
+    }
+
+    public function login(Request $request){
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:12']
+        ]);
+    }
+
+    public function rosterInfoShow(){
+        $doctor = DB::SELECT("SELECT doctor_id FROM doctors");
+        $caregiver = DB::SELECT("SELECT caregiver_id FROM caregivers");
+        $supervisor = DB::SELECT("SELECT supervisor_id FROM supervisors");
+        $group = DB::SELECT("SELECT group_id FROM patient_groups");
+
+        return view("newRoster",["doctor_id"=>$doctor, "caregiver_id"=>$caregiver, "supervisor_id"=>$supervisor, "group_id"=>$group]);
+    }
+
+    public function rosterViewInfo(Request $request){
+        $data = DB::SELECT("SELECT * FROM rosters ORDER BY scheduled_date DESC");
+        return view("roster", ["data"=>$data],["info"=>$data[0]]);
+    }
+
+    public function getRosterInfo(Request $request){
+        $date = strtotime($request->scheduled_date);
+        $date = date('Y-m-d', $date);
+        $data = DB::SELECT("SELECT * FROM rosters WHERE scheduled_date = '$request->scheduled_date'");
+
+        if($data != NULL){
+            return view("roster", ["data"=>$data], ["info"=>$data[0]]);
+        }
+        else{
+            $data = DB::SELECT("SELECT * FROM rosters ORDER BY scheduled_date DESC");
+            return view("roster", ["data"=>$data],["info"=>$data[0]]);
+        }
     }
 }
