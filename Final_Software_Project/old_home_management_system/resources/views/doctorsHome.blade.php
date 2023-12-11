@@ -14,7 +14,7 @@
         
         html{
             height: 100%;
-            padding: 25px;
+            padding: 20px;
             background: linear-gradient(180deg, #EEF5FF, #608ac1,#A25772);
             font-size: 18px;
             font-family: monospace;
@@ -88,6 +88,30 @@
             grid-area: table;
         }
         
+        .logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            background-color: black;
+        }
+        
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
+        }
+        .patient-submit{
+          border: none;
+          background-color: #9EB8D9;
+          width: 50%;
+          font-size: 25pt;
+          height: 70px;
+          margin: 10px 0;
+          color: white;
+          border-radius: 20px;
+        }
     </style>
 </head>
 <body>
@@ -96,10 +120,6 @@
             <div>
                 <h1>Welcome, Doctor!</h1>
             </div>
-
-            {{-- <div>
-                <li>Your Patients</li>
-            </div> --}}
 
             <div>
                 <li><a href="{{ url('/') }}">Log Out</a></li>
@@ -120,41 +140,44 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <form action="/doctorPatients" method="POST">
+                        @foreach ($pastHistory as $pastPatients)
                         <tr>
-                            <td>John Doe</td>
-                            <td>9/17/23</td>
-                            <td>None</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
+                            <td>
+                                <button name="">
+                                    {{ $pastPatients->patient_name}}
+                                </button>
+                            </td>
+                            <td>{{ $pastPatients->scheduled_date }}</td>
+                            <td>{{ $pastPatients->comment }}</td>
+                            <td>{{ $pastPatients->morning_medicine }}</td>
+                            <td>{{ $pastPatients->afternoon_medicine }}</td>
+                            <td>{{ $pastPatients->night_medicine }}</td>
                         </tr>
+                        @endforeach
+                    </form>
                 </tbody>
             </table>
         </div>
 
         <div class="grid-item sidebar">
             <ul>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
+                <li><a href="{{ url('/doctorsDashboard') }}">Dashboard</a></li>
             </ul>
         </div>
 
         <div class="grid-item search">
-            <form action="">
+            <form action="/appointmentFilter", method="POST">
                 @csrf
                 <label>Appointments Search:</label>
                 <input type="date" name="date" >
-                <button>Submit</button>
+                <button class="patient-submit">Submit</button>
             </form>
         </div>
 
 
         <div class="grid-item table">
             <label>Available Appointments until the Specified Date:</label>
-          <form action="" method="POST">
-            @csrf
             <table>
                 <thead>
                     <tr>
@@ -163,16 +186,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($currentHistory as $currentPatients)
                     <tr>
-                        <td>Test1</td>
-                        <td>Test2</td>
+                        <td>{{ $currentPatients->patient_name }}</td>
+                        <td>{{ $currentPatients->scheduled_date }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
-          </form>
         </div>
-
-
     </div>
 </body>
 </html>
