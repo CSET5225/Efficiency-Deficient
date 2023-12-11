@@ -10,7 +10,6 @@ use App\Models\caregiver;
 use App\Models\doctor;
 use App\Models\supervisor;
 use App\Models\admin;
-use Illuminate\Support\Facades\DB;
 
 class RegistrationControllerApi extends Controller
 {
@@ -60,6 +59,7 @@ class RegistrationControllerApi extends Controller
                 echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
                 return view("/login");
             }
+            
         }
     }
     }

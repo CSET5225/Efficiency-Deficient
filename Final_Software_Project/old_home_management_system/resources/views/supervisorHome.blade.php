@@ -129,7 +129,7 @@ h1{
     </form>
    <div class="form">
    <h1>Welcome Supervisor</h1>
-    <div class="div1">
+  <div class="div1">
     
     <button>
             <a href="" class="a">Addtional Patient Info </a>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\ViewController;
 use App\Http\Controllers\loginApplicationController;
+use App\Http\Controllers\RosterControllerAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,11 @@ Route::get('/login', [ViewController::class, 'loginView']);
 
 Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView']);
 
-Route::get('/rosterHome', [ViewController::class, 'rosterView']);
+Route::get('/newRoster', [ViewController::class, 'rosterInfoShow']);
+
+Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
+
+Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
 Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
 
@@ -37,6 +42,9 @@ Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
 
+Route::get('/newRoleForm', function () {
+    return view('roleAddForm');
+});
 
 Route::get('/adminsHome', function () {
     return view('adminsHome');
@@ -52,6 +60,7 @@ Route::get('/supervisorsHome', function () {
 
 Route::get('/caretakersHome', function () {
     return view('caretakersHome');
+});
 
 Route::get('/adminReport', function () {
     return view('adminreport');
@@ -61,7 +70,7 @@ Route::get('/doctorsAppointment', function () {
     return view('doctorsAppointment');
 });
 
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+Route::post('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 
