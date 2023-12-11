@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\RegistrationControllerApi;
+use App\Http\Controllers\RosterControllerAPI;
+use App\Http\Controllers\RoleControllerAPI;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('register', RegistrationControllerApi::class);
+
+Route::resource('newRoster', RosterControllerAPI::class);
+
+Route::resource('addRole', RoleControllerAPI::class);

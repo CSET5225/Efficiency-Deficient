@@ -16,7 +16,7 @@
             background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
             font-size: larger;
             font-family: monospace;
-                  width: auto;
+            width: auto;
         }
         .main-content{
             background-color: #EEF5FF;
@@ -124,8 +124,8 @@ button:hover{
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
+                            <td><input type="checkbox"></td>
+                        </tr>
                     </tbody>
             </table>
             <button>Submit</button>
@@ -133,5 +133,11 @@ button:hover{
         
     </div>
     </div>
+    @else
+    <script>
+        alert("Please log in.");
+        window.location.href = "/login";
+    </script>
+    @endauth
 </body>
 </html>

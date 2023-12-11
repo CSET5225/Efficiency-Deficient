@@ -20,18 +20,16 @@
       font-family: monospace;
     }
 
-
     #form{
-    background-color:#EEF5FF;
-    padding: 20px;
-    border-radius: 20px;
-    z-index: 1;
-    width: 150%;
-    max-width: 420px;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    
+        background-color:#EEF5FF;
+        padding: 20px;
+        border-radius: 20px;
+        z-index: 1;
+        width: 150%;
+        max-width: 420px;
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
     }
 
     input {
@@ -52,11 +50,11 @@
         border-radius: 20px;    
     }
 
-        button:hover{
+    button:hover{
         transition-duration: 2s;
-                background-color: #EEF5FF;
-                color:black;   
-        }
+        background-color: #EEF5FF;
+        color:black;   
+    }
 
     #buttons{
         display: flex;
@@ -75,17 +73,17 @@
 
     select{
         margin: 10px;
-      width: 100%;
-      font-size: large;
-      border-radius: 20px; 
-      border :1px solid black;
+        width: 100%;
+        font-size: large;
+        border-radius: 20px; 
+        border :1px solid black;
     }
     
     a {
-  text-decoration: none;
-  color: white;
-  font-family: monospace;
-  }
+        text-decoration: none;
+        color: white;
+        font-family: monospace;
+    }
 
     a:hover{
         color: black;
@@ -98,7 +96,7 @@
     <div class="error-message">
         <?php echo $error; ?>
     </div>
-<?php endif; ?>
+    <?php endif; ?>
 
         <div class="justify-content-center">
             <div class="w-100 d-flex justify-content-center">

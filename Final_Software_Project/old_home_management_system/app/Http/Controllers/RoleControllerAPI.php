@@ -1,23 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Supervisor;
-use App\Models\Doctor;
-use App\Models\Caregiver;
-use App\Models\Roster;
+use App\Models\Role;
 
-
-class RosterControllerAPI extends Controller
+class RoleControllerAPI extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    { 
-
+    {
+        //
     }
 
     /**
@@ -25,9 +21,9 @@ class RosterControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        if(isset($_POST["submitRoster"])){
+        if(isset($_POST["submitRole"])){
             $data = $request->all();
-            Roster::create($data);
+            Role::create($data);
             return redirect()->back()->with('Roster has been successfully created!');
         }
     }
@@ -37,7 +33,7 @@ class RosterControllerAPI extends Controller
      */
     public function show(string $id)
     {
-    
+        //
     }
 
     /**
@@ -45,7 +41,7 @@ class RosterControllerAPI extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        //
     }
 
     /**
@@ -53,7 +49,6 @@ class RosterControllerAPI extends Controller
      */
     public function destroy(string $id)
     {
-        
+        //
     }
-
 }

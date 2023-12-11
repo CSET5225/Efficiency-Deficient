@@ -14,7 +14,7 @@
         
         html{
             height: 100%;
-            padding: 25px;
+            padding: 20px;
             background: linear-gradient(180deg, #EEF5FF, #608ac1,#A25772);
             font-size: 18px;
             font-family: monospace;
@@ -88,89 +88,7 @@
             grid-area: table;
         }
         
-    </style>
-</head>
-<style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #EEF5FF, #608ac1, #A25772);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  font-size: larger;
-      font-family: 'Courier New', Courier, monospace;
-}
-
-.a {
-  text-decoration: none;
-  color: white;
-font-family: 'Courier New', Courier, monospace;
-}
-
-button {
-  border: none;
-  background-color: #9EB8D9;
-  width: 100%;
-  font-size: 25pt;
-  height: 175px; 
-  margin: 10px 0; 
-  color: white;
-  border-radius: 20px;
-}
-
-.form {
- /* padding: 20px;  */
-   box-sizing: border-box;
-  z-index: 1;
-  width: auto;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center; 
-  background-color: white; 
-  border-radius: 20px;
-}
-
-
-.div1{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 50px;
-  width:auto; 
-}
-.div2{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-   padding: 50px;
-   width: auto;  
-}
-h1{
-        /* margin-top: 50px; */
-        position: absolute; 
-        top: 20px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 2; 
-      padding: 10px;
-      font-size:40pt ;
-    }
-    button:hover{
-        transition-duration: 2s;
-        background-color: #EEF5FF;
-
-    }
-    .a:hover{
-        transition-duration: 2s;
-        color: black;
-    }
-
-    .logout {
+        .logout {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -178,24 +96,30 @@ h1{
             height: auto;
             background-color: black;
         }
-
+        
         .logout:hover{
             background-color: white;
             transition-duration: 2s;
             color: black;
         }
-
-</style>
+        .patient-submit{
+          border: none;
+          background-color: #9EB8D9;
+          width: 50%;
+          font-size: 25pt;
+          height: 70px;
+          margin: 10px 0;
+          color: white;
+          border-radius: 20px;
+        }
+    </style>
+</head>
 <body>
     <div class="grid-container">
         <header class="grid-item header">
             <div>
                 <h1>Welcome, Doctor!</h1>
             </div>
-
-            {{-- <div>
-                <li>Your Patients</li>
-            </div> --}}
 
             <div>
                 <li><a href="{{ url('/') }}">Log Out</a></li>
@@ -216,41 +140,44 @@ h1{
                     </tr>
                 </thead>
                 <tbody>
+                    <form action="/doctorPatients" method="POST">
+                        @foreach ($pastHistory as $pastPatients)
                         <tr>
-                            <td>John Doe</td>
-                            <td>9/17/23</td>
-                            <td>None</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
+                            <td>
+                                <button name="">
+                                    {{ $pastPatients->patient_name}}
+                                </button>
+                            </td>
+                            <td>{{ $pastPatients->scheduled_date }}</td>
+                            <td>{{ $pastPatients->comment }}</td>
+                            <td>{{ $pastPatients->morning_medicine }}</td>
+                            <td>{{ $pastPatients->afternoon_medicine }}</td>
+                            <td>{{ $pastPatients->night_medicine }}</td>
                         </tr>
+                        @endforeach
+                    </form>
                 </tbody>
             </table>
         </div>
 
         <div class="grid-item sidebar">
             <ul>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
+                <li><a href="{{ url('/doctorsDashboard') }}">Dashboard</a></li>
             </ul>
         </div>
 
         <div class="grid-item search">
-            <form action="">
+            <form action="/appointmentFilter", method="POST">
                 @csrf
                 <label>Appointments Search:</label>
                 <input type="date" name="date" >
-                <button>Submit</button>
+                <button class="patient-submit">Submit</button>
             </form>
         </div>
 
 
         <div class="grid-item table">
             <label>Available Appointments until the Specified Date:</label>
-          <form action="" method="POST">
-            @csrf
             <table>
                 <thead>
                     <tr>
@@ -259,16 +186,15 @@ h1{
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($currentHistory as $currentPatients)
                     <tr>
-                        <td>Test1</td>
-                        <td>Test2</td>
+                        <td>{{ $currentPatients->patient_name }}</td>
+                        <td>{{ $currentPatients->scheduled_date }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
-          </form>
         </div>
-
-
     </div>
 </body>
 </html>

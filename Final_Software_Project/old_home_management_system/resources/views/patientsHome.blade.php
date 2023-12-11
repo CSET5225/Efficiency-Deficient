@@ -6,16 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Patients Home</title> {{-- Placeholder Text --}}
     <style>
-       body {
-      margin: 0;
-      overflow: hidden;
-      background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-size: larger;
-      font-family: monospace;    }
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-size: larger;
+            font-family: monospace;
+        }
         div{
             display: flex;
             margin: auto;
@@ -72,55 +73,55 @@
             margin: auto;
             }
 
-h1{
-        position: absolute; 
-        top: 20px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 2; 
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 25pt;
-}
+            h1{
+                position: absolute; 
+                top: 20px; 
+                left: 50%; 
+                transform: translateX(-50%); 
+                z-index: 2; 
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 25pt;
+            }
         
-        table, tr, th, td{
-            width: 50%;
-            border: 1px solid #9EB8D9;
-            margin: auto;
-            padding:10px ;
-        }
+            table, tr, th, td{
+                width: 50%;
+                border: 1px solid #9EB8D9;
+                margin: auto;
+                padding:10px ;
+            }
 
-        .date{
-  display: flex; 
-  flex-direction:row; 
-  align-items: center; 
-  width: 100%; 
-  margin-left: 11%;
-}
+            .date{
+                display: flex; 
+                flex-direction:row; 
+                align-items: center; 
+                width: 100%; 
+                margin-left: 11%;
+            }
 
-.patient-info{
-  display: flex; 
-  flex-direction: row; 
-  align-items: center; 
-  width: 100%; 
- 
-}
-.logout {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: auto;
-            height: auto;
-            background-color: black;
-        }
+            .patient-info{
+            display: flex; 
+            flex-direction: row; 
+            align-items: center; 
+            width: 100%; 
+            
+            }
 
-        .logout:hover{
-            background-color: white;
-            transition-duration: 2s;
-            color: black;
-        }
+            .logout {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: auto;
+                height: auto;
+                background-color: black;
+            }
 
-    </style>
+            .logout:hover{
+                background-color: white;
+                transition-duration: 2s;
+                color: black;
+            }
+        </style>
 </head>
 <body>
 <form action="{{url('/logout')}}" method="GET">
@@ -135,11 +136,13 @@ h1{
                     <label>Patient ID</label>
                     <p name= "patient_id">#1415151</p>
                 </div>
-
+                
                 <div class="patient-info">
                     <label>Patient Name</label>
                     <p name="patient_name">Test</p>
                 </div>
+                
+                <div>
 
                 <div class="date">
                     <label>Date</label>
@@ -179,6 +182,11 @@ h1{
             </table>
         </section>
     </div>
-    
+    @else
+    <script>
+    alert("Please log in.");
+    window.location.href = "/login";
+    </script>
+    @endauth
 </body>
 </html>

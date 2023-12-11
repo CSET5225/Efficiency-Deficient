@@ -9,11 +9,16 @@ class Roster extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         "scheduled_date",
         "group_id",
         "supervisor_id",
         "doctor_id",
-        "caregiver_id"
+        "caregiver1_id",
+        "caregiver2_id",
+        "caregiver3_id",
+        "caregiver4_id"
     ];
 }

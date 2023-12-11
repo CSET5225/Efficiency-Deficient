@@ -6,96 +6,85 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Roster</title>
     
-
-    <title>Test</title>
-</head>
-<body>
-<style>
+    <style>
         body {
-  margin: 0;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #EEF5FF, #608ac1, #A25772);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  font-size: larger;
-  font-family: monospace;}
-
-input {
-      margin: 10px;
-      width: auto;
-      border-radius: 20px; 
-      border :1px solid black; 
-    }
-
-.a {
-  text-decoration: none;
-  color: white;
-  font-family: monospace;}
-
-button {
-  border: none;
-  background-color: #9EB8D9;
-  max-width: fit-content;
-  width: 75%;
-  font-size: 25pt;
-  height: fit-content; 
-  margin: 10px 0; 
-  color: white;
-  border-radius: 20px;
-}
-
-.form {
-  z-index: 1;
-  width: auto;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  padding: 10px;
-  border-radius: 20px;
-}
-
-
-.div1{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 50px;
-  width: 50%; 
-}
-
-h1{
-        /* margin-top: 50px; */
-        position: absolute; 
-        top: 20px; 
-        left: 54%; 
-        transform: translateX(-50%); 
-        z-index: 2; 
-      padding: 10px;
-      font-size:40pt ;
-    }
-    button:hover{
-        transition-duration: 2s;
-        background-color: #EEF5FF;
-        color: black;
-
-    }
-    .a:hover{
-        transition-duration: 2s;
-        color: black;
-    }
-
-    .logout {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 25%;
-            height: auto;
-            background-color: black;
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #EEF5FF, #608ac1, #A25772);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-size: larger;
+            font-family: monospace;
         }
+
+        input {
+            margin: 10px;
+            width: auto;
+            width:auto;
+            height:25px;
+            text-align:center;
+        }
+
+        .a {
+        text-decoration: none;
+        color: white;
+        font-family: monospace;
+        }
+
+        button {
+        border: none;
+        background-color: #9EB8D9;
+        max-width: fit-content;
+        font-size: 25pt;
+        height: fit-content; 
+        color: white;
+        padding:10px;
+        margin:10px;
+        }
+
+        .form {
+        z-index: 1;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        padding: 10px;
+        }
+
+        .div1{
+        background-color:white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align:center;
+        padding: 20px;
+        width: 70%; 
+        }
+
+        h1{
+            padding: 10px;
+            font-size:40pt ;
+        }
+
+        button:hover{
+            transition-duration: 2s;
+            background-color: #EEF5FF;
+            color: black;
+
+        }
+        .a:hover{
+            transition-duration: 2s;
+            color: black;
+        }
+
+        .logout {
+                height: auto;
+                background-color: black;
+            }
 
         .logout:hover{
             background-color: white;
@@ -103,48 +92,60 @@ h1{
             color: black;
         }
         table, tr, th, td{
-            width: auto;
             border: 1px solid white;
             background-color: lightgray;
         }
-    </style>
+        </style>
+    </head>
+    <body>
+    <form action="{{url('/logout')}}" method="GET">
+        <button class="logout">Log Out</button>
+    </form>
 
-<form action="{{url('/logout')}}" method="GET">
-    <button class="logout">Log Out</button>
-    </form>
-    <h1>Roster</h1>
-<div class="div1">
-    <form action="{{ url('api/roster') }}" method="GET" class="form">
-        @csrf
-        <section class="date">
-            <label>Date</label>
-            <input type="date" name="date">
-        </section>
+    <div class="div1">
+        <h1>Roster</h1>
+
+        <form method="GET" action={{ url('getRosterInfo') }} id="rosterForm">
+
+            <table>
+
+                <tr>
+                    <th>Date</th>
+                    <th>Group id</th>
+                    <th>Supervisor id</th>
+                    <th>Doctor id</th>
+                    <th>Caregiver 1 id</th>
+                    <th>Caregiver 2 id</th>
+                    <th>Caregiver 3 id</th>
+                    <th>Caregiver 4 id</th>
+                </tr>
+
+                <tr>
+
+                    @if(isset($data))
+                        <td><input type="date"  id="selectDate" name="scheduled_date" value = {{ $info->scheduled_date }} onchange = show_data()></td>
+                        <td><input type="text" name="group_id" value="{{ $info ? $info->group_id:'' }}" readonly></td>
+                        <td><input type="text" name="supervisor_id" value="{{ $info ? $info->supervisor_id:'' }}" readonly></td>
+                        <td><input type="text" name="doctor_id" value="{{ $info ? $info->doctor_id:'' }}" readonly></td>
+                        <td><input type="text" name="caregiver1_id" value="{{ $info ? $info->caregiver1_id:'' }}" readonly></td>
+                        <td><input type="text" name="caregiver2_id" value="{{ $info ? $info->caregiver2_id:'' }}" readonly></td>
+                        <td><input type="text" name="caregiver3_id" value="{{ $info ? $info->caregiver3_id:'' }}" readonly></td>
+                        <td><input type="text" name="caregiver4_id" value="{{ $info ? $info->caregiver4_id:'' }}" readonly></td>
+                    @endif
         
-    </form>
-    <button>Submit</button>
-    <table>
-        <thead>
-            <tr>
-                <th>Supervisor</th>
-                <th>Doctor</th>
-                <th>Caregiver1</th>
-                <th>Caregiver2</th>
-                <th>Caregiver3</th>
-                <th>Caregiver4</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+
+            </table>
+
+        </form>
+        <form action = "{{ url('adminsHome') }}">
+            <button>Back</button>
+        </form>
     </div>
-</body>
+    </body>
+    <script>
+        function show_data(){
+            document.getElementById("rosterForm").submit()
+        }
+    </script>
 </html>
