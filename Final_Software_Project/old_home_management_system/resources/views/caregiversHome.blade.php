@@ -124,8 +124,8 @@ button:hover{
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
                             <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
+                            <td><input type="checkbox"></td>
+                        </tr>
                     </tbody>
             </table>
             <button>Submit</button>
@@ -133,5 +133,11 @@ button:hover{
         
     </div>
     </div>
+    @else
+    <script>
+        alert("Please log in.");
+        window.location.href = "/login";
+    </script>
+    @endauth
 </body>
 </html>

@@ -136,11 +136,13 @@
                     <label>Patient ID</label>
                     <p name= "patient_id">#1415151</p>
                 </div>
-
+                
                 <div class="patient-info">
                     <label>Patient Name</label>
                     <p name="patient_name">Test</p>
                 </div>
+                
+                <div>
 
                 <div class="date">
                     <label>Date</label>
@@ -180,6 +182,11 @@
             </table>
         </section>
     </div>
-    
+    @else
+    <script>
+    alert("Please log in.");
+    window.location.href = "/login";
+    </script>
+    @endauth
 </body>
 </html>
