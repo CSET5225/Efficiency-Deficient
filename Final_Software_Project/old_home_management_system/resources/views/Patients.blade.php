@@ -121,7 +121,7 @@
 
     <h1>Patients Table</h1>
 
-    <form action="{{ url('/PatientsCheck') }}" method="get" class="form">
+    <form action="{{ url('/patient') }}" method="get" class="form">
         @csrf 
 
         <table>
@@ -130,7 +130,6 @@
                 <th>Name</th>
                 <th>DOB</th>
                 <th>Emergency Contact</th>
-                <th>Emergency Contact Name</th>
                 <th>Admission Date</th>
             </tr>
 
@@ -140,7 +139,6 @@
                     <td>{{ $patient->full_name }}</td>
                     <td>{{ $patient->DOB }}</td>
                     <td>{{ $patient->emergency_contact }}</td>
-                    <td>{{ $patient->emergency_contact_name }}</td>
                     <td>{{ $patient->admission_date }}</td>
                 </tr>
             @endforeach
