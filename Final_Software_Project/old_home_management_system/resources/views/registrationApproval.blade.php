@@ -7,17 +7,8 @@
     <title>Registration Approval</title>
     <style>
 
-        th{
-            padding:10px;
-        }
-        tr{
-            padding:10px;
-        }
-        td{
-            padding:10px;
-        }
-        .hidden{
-            visibility:hidden;
+        #hiddenForm{
+            display:none;
         }
 
     </style>
@@ -36,7 +27,7 @@
 
                 <tr>
 
-                    <form action={{ url('api/register/'.$account->role_id)}} method="POST">
+                    <form action= {{ url('api/register/'.$account->role_id)}} method="POST">
 
                         @csrf
                         @method('PUT')
@@ -48,17 +39,20 @@
 
                     </form>
 
-                    <form action={{ url('api/register/'.$account->role_id) }} method="POST">
+                    <div id="hiddenForm">
+                        <form action={{ url('api/register/'.$account->role_id) }} method="POST">
 
-                        @csrf
-                        @method('DELETE')
-                        <input name="first_name" value = {{ $account->first_name }} class="hidden">
-                        <input name="last_name" value = {{ $account->last_name }} class="hidden">
-                        <input name="email" value = {{ $account->email }} class="hidden">
-                        <input name="role_id" value = {{ $account->role_id }} class="hidden">
-                        <td><button name="accountDelete">Delete</button></td>
+                            @csrf
+                            @method('DELETE')
+                            <input name="first_name" value = {{ $account->first_name }} class="hidden">
+                            <input name="last_name" value = {{ $account->last_name }} class="hidden">
+                            <input name="email" value = {{ $account->email }} class="hidden">
+                            <input name="role_id" value = {{ $account->role_id }} class="hidden">
+                            <td><button name="accountDelete">Delete</button></td>
 
-                    </form>
+                        </form>
+
+                    </div>
 
                 </tr>
 

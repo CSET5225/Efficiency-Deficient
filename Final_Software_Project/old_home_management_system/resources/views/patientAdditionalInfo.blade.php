@@ -11,105 +11,146 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         html{
             height: 100%;
             width: 100%;
             background: linear-gradient(180deg, #EEF5FF, #9EB8D9, #7C93C3, #A25772) no-repeat;
+            font-family:monospace;
         }
-        body{
-            padding: 25px;
-        }
+
         .container{
-            display: grid;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            text-align:center;
             border: 1px solid black;
             border-radius: 10px;
-            grid-template-areas:
-            'patientID patientName'
-            'group .'
-            'admissionDate .'
-            '. buttons';
-            grid-template-columns: 1fr 1fr;
             font-size: 24px;
-            padding: 55px;
-            column-gap: 25px;
+            padding:40px;
             background-color: white;
+            margin:20px;
         }
 
-        input[type=text]{
-            padding: 12px 20px;
-            margin: 8px 0;
+        input{
+            height:35px;
+            width:200px;
+            padding:5px;
         }
 
-        
-        .patientID{
-            grid-area: patientID;
+        select{
+            height:35px;
+            padding:5px;
+            width:150px;
+        }
+
+        h1{
+            padding-bottom:50px;
+        }
+
+        tr, td{
+            padding:10px;
         }
         
-        .group{
-            grid-area: group;
+        .buttonContainer{
+            display:flex;
+            justify-content:center;
         }
-        .admissionDate{
-            grid-area: admissionDate;
+
+        #patientForm{
+            display:flex;
+            justify-content:center;
+            text-align:center;
+            flex-direction:row;
+            align-items:flex-end;
         }
-        .patientName{
-            /* display: none; */
-            grid-area: patientName;
-        }
-        .button-container{
-            grid-area: buttons;
-        }
-        .button-container > button{
-            font-size: 25px;
-            padding: 5px;
+
+        button{
+            margin: 10px;
+            width: 140px;
+            height:35px;
+            background-color:#9EB8D9; 
+            font-size: large;
+            color: white;
+            border: none; 
+            padding:5px;
+        }   
+
+        button:hover{
+            transition-duration: 2s;
+            background-color: #EEF5FF;
+            color:black;   
         }
     </style>
 </head>
 <body>
-    <form action={{ url('/patientSearch') }} method="POST" id="patientForm">
+
+    <div class = "container">
+
+    <h1>Patient Additional Information</h1>
+
+    <form action={{ url('/getPatientInfo') }} method="GET" id="patientForm">
+
         @csrf
-    <div class="container">
-            <section class="patientID">
-                <label style="color: crimson;">Patient ID</label>
-                <select id="patientId" name="patientID" style="padding: 8px;" onchange="searchPatient()">
-                    {{-- @if (isset($patientName)) --}}
-                    {{-- <option value="">{{ $data->patient_id }}</option> --}}
-                    {{-- @endif --}}
-                    <option value="">Select an ID.</option>
-                    @foreach ($data as $item)
-                    <option value="{{ $item->patient_id }}">{{ $item->patient_id }}</option>
-                    @endforeach
-                    
-                </select>
-            </section>
-            <section class="group">
-                <label>Group</label>
-                @if(isset($group_id))
-                <input type="text" name="group" value="{{ $group_id[0]->group_id }}">
-                @endif
-            </section>
-            <section class="admissionDate">
-                <label>Admission Date</label>
-                <input type="date" name="date" value="" readonly>
-            </section>
-            <section class="patientName">
-                <label>Patient Name</label>
-                @if(isset($patientName)){
-                        <input type="text" name="patientName" value="{{ $patientName[0]->first_name }}" readonly>
-                }
-                @endif
-            </section>
-            <section class="button-container">
-                <button name="patient_add_info_submit">Submit</button>
-                <button name="patient_add_info_cancel">
-                    <a style="text-decoration:none;" href="/patientAddInfo">Cancel</a>
-                </button>
-            </section>
+
+            <table>
+
+                <tr>
+
+                    <th>Patient ID</th>
+                    <th>Group</th>
+                    <th>Admission Date</th>
+                    <th>Patient Name</th>
+                
+                </tr>
+
+                <tr>
+
+                    <td>
+
+                        @if(isset($data))
+
+                            <select id="patientId" name="patientID" style="padding: 8px;" onchange="searchPatient()">
+
+                                    @foreach ($data as $item)
+
+                                        <option value="{{ $item->patient_id }}">{{ $item->patient_id }}</option>
+
+                                    @endforeach
+
+                            </select>
+
+                        </td>
+
+                        <td><input type="text" name="group" value="{{ $info ? $info->group_id:$item->group_id }}" readonly></td>
+                        <td><input type="date" name="date" value="{{ $info ? $info->DOB:$item->DOB }}" readonly></td>
+                        <td><input type="text" name="patientName" value="{{ $info ? $info->first_name:$item->first_name }}" readonly></td>
+
+
+                        @endif
+                </tr>
+
+            </table>
+
         </form>
+        
+        <div class="buttonContainer">
+            <form action="{{ url('patientAddInfo') }}">
+                <button>Different Id</button>
+            </form>
+
+            <form action="{{ url('adminsHome') }}">
+                <button>Back To Home</button>
+            </form>
         </div>
+    
+    </div>
+
     <script>
         function searchPatient(){
             document.getElementById('patientForm').submit();
         }
     </script>
+    
 </body>
 </html>

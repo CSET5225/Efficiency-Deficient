@@ -9,7 +9,7 @@
 <body>
     <button>logout</button>
     <div>
-        <button><a href="">Additional info of Patient</a></button>
+        <button><a href="patientAddInfo">Additional info of Patient</a></button>
 
         <button><a href="">Doctors Appiontments</a></button>
 
