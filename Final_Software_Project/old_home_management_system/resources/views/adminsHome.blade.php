@@ -96,10 +96,6 @@
     </style>
 </head>
 <body>
-    <button class="logout">logout</button>
-    <h1>Admins Home</h1>
-    <form>
-        <button><a href="">Additional info of Patient</a></button>
 
         <button><a href="./doctorsAppointment">Doctors Appiontments</a></button>
 

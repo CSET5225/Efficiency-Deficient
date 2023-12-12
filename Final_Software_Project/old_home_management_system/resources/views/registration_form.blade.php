@@ -47,7 +47,7 @@
         font-size: large;
         color: white;
         border: none;
-        border-radius: 20px;    
+        padding:10px;
     }
 
     button:hover{
@@ -92,31 +92,38 @@
     
     </style>
     <body>
-    <?php if (!empty($error)): ?>
-    <div class="error-message">
-        <?php echo $error; ?>
-    </div>
-    <?php endif; ?>
-
         <div class="justify-content-center">
+
             <div class="w-100 d-flex justify-content-center">
+
                 <h1>Registration</h1>
+
             </div>
+
             <div class="d-flex justify-content-center">
+
                 <form action="{{ url('/api/register')}}" method="post" id="form">
+
                     @csrf
+
                     <div class="p-1 d-table w-100 text-center">
+
                         <label for="role_id" class="w-100 text-center">Role:</label>
+
                         <select name="role_id" id="role_id" onchange="showDiv()" class="d-block justify-content-center w-100" required>
+
                             <option value=1>Patient</option>
                             <option value=2>Caregiver</option>
                             <option value=3>Doctor</option>
                             <option value=4>Supervisor</option>
                             <option value=5>Admin</option>
+
                         </select>
+
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
+
                         <label for="first_name" class="w-50">First Name:</label>
 
                         <input type="text" id="first_name" name="first_name" class="w-100" placeholder="First Name" required>
@@ -124,46 +131,71 @@
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
+
                         <label for="last_name" class="w-50">Last Name:</label>
 
                         <input type="text" id="last_name" name="last_name" class="w-100" placeholder="Last Name">
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
+
                         <label for="DOB" class="w-50">Date of Birth:</label>
+
                         <input type="date" name="DOB" id="DOB" placeholder="0000-00-00" class="w-100" required>
+
                     </div>
                             
                     <div class="p-1 d-table w-100 text-center">
+
                         <label for="email" class="w-50">Email:</label>
 
                         <input type="text" id="email" name="email" class="w-100" placeholder="example@example.com" required>
                     </div>
 
                     <div class="p-1 d-table w-100 text-center">
+
                         <label for="password" class="w-50">Password:</label>
 
                         <input type="text" name="password" id="password" maxlength="12" class="w-100" placeholder="Password" required>
+
                     </div>  
                             
                     <div id="hidden_information">
+
                         <div class="p-1 d-table w-100 text-center">
+
                             <label for="family_code" class="w-50">Family Code:</label>
+
                             <input type="text" name="family_code" id="family_code" readonly value="{{ $family_code }}" class="w-100">
+
                         </div>
                                     
                         <div class="p-1 d-table w-100 text-center">
+
                             <label for="emergency_contact" class="w-50">Emergency Contact:</label>  
 
-                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890" required>
+                            <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12" class="w-100" placeholder="123-456-7890">
+
                         </div>
+
+                    </div>
+
+                    <div class="invisible">
+
+                        <input type="text" name="group_id" id="group_id">
+
                     </div>
                             
                     <div id='buttons'>
+
                         <button name="register_button" class="">Submit</button>
-                        <button name="cancel_button" class="w-100"><a href="./">cancel</a></button>
-                </div>
+
+                        <button name="cancel_button" class="w-100"><a href="./">Cancel</a></button>
+
+                    </div>
+
                 </form>
+
             </div>
         </div>
         <script>

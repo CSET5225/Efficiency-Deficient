@@ -42,12 +42,11 @@ Route::get('/registrationApproval', [viewController::class, 'registrationApprova
 
 Route::get('/Patients', [ViewController::class, 'check']);
 
-Route::post('/patientSearch', [ViewController::class, 'patientSearch']);
+Route::get('/getPatientInfo', [ViewController::class, 'getPatientInfo']);
 
 Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
-
 
 Route::get('/employeeList', [ViewController::class, 'employeeListView']);
 
@@ -84,7 +83,6 @@ Route::get('/payment', function () {
 Route::get('/patient', function () {
     return view('Patients');
 });
-
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 

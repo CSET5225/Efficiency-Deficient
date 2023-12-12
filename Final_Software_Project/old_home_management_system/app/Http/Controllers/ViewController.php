@@ -47,19 +47,6 @@ class ViewController extends Controller
         return view("patientsHome");
     }
 
-    public function patientAddInfoView(){
-        $data = DB::table('patients')
-        ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
-        ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
-        "patient_id",
-        "admission_date",
-        "patient_groups.group_id")
-        ->get();
-        if($data){
-            return view("patientAdditionalInfo", ['data' => $data]);
-        }
-    }
-
     public function patientInfoConfirmChange(Request $request){
         if($_POST['group']){
             $group_id = $request->validate([
@@ -100,22 +87,6 @@ class ViewController extends Controller
 
     //     }
     // }
-
-    public function patientSearch(Request $request){
-        $data = DB::table('patients')
-        ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
-        ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
-        "patient_id",
-        "admission_date",
-        "patient_groups.group_id")
-        ->get();
-
-        $id = $request->input('patientID');
-        $firstName = DB::SELECT("SELECT first_name FROM patients WHERE patient_id = $id");
-        $group = DB::SELECT("SELECT p.group_id FROM patients p JOIN patient_groups pg ON pg.group_id = p.group_id WHERE patient_id = $id");
-
-        return view('patientAdditionalInfo', ['data' => $data], ['patientName' => $firstName],  ['group_id' => $group]);
-    }
 
     public function adminHomeView(){
         return view("adminsHome");
@@ -354,5 +325,15 @@ class ViewController extends Controller
             $data = DB::SELECT("SELECT * FROM rosters ORDER BY scheduled_date DESC");
             return view("roster", ["data"=>$data],["info"=>$data[0]]);
         }
+    }
+
+    public function patientAddInfoView(Request $request){
+        $data = DB::SELECT("SELECT * FROM patients");
+        return view("patientAdditionalInfo", ["data"=>$data], ["info"=>$data[0]]);
+    }
+
+    public function getPatientInfo(Request $request){
+        $data = DB::SELECT("SELECT * FROM patients WHERE patient_id = '$request->patientID'");
+        return view("patientAdditionalInfo", ["data"=>$data], ["info"=>$data[0]]);
     }
 }
