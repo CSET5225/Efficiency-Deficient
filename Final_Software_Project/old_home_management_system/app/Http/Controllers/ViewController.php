@@ -211,28 +211,28 @@ class ViewController extends Controller
     public function getAdmins(){
         return DB::table('admins as a')
         ->join('roles as r', 'r.role_id', '=', 'a.role_id')
-        ->select('admin_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('admin_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
 
     public function getCaregivers(){
         return DB::table('caregivers as c')
         ->join('roles as r', 'r.role_id', '=', 'c.role_id')
-        ->select('caregiver_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('caregiver_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
 
     public function getSupervisors(){
         return DB::table('supervisors as s')
         ->join('roles as r', 'r.role_id', '=', 's.role_id')
-        ->select('supervisor_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('supervisor_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
 
     public function getDoctors(){
         return DB::table('doctors as d')
         ->join('roles as r', 'r.role_id', '=', 'd.role_id')
-        ->select('doctor_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('doctor_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
     
@@ -250,7 +250,7 @@ class ViewController extends Controller
         // DB::select('SELECT * FROM employee where employeeId = ? AND employeeName = ?', [$request->employeeID], [$request->employeeName]);
 
         return DB::select(
-            "SELECT r.role_id, CONCAT(first_name, ' ', last_name) AS full_name, role_name, salary
+            "SELECT employee_id, first_name, last_name, role_name, salary
             FROM roles as r
             JOIN admins a on r.role_id = a.role_id
             JOIN caregivers c ON r.role_id = c.role_id
@@ -258,7 +258,8 @@ class ViewController extends Controller
             JOIN doctors d ON r.role_id = d.role_id
             WHERE id = ? AND full_name = ? AND role_name = ? AND salary = ?",
             [$request->emp_id],
-            [$request->emp_name],
+            [$request->first_name],
+            [$request->last_name],
             [$request->emp_role],
             [$request->emp_salary]);
     }
@@ -297,7 +298,6 @@ class ViewController extends Controller
             ->exists();
             if($dataCheck){
                 if(!empty($updateData['newSalary'])){
-
                     DB::table($tableName)
                     ->where($id, $updateData['empID'])
                     ->update(['salary' => $updateData['newSalary']]);

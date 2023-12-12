@@ -122,8 +122,11 @@
           <label for="empID">Employee ID</label>
           <input id="empID" type="text" placeholder="Search by ID:" name="emp_id">
           
-          <label for="empName">Employee Name</label>
-          <input id="empName" type="text" placeholder="Search by Employee Name:" name="emp_name">
+          <label for="first_name">First Name</label>
+          <input id="first_name" type="text" placeholder="Search by Employee Name:" name="first_name">
+
+          <label for="last_name">Last Name</label>
+          <input id="last_name" type="text" placeholder="Search by Employee Name:" name="last_name">
           
           <label for="empRole">Employee Role</label>
           <input id="empRole" type="text" placeholder="Search by Role:" name="emp_role">
@@ -139,7 +142,8 @@
               <thead>
                 <tr>
                   <th>Employee ID</th>
-                  <th>Employee Name</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
                   <th>Role</th>
                   <th>Salary</th>
                 </tr>
@@ -148,7 +152,8 @@
               @foreach ($adminData as $adminData)
               <tr>
                 <td>{{ $adminData->admin_id }}</td>
-                <td>{{ $adminData->full_name }}</td>
+                <td>{{ $adminData->first_name }}</td>
+                <td>{{ $adminData->last_name }}</td>
                 <td>{{ $adminData->role_name }}</td>
                 <td>{{ $adminData->salary }}</td>
               </tr>
@@ -156,7 +161,8 @@
               @foreach ($supervisorData as $supervisorData)
               <tr>
                 <td>{{ $supervisorData->supervisor_id }}</td>
-                <td>{{ $supervisorData->full_name }}</td>
+                <td>{{ $supervisorData->first_name }}</td>
+                <td>{{ $supervisorData->last_name }}</td>
                 <td>{{ $supervisorData->role_name }}</td>
                 <td>{{ $supervisorData->salary }}</td>
               </tr>
@@ -164,7 +170,8 @@
               @foreach ($caregiverData as $caregiverData)
               <tr>
                 <td>{{ $caregiverData->caregiver_id }}</td>
-                <td>{{ $caregiverData->full_name }}</td>
+                <td>{{ $caregiverData->first_name }}</td>
+                <td>{{ $caregiverData->last_name }}</td>
                 <td>{{ $caregiverData->role_name }}</td>
                 <td>{{ $caregiverData->salary }}</td>
               </tr>
@@ -172,7 +179,8 @@
               @foreach ($doctorData as $doctorData)
               <tr>
                 <td>{{ $doctorData->doctor_id }}</td>
-                <td>{{ $doctorData->full_name }}</td>
+                <td>{{ $doctorData->first_name }}</td>
+                <td>{{ $doctorData->last_name }}</td>
                 <td>{{ $doctorData->role_name }}</td>
                 <td>{{ $doctorData->salary }}</td>
               </tr>
