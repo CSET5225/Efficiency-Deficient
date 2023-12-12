@@ -27,47 +27,58 @@ class RegistrationControllerApi extends Controller
     public function store(Request $request)
     {
         if(isset($_POST['register_button'])){
+            $group = rand(1,4);
 
-            $data = request()->all();
+            $data = [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'DOB' => $request->DOB,
+                'emergency_contact' => $request->emergency_contact,
+                'email' => $request->email,
+                'password' => $request->password,
+                'family_code' => $request->family_code,
+                'role_id' => $request->role_id,
+                'group_id' => $group
+            ];
 
             if ($this->emailExists($data['email'])) {
                 echo "<script>alert('Email already exists. Please use a different email address.');</script>";
                 return view("homePage"); 
-
-            if($data['role_id']==1){
-                patient::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view("/login");
             }
-            if($data['role_id']==2){
-                caregiver::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view("/login");
+            else {
+                if($data['role_id']==1){
+                    patient::create($data);
+                    echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                    return view("/login");
+                }
+                if($data['role_id']==2){
+                    caregiver::create($data);
+                    echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                    return view("/login");
+                }
+                if($data['role_id']==3){
+                    doctor::create($data);
+                    echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                    return view("/login");
+                }
+                if($data['role_id']==4){
+                    supervisor::create($data);
+                    echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                    return view("/login");
+                }
+                if($data['role_id']==5){
+                    admin::create($data);
+                    echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
+                    return view("/login");
+                }
             }
-            if($data['role_id']==3){
-                doctor::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view("/login");
-            }
-            if($data['role_id']==4){
-                supervisor::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view("/login");
-            }
-            if($data['role_id']==5){
-                admin::create($data);
-                echo "<script>alert('Account Has Been Created And Is Now Awaiting Admin Approval');</script>";
-                return view("/login");
-            }
-            
         }
     }
-    }
     public function emailExists($email)
-{
-    $user = DB::table('patients')->where('email', $email)->first();
-    return $user !== null;
-}
+    {
+        $user = DB::table('patients')->where('email', $email)->first();
+        return $user !== null;
+    }
 
     /**
      * Display the specified resource.
@@ -85,7 +96,6 @@ class RegistrationControllerApi extends Controller
         if(isset($_POST['accountApprove'])){ 
             $data = $request->all();
             if($data['role_id']==1){
-                //DB::table('table_name')->select('column_name')->where('column name','=',value)->get();
                 $account = DB::table('patients')->where('email', $data['email'])->update(['approved' => 1]);
                 return redirect()->back()->with('Account has been approved successfully!');
             }
@@ -116,23 +126,23 @@ class RegistrationControllerApi extends Controller
         if(isset($_POST['accountDelete'])){
             $data = $request->all();
             if($data['role_id']==1){
-                $account = patient::where('email', $data['email'])->delete();;
+                $account = patient::where('email', $data['email'])->delete();
                 return redirect()->back()->with('Account has been approved successfully!');
             }
             if($data['role_id']==2){
-                $account = caregiver::where('email', $data['email'])->delete();;
+                $account = caregiver::where('email', $data['email'])->delete();
                 return redirect()->back()->with('Account has been approved successfully!');
             }
             if($data['role_id']==3){
-                $account = doctor::where('email', $data['email'])->delete();;
+                $account = doctor::where('email', $data['email'])->delete();
                 return redirect()->back()->with('Account has been approved successfully!');
             }
             if($data['role_id']==4){
-                $account = supervisor::where('email', $data['email'])->delete();;
+                $account = supervisor::where('email', $data['email'])->delete();
                 return redirect()->back()->with('Account has been approved successfully!');
             }
             if($data['role_id']==5){
-                $account = admin::where('email', $data['email'])->delete();;
+                $account = admin::where('email', $data['email'])->delete();
                 return redirect()->back()->with('Account has been approved successfully!');
             }
         }

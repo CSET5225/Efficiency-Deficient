@@ -47,19 +47,6 @@ class ViewController extends Controller
         return view("patientsHome");
     }
 
-    public function patientAddInfoView(){
-        $data = DB::table('patients')
-        ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
-        ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
-        "patient_id",
-        "admission_date",
-        "patient_groups.group_id")
-        ->get();
-        if($data){
-            return view("patientAdditionalInfo", ['data' => $data]);
-        }
-    }
-
     public function patientInfoConfirmChange(Request $request){
         if($_POST['group']){
             $group_id = $request->validate([
@@ -101,22 +88,6 @@ class ViewController extends Controller
     //     }
     // }
 
-    public function patientSearch(Request $request){
-        $data = DB::table('patients')
-        ->join('patient_groups', 'patient_groups.group_id', '=', 'patients.group_id')
-        ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"),
-        "patient_id",
-        "admission_date",
-        "patient_groups.group_id")
-        ->get();
-
-        $id = $request->input('patientID');
-        $firstName = DB::SELECT("SELECT first_name FROM patients WHERE patient_id = $id");
-        $group = DB::SELECT("SELECT p.group_id FROM patients p JOIN patient_groups pg ON pg.group_id = p.group_id WHERE patient_id = $id");
-
-        return view('patientAdditionalInfo', ['data' => $data], ['patientName' => $firstName],  ['group_id' => $group]);
-    }
-
     public function adminHomeView(){
         return view("adminsHome");
     }
@@ -130,12 +101,12 @@ class ViewController extends Controller
         ->leftJoin('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
         ->leftJoin('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
         ->select(
-            DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
-            'comment', 'scheduled_date',
-            'morning_meds.medicine_name AS morning_medicine',
-            'afternoon_meds.medicine_name AS afternoon_medicine',
-            'night_meds.medicine_name AS night_medicine'
-    )
+        DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
+        'comment', 'scheduled_date',
+        'morning_meds.medicine_name AS morning_medicine',
+        'afternoon_meds.medicine_name AS afternoon_medicine',
+        'night_meds.medicine_name AS night_medicine'
+        )
         ->where('scheduled_date', '<', now())
         ->orderBy('scheduled_date')
         ->get();
@@ -193,18 +164,6 @@ class ViewController extends Controller
     }
 
     public function doctorPatientsView(){
-        // $data = DB::table('appointments AS a')
-        // ->join('doctors AS d', 'd.doctor_id', '=', 'a.doctor_id')
-        // ->join('patients AS p', 'p.patient_id', '=', 'a.patient_id')
-        // ->join('patient_medications as pm', 'pm.patient_id', '=', 'p.patient_id')
-        // ->join('medications as morning_meds', 'pm.morning_medicine', '=', 'morning_meds.medicine_id')
-        // ->join('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
-        // ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
-        // ->select('scheduled_date', 'comment', 'morning_meds.medicine_name AS morning_medicine',
-        // 'afternoon_meds.medicine_name AS afternoon_medicine',
-        // 'night_meds.medicine_name AS night_medicine')
-        // ->first();
-        
         return view("doctorPatients");
     }
 
@@ -362,25 +321,47 @@ class ViewController extends Controller
                              FROM supervisors
                              WHERE approved IS NULL");
         return view("registrationApproval",["query"=>$query]);
+
     }
-    
+
+    public function patientView(){
+        $patients = DB::table('patients')
+        ->select("patient_id", DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), "DOB", "emergency_contact", "admission_date")
+        ->get();
+        return view('Patients', ["patients"=>$patients]);
+    }
     public function familyHomeView(Request $request)
     {
-        $patients = Patient::join('appointments', 'appointments.appointment_id', '=', 'appointments.appointment_id')
-            ->join('doctors', 'appointments.doctor_id', '=', 'doctors.doctor_id')
-            ->join('caregivers', 'caregivers.caregiver_id', '=', 'caregivers.caregiver_id')
-            ->select(
-                'patients.patient_id',
-                DB::raw('CONCAT(doctors.first_name, " ", doctors.last_name) AS doctors_name'),
-                DB::raw('CONCAT(appointments.scheduled_date, appointments.appointment_id) AS doctors_appointments'),
-                DB::raw('CONCAT(caregivers.first_name, " ", caregivers.last_name) AS caregivers_name'),
-            )
-            ->get();
+        $userInputPatientId = $request->input('patient_id');
 
-        foreach ($patients as $patient) {
-            Patient::create([
+        $a = DB::select("
+            SELECT
+                patients.patient_id,
+                CONCAT(doctors.first_name, ' ', doctors.last_name) AS doctors_name,
+                appointments.scheduled_date AS doctors_appointments,
+                CONCAT(caregivers.first_name, ' ', caregivers.last_name) AS caregivers_name,
+                patients_medications.morning_medicine,
+                patients_medications.afternoon_medicine,
+                patients_medications.night_medicine,
+                food.food_id AS breakfast,
+                food.food_id AS lunch,
+                food.food_id AS dinner
+            FROM
+                patients
+                JOIN appointments ON patients.patient_id = appointments.patient_id
+                JOIN doctors ON doctors.doctor_id = appointments.doctor_id
+                JOIN caregivers ON caregivers.patient_id = patients.patient_id
+                LEFT JOIN patients_medications ON patients.patient_id = patients_medications.patient_id
+                LEFT JOIN food ON patients.food_id = food.food_id;
+        "
+    );
+        
+        $patientData = [];
+        
+        foreach ($a as $patient) {
+            $patientData[] = [
                 'patient_id' => $patient->patient_id,
-                'full_name' => $patient->doctors_name,
+                'doctors_name' => $patient->doctors_name,
                 'doctors_appointments' => $patient->doctors_appointments,
                 'caregivers_name' => $patient->caregivers_name,
                 'morning_medicine' => $patient->morning_medicine,
@@ -389,10 +370,54 @@ class ViewController extends Controller
                 'breakfast' => $patient->breakfast,
                 'lunch' => $patient->lunch,
                 'dinner' => $patient->dinner,
-            ]);
+            ];
         }
-      
-        $data = Patient::all();
-        return view('familyMembers_home', ['a' => $data]);
+        
+        return view('familyMembers_home', ['a' => $patientData]);
+    }
+
+    public function login(Request $request){
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:12']
+        ]);
+    }
+
+    public function rosterInfoShow(){
+        $doctor = DB::SELECT("SELECT doctor_id FROM doctors");
+        $caregiver = DB::SELECT("SELECT caregiver_id FROM caregivers");
+        $supervisor = DB::SELECT("SELECT supervisor_id FROM supervisors");
+        $group = DB::SELECT("SELECT group_id FROM patient_groups");
+
+        return view("newRoster",["doctor_id"=>$doctor, "caregiver_id"=>$caregiver, "supervisor_id"=>$supervisor, "group_id"=>$group]);
+    }
+
+    public function rosterViewInfo(Request $request){
+        $data = DB::SELECT("SELECT * FROM rosters ORDER BY scheduled_date DESC");
+        return view("roster", ["data"=>$data],["info"=>$data[0]]);
+    }
+
+    public function getRosterInfo(Request $request){
+        $date = strtotime($request->scheduled_date);
+        $date = date('Y-m-d', $date);
+        $data = DB::SELECT("SELECT * FROM rosters WHERE scheduled_date = '$request->scheduled_date'");
+
+        if($data != NULL){
+            return view("roster", ["data"=>$data], ["info"=>$data[0]]);
+        }
+        else{
+            $data = DB::SELECT("SELECT * FROM rosters ORDER BY scheduled_date DESC");
+            return view("roster", ["data"=>$data],["info"=>$data[0]]);
+        }
+    }
+
+    public function patientAddInfoView(Request $request){
+        $data = DB::SELECT("SELECT * FROM patients");
+        return view("patientAdditionalInfo", ["data"=>$data], ["info"=>$data[0]]);
+    }
+
+    public function getPatientInfo(Request $request){
+        $data = DB::SELECT("SELECT * FROM patients WHERE patient_id = '$request->patientID'");
+        return view("patientAdditionalInfo", ["data"=>$data], ["info"=>$data[0]]);
     }
 }

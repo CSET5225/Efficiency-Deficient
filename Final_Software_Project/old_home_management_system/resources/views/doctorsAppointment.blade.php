@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <style>
-        body {
+    body {
       margin: 0;
       overflow: hidden;
       background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
@@ -17,20 +17,19 @@
       font-family: monospace;
     }
 
+    .form{
+      background-color:#EEF5FF;
+      padding: 20px;
+      border-radius: 20px;
+      z-index: 1;
+      width: 150%;
+      max-width: 420px;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+    }
 
-#form{
-  background-color:#EEF5FF;
-  padding: 20px;
-  border-radius: 20px;
-  z-index: 1;
-  width: 150%;
-  max-width: 420px;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  
-}
-     input {
+    input {
       margin: 10px;
       width: 100%;
       font-size: large;
@@ -46,72 +45,74 @@
         color: white;
         border: none;
         border-radius: 20px;
-        
-}
+    }
 
-button:hover{
-  transition-duration: 2s;
-        background-color: #EEF5FF;
-        color:black;   
-}
+    button:hover{
+      transition-duration: 2s;
+      background-color: #EEF5FF;
+      color:black;   
+    }
 
-#buttons{
-    display: flex;
-    flex-direction: row;
-}
+    #buttons{
+        display: flex;
+        flex-direction: row;
+    }
 
-h1{
-        position: absolute; 
-        top: 20px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 2; 
+    h1{
+      position: absolute; 
+      top: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      z-index: 2; 
       padding: 10px;
       border-radius: 10px;
     }
 
     select{
-        margin: 10px;
+      margin: 10px;
       width: 100%;
       font-size: large;
       border-radius: 20px; 
       border :1px solid black;
     }
+
     a {
-  text-decoration: none;
-  color: white;
-  font-family: monospace;
-}
-a:hover{
-    color: black;
-    transition-duration: 2s;
-}
+      text-decoration: none;
+      color: white;
+      font-family: monospace;
+    }
 
-.logout {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: auto;
-            height: auto;
-            background-color: black;
-        }
+    a:hover{
+        color: black;
+        transition-duration: 2s;
+    }
 
-        .logout:hover{
-            background-color: white;
-            transition-duration: 2s;
-            color: black;
-        }
-        #buttons{
-    display: flex;
-    flex-direction: row;
-}
+    .logout {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: auto;
+      height: auto;
+      background-color: black;
+    }
+
+    .logout:hover{
+        background-color: white;
+        transition-duration: 2s;
+        color: black;
+    }
+    
+    #buttons{
+      display: flex;
+      flex-direction: row;
+    }
 </style>
 <body>
 <form action="{{url('/logout')}}" method="GET">
     <button class="logout">Log Out</button>
     </form>
     <h1>Docotor's Appointments</h1>
-    <form action="{{url('/doctorsAppointment')}}" method="get">
+    <form action="{{url('/doctorsAppointment')}}" method="get" class='form'>
     <label for="">Patient Id</label>
     <input type="text">
     <br>

@@ -11,6 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
         html{
             height: 100%;
             background: linear-gradient(to bottom, #EEF5FF, #608ac1,#A25772);
@@ -18,6 +19,7 @@
             font-family: monospace;
             width: auto;
         }
+
         .main-content{
             background-color: #EEF5FF;
             padding: 20px;

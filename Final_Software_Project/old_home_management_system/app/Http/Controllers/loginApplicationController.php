@@ -36,7 +36,7 @@ class loginApplicationController extends Controller
                 return view('adminsHome');
             }
             elseif(DB::SELECT("SELECT * FROM supervisors WHERE email = '$email' AND password = '$password' AND approved = 1")){
-                return view('supervisorsHome');
+                return view('supervisorHome');
             }
             else{
                 echo "<script>alert('Account does not exist with this information');</script>";

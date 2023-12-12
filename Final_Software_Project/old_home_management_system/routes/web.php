@@ -40,9 +40,9 @@ Route::get('/patientAddInfo', [ViewController::class, 'patientAddInfoView']);
 
 Route::get('/registrationApproval', [viewController::class, 'registrationApprovalShow']);
 
-Route::get('/Patients', [ViewController::class, 'check']);
+// Route::get('/Patients', [ViewController::class, 'check']);
 
-Route::post('/patientSearch', [ViewController::class, 'patientSearch']);
+Route::get('/getPatientInfo', [ViewController::class, 'getPatientInfo']);
 
 Route::get('/patientsHome', function () {
     return view('patientsHome');
@@ -68,8 +68,12 @@ Route::get('/supervisorsHome', function () {
     return view('supervisorHome');
 });
 
-Route::get('/caretakersHome', function () {
-    return view('caretakersHome');
+Route::get('/caregiversHome', function () {
+    return view('caregiversHome');
+});
+
+Route::get('/supervisorsHome', function () {
+    return view('supervisorsHome');
 });
 
 Route::get('/adminReport', function () {
@@ -80,10 +84,15 @@ Route::get('/doctorsAppointment', function () {
     return view('doctorsAppointment');
 });
 
+Route::get('/payment', function () {
+    return view('payment');
+});
+
+Route::get('/Patient', [ViewController::class, 'patientView']);
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 
-Route::post('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 

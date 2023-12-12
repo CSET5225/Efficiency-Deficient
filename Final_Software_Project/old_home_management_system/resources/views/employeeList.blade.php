@@ -19,7 +19,7 @@
         justify-content: center;
         height: 110vh;
       }
-      .main_content{
+      .main{
         background-color:#EEF5FF;
         padding: 20px;
         border-radius: 20px;
@@ -115,7 +115,7 @@
 </head>
 <body>
     <h1>Employees</h1>
-    <div class="main_content">
+    <div class="main">
     <form action="{{ url('/employeeSearch')}}" method="post">
         @csrf
         <div class= 'search'>
@@ -215,6 +215,6 @@
     <button name = "register_button" id="register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
 </form>
-</div>
+  </div>
 </body>
 </html>
