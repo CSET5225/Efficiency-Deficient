@@ -36,7 +36,6 @@
       margin: 10px;
       width: 100%;
       font-size: large;
-      border-radius: 20px; 
       border :1px solid black; 
     }
 
@@ -75,7 +74,6 @@
         margin: 10px;
         width: 100%;
         font-size: large;
-        border-radius: 20px; 
         border :1px solid black;
     }
     

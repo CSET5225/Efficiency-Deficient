@@ -81,9 +81,30 @@
             background-color: #EEF5FF;
             color:black;   
         }
+
+        .logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            background-color: black;
+        }
+
+        .logout:hover{
+            background-color: white;
+            transition-duration: 2s;
+            color: black;
+        }
     </style>
 </head>
 <body>
+
+    <form action="{{url('/logout')}}" method="GET">
+
+        <button class="logout">Log Out</button>
+
+    </form>
 
     <div class = "container">
 
@@ -147,9 +168,11 @@
     </div>
 
     <script>
+
         function searchPatient(){
             document.getElementById('patientForm').submit();
         }
+
     </script>
     
 </body>
