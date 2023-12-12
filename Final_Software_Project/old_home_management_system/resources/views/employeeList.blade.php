@@ -17,21 +17,21 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        height: 110vh;
       }
-      form{
+      .main_content{
         background-color:#EEF5FF;
         padding: 20px;
         border-radius: 20px;
         z-index: 1;
         width: 150%;
         max-width: 420px;
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .date{
-        display: flex; 
+        display: flex;
         flex-direction: column; 
         align-items: center; 
         width: 100%; 
@@ -74,10 +74,10 @@
       }
       h1{
           position: absolute; 
-          top: 20px; 
-          left: 54%; 
-          transform: translateX(-50%); 
-          z-index: 2; 
+          top: 20px;
+          left: 54%;
+          transform: translateX(-50%);
+          z-index: 2;
         padding: 10px;
         border-radius: 10px;
       }
@@ -104,15 +104,33 @@
         padding: 2px;
       }
 
+      #errorMessage{
+        color: crimson;
+      }
+      #successMessage{
+        color: rgb(80, 194, 80);
+      }
 
     </style>
 </head>
 <body>
     <h1>Employees</h1>
-    <form action="{{ url('')}}" method="post">
+    <div class="main_content">
+    <form action="{{ url('/employeeSearch')}}" method="post">
         @csrf
-        <div class= 'date'>
+        <div class= 'search'>
+          <label for="empID">Employee ID</label>
+          <input id="empID" type="text" placeholder="Search by ID:" name="emp_id">
+          
+          <label for="empName">Employee Name</label>
+          <input id="empName" type="text" placeholder="Search by Employee Name:" name="emp_name">
+          
+          <label for="empRole">Employee Role</label>
+          <input id="empRole" type="text" placeholder="Search by Role:" name="emp_role">
 
+          <label for="empSalary">Employee Salary</label>
+          <input id="empSalary" type="text" placeholder="Search by Salary:" name="emp_salary">
+          <button>Submit</button>
         </div>
       </form>
         <div>
@@ -162,27 +180,33 @@
             </tbody>
           </table>
         </div>
-          
-        {{-- <label for="ID">ID</label>
-        <input type="hidden" name="ID" id="ID">
-        <label for="name">Name</label>
-        <input type="hidden" name="name" id="name">
-        <label for="role">Role</label>
-        <input type="hidden" name="role" id="role">
-        <label for="salary">Salary</label>
-        <input type="hidden" name="salary" id="salary"> --}}
     </div>
-    <form action="" method="POST">
-    <div>
+    <form action="{{ url('/updateSalary') }}" method="POST">
+      @csrf
+      <div>
         <label for="empID">Emp ID</label>
         <input type="text" name="empID" id="empID">
-    </div>
-    <div>
+      </div>
+      <div>
+        <label for="">Role Name</label>
+        <input type="text" name="role_name" id="role_name">
+      </div>
+      <div>
         <label for="newSalary">New Salary</label>
         <input type="text" name="newSalary" id="newSalary">
-    </div>
-    <button name = "register_button">Ok</button>
+      </div>
+      @if (isset($successMessage))
+      <p id="successMessage">
+        {{ $successMessage }}
+      </p>
+      @elseif (isset($errorMessage))
+      <p id="errorMessage">
+        {{ $errorMessage }}
+      </p>
+      @endif
+    <button name = "register_button" id="register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
 </form>
+</div>
 </body>
 </html>

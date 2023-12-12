@@ -246,6 +246,85 @@ class ViewController extends Controller
         compact('adminData', 'caregiverData', 'supervisorData', 'doctorData'));
     }
 
+    public function employeeSearch(Request $request){
+        // DB::select('SELECT * FROM employee where employeeId = ? AND employeeName = ?', [$request->employeeID], [$request->employeeName]);
+
+        return DB::select(
+            "SELECT r.role_id, CONCAT(first_name, ' ', last_name) AS full_name, role_name, salary
+            FROM roles as r
+            JOIN admins a on r.role_id = a.role_id
+            JOIN caregivers c ON r.role_id = c.role_id
+            JOIN supervisors s ON r.role_id = s.role_id
+            JOIN doctors d ON r.role_id = d.role_id
+            WHERE id = ? AND full_name = ? AND role_name = ? AND salary = ?",
+            [$request->emp_id],
+            [$request->emp_name],
+            [$request->emp_role],
+            [$request->emp_salary]);
+    }
+    
+    public function updateSalary(Request $request){
+        $updateData = $request->validate([
+            'empID' => 'required',
+            'role_name' => 'required',
+            'newSalary' => 'required'
+        ]);
+
+        if($updateData['role_name'] == 'Admin' || $updateData['role_name'] == 'admin'){
+            $tableName = 'Admins';
+            $id = 'admin_id';
+        }
+        elseif($updateData['role_name'] == 'Doctor' || $updateData['role_name'] == 'doctor'){
+            $tableName = 'Doctors';
+            $id = 'doctor_id';
+        }
+        elseif($updateData['role_name'] == 'Supervisor' || $updateData['role_name'] == 'supervisor'){
+            $tableName = 'Supervisors';
+            $id = 'supervisor_id';
+        }
+        elseif($updateData['role_name'] == 'Caregiver' || $updateData['role_name'] == 'caregiver'){
+            $tableName = 'Caregivers';
+            $id = 'caregiver_id';
+        }
+        else{
+            $errorMessage = 'The role '. $updateData['role_name'] . ' does not exist.';
+            return $this->employeeListView()->with('errorMessage', $errorMessage);
+        }
+
+        if($tableName){
+            $dataCheck = DB::table($tableName)
+            ->where($id, $updateData['empID'])
+            ->exists();
+            if($dataCheck){
+                if(!empty($updateData['newSalary'])){
+
+                    DB::table($tableName)
+                    ->where($id, $updateData['empID'])
+                    ->update(['salary' => $updateData['newSalary']]);
+                    
+                    $personData = DB::table($tableName)
+                    ->where($id, $updateData['empID'])
+                    ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'salary')
+                    ->first();
+                    
+                    $successMessage = $personData->full_name. "'s salary has been updated to $". $personData->salary;
+                    return $this->employeeListView()->with('successMessage', $successMessage);
+                }
+                else{
+                    $errorMessage = 'The new salary is empty!';
+                    return $this->employeeListView()->with('errorMessage', $errorMessage);
+                }
+            }
+            else{
+                $errorMessage = 'The employee id of '. $updateData['empID']. ' does not exist';
+                return $this->employeeListView()->with('errorMessage', $errorMessage);
+            }
+        }
+        if(isset($_POST['cancel_button'])){
+            return $this->employeeListView();
+        }
+    }
+    
     public function addNewMeds(){
         
     }
