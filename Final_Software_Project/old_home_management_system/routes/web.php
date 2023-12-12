@@ -88,7 +88,7 @@ Route::get('/Patient', [ViewController::class, 'patientView']);
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 
-Route::post('/familyMembers_home', [ViewController::class, 'familyHomeView']);
+Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 
