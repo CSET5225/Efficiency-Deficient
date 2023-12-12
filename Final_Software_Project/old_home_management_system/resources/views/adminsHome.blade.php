@@ -109,7 +109,7 @@
         <div class="row">
             <button><a href="./doctorsAppointment">Doctors Appointments</a></button>
             <button><a href="employeeList">Employee List</a></button>
-            <button><a href="./patient">Patients</a></button>
+            <button><a href="./Patients">Patients</a></button>
             <button><a href="registrationApproval">Registration Approval</a></button>
             <button><a href="rosterView">Roster</a></button>
         </div>
