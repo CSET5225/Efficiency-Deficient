@@ -103,7 +103,8 @@
     </style>
 </head>
 <body>
-    <h1>Admins Home</h1>
+    <button class="logout">Log Out</button>
+        <h1>Admins Home</h1>
 <form action="">
         <div class="row">
             <button><a href="./doctorsAppointment">Doctors Appointments</a></button>
