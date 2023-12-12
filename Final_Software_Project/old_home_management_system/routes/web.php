@@ -24,23 +24,31 @@ Route::get('/login', [ViewController::class, 'loginView']);
 
 Route::get('/doctorsDashboard', [ViewController::class, 'doctorsDashboardView']);
 
+Route::post('/appointmentSearch', [ViewController::class, 'appointmentSearch']);
+
 Route::get('/newRoster', [ViewController::class, 'rosterInfoShow']);
 
 Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
 
 Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
-Route::get('/doctorsPatients', [ViewController::class, 'doctorPatientsView']);
+Route::post('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
+
+Route::get('/patientAddInfo', [ViewController::class, 'patientAddInfoView']);
 
 Route::get('/registrationApproval', [viewController::class, 'registrationApprovalShow']);
 
 Route::get('/Patients', [ViewController::class, 'check']);
 
+Route::get('/getPatientInfo', [ViewController::class, 'getPatientInfo']);
+
 Route::get('/patientsHome', function () {
     return view('patientsHome');
 });
+
+Route::get('/employeeList', [ViewController::class, 'employeeListView']);
 
 Route::get('/newRoleForm', function () {
     return view('roleAddForm');
@@ -50,16 +58,14 @@ Route::get('/adminsHome', function () {
     return view('adminsHome');
 });
 
-Route::get('/doctorsHome', function () {
-    return view('doctorsHome');
-});
+Route::get('/doctorsHome', [ViewController::class, 'doctorsHomeView']);
 
 Route::get('/supervisorsHome', function () {
     return view('supervisorHome');
 });
 
-Route::get('/caretakersHome', function () {
-    return view('caretakersHome');
+Route::get('/caregiversHome', function () {
+    return view('caregiversHome');
 });
 
 Route::get('/adminReport', function () {
@@ -69,6 +75,16 @@ Route::get('/adminReport', function () {
 Route::get('/doctorsAppointment', function () {
     return view('doctorsAppointment');
 });
+
+Route::get('/payment', function () {
+    return view('payment');
+});
+
+Route::get('/patient', function () {
+    return view('Patients');
+});
+
+Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 
 Route::post('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 

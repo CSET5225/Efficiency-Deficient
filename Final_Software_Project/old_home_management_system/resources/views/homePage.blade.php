@@ -83,7 +83,7 @@
             </div>
 
             <div class="familyContainer">
-                <h2>Logging in for your family member? Click <a href="{{ url('/familyMembers_home') }}" id="familyLink">HERE</a></h2>
+                <h2>Logging in for your family member? Click <a href="/familyMembers_home" id="familyLink">HERE</a></h2>
             </div>
 
         </div>
