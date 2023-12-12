@@ -68,6 +68,10 @@ Route::get('/caretakersHome', function () {
     return view('caretakersHome');
 });
 
+Route::get('/supervisorsHome', function () {
+    return view('supervisorsHome');
+});
+
 Route::get('/adminReport', function () {
     return view('adminreport');
 });

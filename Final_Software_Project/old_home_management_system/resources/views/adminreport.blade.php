@@ -69,7 +69,6 @@ h1{
         z-index: 2; 
       padding: 10px;
       border-radius: 10px;
-      /* margin-top:80px; */
     }
 
     select{

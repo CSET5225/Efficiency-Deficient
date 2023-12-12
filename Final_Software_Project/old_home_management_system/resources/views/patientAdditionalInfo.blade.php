@@ -147,9 +147,11 @@
     </div>
 
     <script>
+
         function searchPatient(){
             document.getElementById('patientForm').submit();
         }
+        
     </script>
     
 </body>
