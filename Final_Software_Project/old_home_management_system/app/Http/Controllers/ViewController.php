@@ -240,6 +240,13 @@ class ViewController extends Controller
         return view("registrationApproval",["query"=>$query]);
 
     }
+
+    public function patientView(){
+        $patients = DB::table('patients')
+        ->select("patient_id", DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), "DOB", "emergency_contact", "admission_date")
+        ->get();
+        return view('Patients', ["patients"=>$patients]);
+    }
     public function familyHomeView(Request $request)
     {
         $userInputPatientId = $request->input('patient_id');

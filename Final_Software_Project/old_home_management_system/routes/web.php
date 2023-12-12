@@ -40,7 +40,7 @@ Route::get('/patientAddInfo', [ViewController::class, 'patientAddInfoView']);
 
 Route::get('/registrationApproval', [viewController::class, 'registrationApprovalShow']);
 
-Route::get('/Patients', [ViewController::class, 'check']);
+// Route::get('/Patients', [ViewController::class, 'check']);
 
 Route::get('/getPatientInfo', [ViewController::class, 'getPatientInfo']);
 
@@ -84,9 +84,7 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
-Route::get('/patient', function () {
-    return view('Patients');
-});
+Route::get('/Patient', [ViewController::class, 'patientView']);
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 
