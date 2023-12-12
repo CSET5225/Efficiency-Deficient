@@ -116,68 +116,68 @@ body {
 
 
 <body>
-  <div class='body'>
-    <form action="{{ url('/logout') }}" method="GET">
-        <button class="logout">Log Out</button>
-    </form>
-    <h1>Family Member</h1>
+<div class='body'>
+        <form action="{{ url('/logout') }}" method="GET">
+            <button class="logout">Log Out</button>
+        </form>
+        <h1>Family Member</h1>
 
-    <div id="form">
-    <form action="{{ url('/familyMembers_home') }}" method="post" onsubmit="return validateForm()">
+        <div id="form">
+        <form action="{{ url('/familyMembers_home') }}" method="GET">
     @csrf
     <div class='date'>
-                <label>Date:</label><br>
-                <input type="date" name="date" id="date">
-            </div>
-            <br><br>
-            <div class="code">
-                <label>Family Code:</label><br>
-                <input type="text" name="family_code" id="family_code" placeholder="Enter Family Code" required>
-            </div>
-            <br><br>
-            <div class='emergency_contact'>
-                <label>Emergency Contact:</label><br>
-                <input type="tel" name="emergency_contact" id="emergency_contact" maxlength="12"
-                    placeholder="Enter Emergency Contact" required>
-            </div>
-            <br><br>
-            <div id="buttons">
-            <button type="button" name="register_button" onclick="showTable()">Ok</button>
-            <button name="cancel_button">cancel</button>
-            </div>
-</form>
+        <label>Date:</label><br>
+        <input type="date" name="date" id="date" required>
     </div>
-  </div>
-   <div>
-        <table id="familyTable">
-        <tr>
-            <th>Patient ID</th>
-            <th>Doctor's Name</th>
-            <th>Doctor's Appointments</th>
-            <th>Caregiver's Name</th>
-            <th>Morning Medicine</th>
-            <th>Afternoon Medicine</th>
-            <th>Night Medicine</th>
-            <th>Breakfast</th>
-            <th>Lunch</th>
-            <th>Dinner</th>
-        </tr>
+    <br><br>
+    <div class="code">
+        <label>Family Code:</label><br>
+        <input type="text" name="family_code" id="family_code" placeholder="Enter Family Code" required>
+    </div>
+    <br><br>
+    <div class='emergency_contact'>
+        <label>Patient ID:</label><br>
+        <input type="text" name="patient_id" id="patient_id" placeholder="Enter Patient ID" required>
+    </div>
+    <br><br>
+    <div id="buttons">
+        <button type="button" name="register_button" onclick="showTable()">Ok</button>
+        <button type="button" name="cancel_button" onclick="resetForm()">Cancel</button>
+    </div>
+</form>
+        </div>
+    </div>
 
-        @foreach ($a as $data)
+    <div>
+        <table id="familyTable">
             <tr>
-                <td>{{ $data->patient_id }}</td>
-                <td>{{ $data->doctors_name }}</td>
-                <td>{{ $data->doctors_appointments }}</td>
-                <td>{{ $data->caregivers_name }}</td>
-                <td>{{ $data->morning_medicine }}</td>
-                <td>{{ $data->afternoon_medicine }}</td>
-                <td>{{ $data->night_medicine }}</td>
-                <td>{{ $data->breakfast }}</td>
-                <td>{{ $data->lunch }}</td>
-                <td>{{ $data->dinner }}</td>
+                <th>Patient ID</th>
+                <th>Doctor's Name</th>
+                <th>Doctor's Appointments</th>
+                <th>Caregiver's Name</th>
+                <th>Morning Medicine</th>
+                <th>Afternoon Medicine</th>
+                <th>Night Medicine</th>
+                <th>Breakfast</th>
+                <th>Lunch</th>
+                <th>Dinner</th>
             </tr>
-        @endforeach
-    </table>
+
+            @foreach ($a as $patient)
+    <tr>
+        <td>{{ $patient['patient_id'] }}</td>
+        <td>{{ $patient['doctors_name'] }}</td>
+        <td>{{ $patient['doctors_appointments'] }}</td>
+        <td>{{ $patient['caregivers_name'] }}</td>
+        <td>{{ $patient['morning_medicine'] }}</td>
+        <td>{{ $patient['afternoon_medicine'] }}</td>
+        <td>{{ $patient['night_medicine'] }}</td>
+        <td>{{ $patient['breakfast'] }}</td>
+        <td>{{ $patient['lunch'] }}</td>
+        <td>{{ $patient['dinner'] }}</td>
+    </tr>
+@endforeach
+        </table>
     </div>
 <script>
    function validateForm() {
@@ -198,9 +198,9 @@ body {
     function showTable() {
         var date = document.getElementById('date').value;
         var familyCode = document.getElementById('family_code').value;
-        var emergencyContact = document.getElementById('emergency_contact').value;
+        var pateintid = document.getElementById('patient_id').value;
         var familyTable = document.getElementById('familyTable');
-        if (date && familyCode && emergencyContact) {
+        if (date && familyCode && familyTable) {
             familyTable.style.display = 'table';
         } else {
             familyTable.style.display = 'none';
