@@ -273,9 +273,7 @@ class ViewController extends Controller
                 JOIN doctors ON doctors.doctor_id = appointments.doctor_id
                 JOIN caregivers ON caregivers.patient_id = patients.patient_id
                 LEFT JOIN patients_medications ON patients.patient_id = patients_medications.patient_id
-                LEFT JOIN food ON patients.food_id = food.food_id
-            WHERE
-                patients.patient_id = $userInputPatientId
+                LEFT JOIN food ON patients.food_id = food.food_id;
         "
     );
         
