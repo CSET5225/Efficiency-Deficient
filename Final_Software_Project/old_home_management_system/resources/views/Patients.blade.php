@@ -117,7 +117,12 @@
     </style>
 </head>
 <body>
-    <button class="logout">Log Out</button>
+
+    <form action="{{url('/logout')}}" method="GET">
+
+        <button class="logout">Log Out</button>
+
+    </form>
 
     <h1>Patients Table</h1>
 
@@ -135,6 +140,7 @@
             </tr>
 
             @foreach ($patients as $patient)
+
                 <tr>
                     <td>{{ $patient->patient_id }}</td>
                     <td>{{ $patient->full_name }}</td>
@@ -143,8 +149,12 @@
                     <td>{{ $patient->emergency_contact_name }}</td>
                     <td>{{ $patient->admission_date }}</td>
                 </tr>
+
             @endforeach
+
         </table>
+
     </form>
+    
 </body>
 </html>
