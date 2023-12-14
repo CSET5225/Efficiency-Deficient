@@ -110,6 +110,9 @@
       #successMessage{
         color: rgb(80, 194, 80);
       }
+      .center{
+        display;flex;
+      }
 
     </style>
 </head>
@@ -212,9 +215,13 @@
         {{ $errorMessage }}
       </p>
       @endif
+    <div class = "center">
     <button name = "register_button" id="register_button">Ok</button>
-    <button name = "cancel_button">Cancel</button>
-</form>
+    </form>
+    <form action = "{{ url('adminsHome') }}">
+    <button>Cancel</button>
+    </form>
+    </div>
   </div>
 </body>
 </html>
