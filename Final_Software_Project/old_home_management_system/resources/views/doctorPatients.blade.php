@@ -87,13 +87,28 @@
                             <input name="comment" type="text">
                         </td>
                         <td>
-                            <input name="morningMedicine" type="input">
+                            <select name="morning_medicine" >
+                                <option value="none">None</option>
+                                @foreach ($medicine as $meds)
+                                    <option name="morning_medicine" value="{{ $meds->medicine_name }}">{{ $meds->medicine_name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
-                            <input name="afternoonMedicine" type="input">
+                            <select name="afternoon_medicine">
+                                <option value="none">None</option>
+                                @foreach ($medicine as $meds)
+                                    <option name="afternoon_medicine" value="{{ $meds->medicine_name }}">{{ $meds->medicine_name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
-                            <input name="nightMedicine" type="input">
+                            <select name="night_medicine" >
+                                <option value="none">None</option>
+                                @foreach ($medicine as $meds)
+                                    <option name="night_medicine" value="{{ $meds->medicine_name }}">{{ $meds->medicine_name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                             <button>Submit</button>

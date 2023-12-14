@@ -179,23 +179,17 @@ class ViewController extends Controller
          ->where('p.patient_id', '=', $request->patient_id)
          ->get();
 
-        //  $medicine = DB::table('patient_medications as pm')
-        //  ->join('medications as m', 'm.medicine_name', 'medicine_name')
+         $medicine = DB::select('SELECT medicine_name FROM medications');
 
-         return view("doctorPatients", compact('data'));
+         return view("doctorPatients", compact('data', 'medicine'));
     }
 
     public function addMoreMeds(Request $request){
-        $morning_medicine_name = $request->morningMedicine;
-        $afternoon_medicine_name = $request->afternoonMedicine;
-        $night_medicine_name = $request->nightMedicine;
-        
-        DB::table('patient_medications as pm')->insert([
-            'medicine_date' => $request->comment,
+        return DB::table('patient_medications as pm')->insert([
             'comment' => $request->comment,
-            'morning_medicine' => $request->comment,
-            'afternoon_medicine' => $request->comment,
-            'night_medicine' => $request->comment
+            'morning_medicine' => $request->morning_medicine,
+            'afternoon_medicine' => $request->afternoon_medicine,
+            'night_medicine' => $request->night_medicine
         ]);
     }
 
