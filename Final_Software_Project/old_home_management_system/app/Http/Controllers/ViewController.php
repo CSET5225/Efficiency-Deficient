@@ -102,13 +102,12 @@ class ViewController extends Controller
         ->leftJoin('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
         ->leftJoin('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
         ->select(
-        DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
-        'p.patient_id',
-        'comment', 'scheduled_date',
-        'morning_meds.medicine_name AS morning_medicine',
-        'afternoon_meds.medicine_name AS afternoon_medicine',
-        'night_meds.medicine_name AS night_medicine'
-        )
+            DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
+            'comment', 'scheduled_date',
+            'morning_meds.medicine_name AS morning_medicine',
+            'afternoon_meds.medicine_name AS afternoon_medicine',
+            'night_meds.medicine_name AS night_medicine'
+    )
         ->where('scheduled_date', '<', now())
         ->orderBy('p.patient_id')
         ->get();
