@@ -337,4 +337,10 @@ class ViewController extends Controller
         $data = DB::SELECT("SELECT * FROM patients WHERE patient_id = '$request->patientID'");
         return view("patientAdditionalInfo", ["data"=>$data], ["info"=>$data[0]]);
     }
+
+    public function appointmentInfoView(Request $request){
+        $patientData = DB::SELECT("SELECT * FROM patients");
+        $doctorData = DB::SELECT("SELECT * FROM doctors");
+        return view("doctorsAppointment", compact('patientData', 'doctorData'));
+    }
 }

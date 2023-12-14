@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Patient Additional Information</title>
     <style>
+        
         *{
             margin: 0;
             padding: 0;
@@ -96,6 +97,7 @@
             transition-duration: 2s;
             color: black;
         }
+
     </style>
 </head>
 <body>
