@@ -18,7 +18,7 @@
         height: 100vh;
       }
 
-      form{
+      .form{
         background-color:#EEF5FF;
         padding: 20px;
         border-radius: 20px;
@@ -111,7 +111,7 @@
     <button class="logout">Log Out</button>
     </form>
     <h1>Payment</h1>
-    <form action="{{ url('')}}" method="post">
+    <form action="{{ url('')}}" method="post" class="form">
         @csrf
         <div class= 'date'>
             <label>Date:</label><br>
@@ -131,7 +131,6 @@
         </div>
     <button name = "register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
-    <button type="reset"></button>
 </form>
 </body>
 </html>
