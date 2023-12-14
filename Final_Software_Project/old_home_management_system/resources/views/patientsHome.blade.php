@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,6 +127,7 @@
         </style>
 </head>
 <body>
+@if (Session('role_id') == 1)
 <form action="{{url('/logout')}}" method="GET">
     <button class="logout">Log Out</button>
     </form>
@@ -183,10 +187,13 @@
         </section>
     </div>
     @else
+
+    {{-- @else --}}
     <script>
-    alert("Please log in.");
-    window.location.href = "/login";
-    </script>
-    @endauth
+        alert("Please log in.");
+        window.location.href = "/login";
+        </script>
+    {{-- @endauth --}}
+    @endif
 </body>
 </html>

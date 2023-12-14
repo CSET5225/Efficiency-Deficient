@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\patient;
 use App\Models\supervisor;
 use App\Models\caretaker;
@@ -35,7 +36,7 @@ class ViewController extends Controller
     public function homeView(){
     return view("homePage");
     }
-
+    
     public function loginView(){
     return view("login");
     }
@@ -108,7 +109,7 @@ class ViewController extends Controller
             'night_meds.medicine_name AS night_medicine'
     )
         ->where('scheduled_date', '<', now())
-        ->orderBy('scheduled_date')
+        ->orderBy('p.patient_id')
         ->get();
     }
 
@@ -123,13 +124,13 @@ class ViewController extends Controller
         ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
         ->select(
             DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
-            'comment', 'scheduled_date',
+            'p.patient_id', 'comment', 'scheduled_date',
             'morning_meds.medicine_name AS morning_medicine',
             'afternoon_meds.medicine_name AS afternoon_medicine',
             'night_meds.medicine_name AS night_medicine'
     )
     ->where('scheduled_date', '=', $current_date)
-    ->orderBy('scheduled_date')
+    ->orderBy('p.patient_id')
     ->get();
     }
     
@@ -149,49 +150,79 @@ class ViewController extends Controller
         return view("doctorsHome", compact('pastHistory', 'currentHistory'));
     }
     
+    public function doctorsDashboardView(){
+        return view("doctorDashboard");
+    }
+    
+    public function caregiversHomeView(){
+        return view("caregiversHome");
+    }
+    
     public function doctorsHomeView(){
         $pastHistory = $this->pastPatientAppointments();
         $currentHistory = $this->presentPatientAppointments();
         return view("doctorsHome", compact('pastHistory', 'currentHistory'));
     }
+    
+    public function doctorPatientsView(Request $request){
+        $data = DB::table('patient_medications as pm')
+        ->leftJoin('patients as p', 'pm.patient_id', 'p.patient_id')
+        ->leftJoin('medications as morning_meds', 'pm.morning_medicine', 'morning_meds.medicine_id')
+        ->leftJoin('medications as afternoon_meds', 'pm.afternoon_medicine', 'afternoon_meds.medicine_id')
+        ->leftJoin('medications as night_meds', 'pm.night_medicine', 'night_meds.medicine_id')
+        ->select('p.patient_id', 'p.first_name', 'p.last_name', 'pm.medicine_date', 'pm.comment',
+         'morning_meds.medicine_name AS morning_medicine',
+         'afternoon_meds.medicine_name AS afternoon_medicine',
+         'night_meds.medicine_name AS night_medicine')
+         ->where('medicine_date', '<', now())
+         ->where('p.patient_id', '=', $request->patient_id)
+         ->get();
 
-    public function doctorsDashboardView(){
-        return view("doctorDashboard");
+        //  $medicine = DB::table('patient_medications as pm')
+        //  ->join('medications as m', 'm.medicine_name', 'medicine_name')
+
+         return view("doctorPatients", compact('data'));
     }
 
-    public function caregiversHomeView(){
-        return view("caregiversHome");
-    }
-
-    public function doctorPatientsView(){
-        return view("doctorPatients");
+    public function addMoreMeds(Request $request){
+        $morning_medicine_name = $request->morningMedicine;
+        $afternoon_medicine_name = $request->afternoonMedicine;
+        $night_medicine_name = $request->nightMedicine;
+        
+        DB::table('patient_medications as pm')->insert([
+            'medicine_date' => $request->comment,
+            'comment' => $request->comment,
+            'morning_medicine' => $request->comment,
+            'afternoon_medicine' => $request->comment,
+            'night_medicine' => $request->comment
+        ]);
     }
 
     public function getAdmins(){
         return DB::table('admins as a')
         ->join('roles as r', 'r.role_id', '=', 'a.role_id')
-        ->select('admin_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('admin_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
 
     public function getCaregivers(){
         return DB::table('caregivers as c')
         ->join('roles as r', 'r.role_id', '=', 'c.role_id')
-        ->select('caregiver_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('caregiver_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
 
     public function getSupervisors(){
         return DB::table('supervisors as s')
         ->join('roles as r', 'r.role_id', '=', 's.role_id')
-        ->select('supervisor_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('supervisor_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
 
     public function getDoctors(){
         return DB::table('doctors as d')
         ->join('roles as r', 'r.role_id', '=', 'd.role_id')
-        ->select('doctor_id', DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'role_name', 'salary')
+        ->select('doctor_id', 'first_name', 'last_name', 'role_name', 'salary')
         ->get();
     }
     
@@ -205,6 +236,85 @@ class ViewController extends Controller
         compact('adminData', 'caregiverData', 'supervisorData', 'doctorData'));
     }
 
+    public function employeeSearch(Request $request){
+        // DB::select('SELECT * FROM employee where employeeId = ? AND employeeName = ?', [$request->employeeID], [$request->employeeName]);
+
+        return DB::select(
+            "SELECT employee_id, first_name, last_name, role_name, salary
+            FROM roles as r
+            JOIN admins a on r.role_id = a.role_id
+            JOIN caregivers c ON r.role_id = c.role_id
+            JOIN supervisors s ON r.role_id = s.role_id
+            JOIN doctors d ON r.role_id = d.role_id
+            WHERE id = ? AND full_name = ? AND role_name = ? AND salary = ?",
+            [$request->emp_id],
+            [$request->first_name],
+            [$request->last_name],
+            [$request->emp_role],
+            [$request->emp_salary]);
+    }
+    
+    public function updateSalary(Request $request){
+        $updateData = $request->validate([
+            'empID' => 'required',
+            'role_name' => 'required',
+            'newSalary' => 'required'
+        ]);
+
+        if($updateData['role_name'] == 'Admin' || $updateData['role_name'] == 'admin'){
+            $tableName = 'Admins';
+            $id = 'admin_id';
+        }
+        elseif($updateData['role_name'] == 'Doctor' || $updateData['role_name'] == 'doctor'){
+            $tableName = 'Doctors';
+            $id = 'doctor_id';
+        }
+        elseif($updateData['role_name'] == 'Supervisor' || $updateData['role_name'] == 'supervisor'){
+            $tableName = 'Supervisors';
+            $id = 'supervisor_id';
+        }
+        elseif($updateData['role_name'] == 'Caregiver' || $updateData['role_name'] == 'caregiver'){
+            $tableName = 'Caregivers';
+            $id = 'caregiver_id';
+        }
+        else{
+            $errorMessage = 'The role '. $updateData['role_name'] . ' does not exist.';
+            return $this->employeeListView()->with('errorMessage', $errorMessage);
+        }
+
+        if($tableName){
+            $dataCheck = DB::table($tableName)
+            ->where($id, $updateData['empID'])
+            ->exists();
+            if($dataCheck){
+                if(!empty($updateData['newSalary'])){
+                    DB::table($tableName)
+                    ->where($id, $updateData['empID'])
+                    ->update(['salary' => $updateData['newSalary']]);
+                    
+                    $personData = DB::table($tableName)
+                    ->where($id, $updateData['empID'])
+                    ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS full_name"), 'salary')
+                    ->first();
+                    
+                    $successMessage = $personData->full_name. "'s salary has been updated to $". $personData->salary;
+                    return $this->employeeListView()->with('successMessage', $successMessage);
+                }
+                else{
+                    $errorMessage = 'The new salary is empty!';
+                    return $this->employeeListView()->with('errorMessage', $errorMessage);
+                }
+            }
+            else{
+                $errorMessage = 'The employee id of '. $updateData['empID']. ' does not exist';
+                return $this->employeeListView()->with('errorMessage', $errorMessage);
+            }
+        }
+        if(isset($_POST['cancel_button'])){
+            return $this->employeeListView();
+        }
+    }
+    
     public function addNewMeds(){
         
     }

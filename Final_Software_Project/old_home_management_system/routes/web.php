@@ -32,7 +32,9 @@ Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
 
 Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
-Route::post('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
+Route::POST('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
+
+Route::post('/addMoreMeds', [ViewController::class, 'addMoreMeds']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
@@ -49,6 +51,10 @@ Route::get('/patientsHome', function () {
 });
 
 Route::get('/employeeList', [ViewController::class, 'employeeListView']);
+
+Route::post('/employeeSearch', [ViewController::class, 'employeeSearch']);
+
+Route::post('/updateSalary', [ViewController::class, 'updateSalary']);
 
 Route::get('/newRoleForm', function () {
     return view('roleAddForm');
