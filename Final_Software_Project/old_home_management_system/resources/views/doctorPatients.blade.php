@@ -37,6 +37,9 @@
             content: "✓";
             padding-left: 5px;
         }
+        .todaysMedications{
+            /* display: none; */
+        }
     </style>
 </head>
 <body>
@@ -52,49 +55,58 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($data as $storedInfo)
             <tr>
-                <td>12/9/23</td>
-                <td>All good</td>
-                <td>9:00 AM</td>
-                <td>3:00 PM</td>
-                <td>9:00 PM</td>
+                <td>{{ $storedInfo->medicine_date }}</td>
+                <td>{{ $storedInfo->comment }}</td>
+                <td>{{ $storedInfo->morning_medicine}}</td>
+                <td>{{ $storedInfo->afternoon_medicine}}</td>
+                <td>{{ $storedInfo->night_medicine}}</td>
             </tr>
+            @endforeach
 
         </tbody>
-    </table> 
+    </table>
 
-    <label>Today is: <p></p> It's time to assign a prescription!</label>
-
-    <form action="" method="POST">
-        <table>
+    
+    <table class="todaysMedications">
             <thead>
                 <tr>
                     <th>Comment</th>
                     <th>Morning Medicine</th>
                     <th>Afternoon Medicine</th>
                     <th>Night Medicine</th>
+                    <th>Submit</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <input name="comment" type="text">
-                    </td>
-                    <td>
-                        <input name="morningMedicine" type="time" value="05:00" min = "05:00" max="11:59" required>
-                        <span class="validity"></span>
-                    </td>
-                    <td>
-                        <input name="afternoonMedicine" type="time" value="12:00" min="12:00" max="16:00" required>
-                        <span class="validity"></span>
-                    </td>
-                    <td>
-                        <input name="nightMedicine" type="time" value="17:00" min="17:00" max="23:59" required>
-                        <span class="validity"></span>
-                    </td>
-                </tr>
+                <form action="addMoreMeds" method="post">
+                    @csrf
+                    <tr>
+                        <td>
+                            <input name="comment" type="text">
+                        </td>
+                        <td>
+                            <input name="morningMedicine" type="input">
+                        </td>
+                        <td>
+                            <input name="afternoonMedicine" type="input">
+                        </td>
+                        <td>
+                            <input name="nightMedicine" type="input">
+                        </td>
+                        <td>
+                            <button>Submit</button>
+                        </td>
+                    </tr>
+                </form>
             </tbody>
         </table>
-    </form>
     </body>
+    <script>
+        const today = new Date();
+        function displayMedicationsInput(){
+            document.getElementsByClassName('todaysMedications').style.display = {{ 'medicine_date' }} == today ? "block" : "none" ;
+        }
+    </script>
 </html>

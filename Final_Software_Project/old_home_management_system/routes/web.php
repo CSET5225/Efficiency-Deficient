@@ -32,7 +32,9 @@ Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
 
 Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
-Route::post('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
+Route::POST('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
+
+Route::post('/addMoreMeds', [ViewController::class, 'addMoreMeds']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
@@ -95,4 +97,3 @@ Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
 Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
 
 Route::get('/logout', [loginApplicationController::class, 'logout']);
-

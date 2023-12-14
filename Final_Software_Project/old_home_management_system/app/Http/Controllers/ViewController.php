@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\patient;
 use App\Models\supervisor;
 use App\Models\caretaker;
@@ -35,7 +36,7 @@ class ViewController extends Controller
     public function homeView(){
     return view("homePage");
     }
-
+    
     public function loginView(){
     return view("login");
     }
@@ -102,13 +103,14 @@ class ViewController extends Controller
         ->leftJoin('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
         ->select(
         DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
+        'p.patient_id',
         'comment', 'scheduled_date',
         'morning_meds.medicine_name AS morning_medicine',
         'afternoon_meds.medicine_name AS afternoon_medicine',
         'night_meds.medicine_name AS night_medicine'
         )
         ->where('scheduled_date', '<', now())
-        ->orderBy('scheduled_date')
+        ->orderBy('p.patient_id')
         ->get();
     }
 
@@ -123,13 +125,13 @@ class ViewController extends Controller
         ->join('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
         ->select(
             DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
-            'comment', 'scheduled_date',
+            'p.patient_id', 'comment', 'scheduled_date',
             'morning_meds.medicine_name AS morning_medicine',
             'afternoon_meds.medicine_name AS afternoon_medicine',
             'night_meds.medicine_name AS night_medicine'
     )
     ->where('scheduled_date', '=', $current_date)
-    ->orderBy('scheduled_date')
+    ->orderBy('p.patient_id')
     ->get();
     }
     
@@ -149,22 +151,52 @@ class ViewController extends Controller
         return view("doctorsHome", compact('pastHistory', 'currentHistory'));
     }
     
+    public function doctorsDashboardView(){
+        return view("doctorDashboard");
+    }
+    
+    public function caregiversHomeView(){
+        return view("caregiversHome");
+    }
+    
     public function doctorsHomeView(){
         $pastHistory = $this->pastPatientAppointments();
         $currentHistory = $this->presentPatientAppointments();
         return view("doctorsHome", compact('pastHistory', 'currentHistory'));
     }
+    
+    public function doctorPatientsView(Request $request){
+        $data = DB::table('patient_medications as pm')
+        ->leftJoin('patients as p', 'pm.patient_id', 'p.patient_id')
+        ->leftJoin('medications as morning_meds', 'pm.morning_medicine', 'morning_meds.medicine_id')
+        ->leftJoin('medications as afternoon_meds', 'pm.afternoon_medicine', 'afternoon_meds.medicine_id')
+        ->leftJoin('medications as night_meds', 'pm.night_medicine', 'night_meds.medicine_id')
+        ->select('p.patient_id', 'p.first_name', 'p.last_name', 'pm.medicine_date', 'pm.comment',
+         'morning_meds.medicine_name AS morning_medicine',
+         'afternoon_meds.medicine_name AS afternoon_medicine',
+         'night_meds.medicine_name AS night_medicine')
+         ->where('medicine_date', '<', now())
+         ->where('p.patient_id', '=', $request->patient_id)
+         ->get();
 
-    public function doctorsDashboardView(){
-        return view("doctorDashboard");
+        //  $medicine = DB::table('patient_medications as pm')
+        //  ->join('medications as m', 'm.medicine_name', 'medicine_name')
+
+         return view("doctorPatients", compact('data'));
     }
 
-    public function caregiversHomeView(){
-        return view("caregiversHome");
-    }
-
-    public function doctorPatientsView(){
-        return view("doctorPatients");
+    public function addMoreMeds(Request $request){
+        $morning_medicine_name = $request->morningMedicine;
+        $afternoon_medicine_name = $request->afternoonMedicine;
+        $night_medicine_name = $request->nightMedicine;
+        
+        DB::table('patient_medications as pm')->insert([
+            'medicine_date' => $request->comment,
+            'comment' => $request->comment,
+            'morning_medicine' => $request->comment,
+            'afternoon_medicine' => $request->comment,
+            'night_medicine' => $request->comment
+        ]);
     }
 
     public function getAdmins(){
