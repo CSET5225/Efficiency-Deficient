@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <style>
+
     body {
       margin: 0;
       overflow: hidden;
@@ -18,7 +19,7 @@
     }
 
     .form{
-      background-color:#EEF5FF;
+      background-color:white;
       padding: 20px;
       border-radius: 20px;
       z-index: 1;
@@ -32,25 +33,29 @@
     input {
       margin: 10px;
       width: 100%;
-      font-size: large;
-      border-radius: 20px; 
-      border :1px solid black; 
+      font-size: medium;
+      border :1px solid black;
+      padding:5px;
     }
 
     button{
-        margin: 10px;
-        width: 50%;
-        background-color:#9EB8D9; 
-        font-size: large;
-        color: white;
-        border: none;
-        border-radius: 20px;
+      margin: 10px;
+      width: 100px;
+      background-color:#9EB8D9; 
+      font-size: large;
+      color: white;
+      border: none;
+      padding:5px;
     }
 
     button:hover{
-      transition-duration: 2s;
+      transition-duration: 1s;
       background-color: #EEF5FF;
       color:black;   
+    }
+
+    label{
+      font-size:24px;
     }
 
     #buttons{
@@ -72,8 +77,8 @@
       margin: 10px;
       width: 100%;
       font-size: large;
-      border-radius: 20px; 
       border :1px solid black;
+      padding:5px;
     }
 
     a {
@@ -106,44 +111,68 @@
       display: flex;
       flex-direction: row;
     }
+
 </style>
 <body>
-<form action="{{url('/logout')}}" method="GET">
-    <button class="logout">Log Out</button>
-    </form>
-    <h1>Docotor's Appointments</h1>
-    <form action="{{url('/doctorsAppointment')}}" method="get" class='form'>
-    <label for="">Patient Id</label>
-    <input type="text">
-    <br>
-    <br>
-    <label for="">Patient Name</label>
-    <input type="text">
-    <br><br>
-    <label for="">date</label>
-    <input type="date">
-    <br><br>
-    <label for="">Doctor</label>
-    <select name="Doctors" id="doctor">
-        <option value="doc1">
-        doc1
-        </option>
-        <option value="doc2">
-        doc2
-        </option>
-        <option value="doc3">
-        doc3
-        </option>
-        <option value="doc4">
-        doc4
-        </option>
+    <form action="{{url('/logout')}}" method="GET">
 
-    </select>
-    <div id="buttons">
-    <button>Ok</button>
-    <button>cancel</button>
+      <button class="logout">Log Out</button>
+
+    </form>
+
+    <h1>Docotor's Appointments</h1>
+    <form action="{{url('api/addAppointment')}}" method="POST" class='form' id="appointmentForm">
+
+      @csrf
+
+      <label>Patient Id</label>
+      <select name="patient_id">
+
+        @foreach($patientData as $patient)
+        
+          <option>{{ $patient->patient_id }}</option>
+
+        @endforeach
+
+      </select>
+
+      <label>date</label>
+      <input type="date" name="scheduled_date">
+
+      <label>Doctor</label>
+      <select name="doctor_id" id="doctor">
+
+        @foreach($doctorData as $doctor)
+
+          <option>{{ $doctor->doctor_id }}</option>
+
+        @endforeach
+
+      </select>
+
+      <div id="buttons">
+
+        <button>Submit</button>
+
+    </form>
+
+    <form action="{{ url('/adminsHome') }}">
+
+      <button>Cancel</button>
+
+    </form>
+
     </div>
 
-    </form>
 </body>
+
+
+<script>
+
+  function show_data(){
+      document.getElementById("appointmentForm").submit()
+  }
+
+</script>
+
 </html>

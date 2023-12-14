@@ -102,13 +102,12 @@ class ViewController extends Controller
         ->leftJoin('medications as afternoon_meds', 'pm.afternoon_medicine', '=', 'afternoon_meds.medicine_id')
         ->leftJoin('medications as night_meds', 'pm.night_medicine', '=', 'night_meds.medicine_id')
         ->select(
-        DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
-        'p.patient_id',
-        'comment', 'scheduled_date',
-        'morning_meds.medicine_name AS morning_medicine',
-        'afternoon_meds.medicine_name AS afternoon_medicine',
-        'night_meds.medicine_name AS night_medicine'
-        )
+            DB::raw("CONCAT(p.first_name, ' ', p.last_name) AS patient_name"),
+            'comment', 'scheduled_date',
+            'morning_meds.medicine_name AS morning_medicine',
+            'afternoon_meds.medicine_name AS afternoon_medicine',
+            'night_meds.medicine_name AS night_medicine'
+    )
         ->where('scheduled_date', '<', now())
         ->orderBy('p.patient_id')
         ->get();
@@ -362,52 +361,62 @@ class ViewController extends Controller
         ->get();
         return view('Patients', ["patients"=>$patients]);
     }
-    public function familyHomeView(Request $request)
+    public function familyHomeView()
     {
-        $userInputPatientId = $request->input('patient_id');
+        $a = [];
+        return view('familyMembers_home', compact('a'));
+}
 
-        $a = DB::select("
-            SELECT
-                patients.patient_id,
-                CONCAT(doctors.first_name, ' ', doctors.last_name) AS doctors_name,
-                appointments.scheduled_date AS doctors_appointments,
-                CONCAT(caregivers.first_name, ' ', caregivers.last_name) AS caregivers_name,
-                patients_medications.morning_medicine,
-                patients_medications.afternoon_medicine,
-                patients_medications.night_medicine,
-                food.food_id AS breakfast,
-                food.food_id AS lunch,
-                food.food_id AS dinner
-            FROM
-                patients
-                JOIN appointments ON patients.patient_id = appointments.patient_id
-                JOIN doctors ON doctors.doctor_id = appointments.doctor_id
-                JOIN caregivers ON caregivers.patient_id = patients.patient_id
-                LEFT JOIN patients_medications ON patients.patient_id = patients_medications.patient_id
-                LEFT JOIN food ON patients.food_id = food.food_id;
-        "
-    );
-        
-        $patientData = [];
-        
-        foreach ($a as $patient) {
-            $patientData[] = [
-                'patient_id' => $patient->patient_id,
-                'doctors_name' => $patient->doctors_name,
-                'doctors_appointments' => $patient->doctors_appointments,
-                'caregivers_name' => $patient->caregivers_name,
-                'morning_medicine' => $patient->morning_medicine,
-                'afternoon_medicine' => $patient->afternoon_medicine,
-                'night_medicine' => $patient->night_medicine,
-                'breakfast' => $patient->breakfast,
-                'lunch' => $patient->lunch,
-                'dinner' => $patient->dinner,
-            ];
-        }
-        
-        return view('familyMembers_home', ['a' => $patientData]);
+public function familyView()
+{
+    $a = [];
+    return view('familyMember_home', compact('a'));
+}
+
+
+public function famlyMembers(Request $request){
+    $familyCode = $request->input('family_code');
+    $patientId = $request->input('patient_id');
+
+    $a = DB::select("
+        SELECT
+            patients.patient_id,
+            CONCAT(doctors.first_name, ' ', doctors.last_name) AS doctors_name,
+            appointments.scheduled_date AS doctors_appointments,
+            CONCAT(caregivers.first_name, ' ', caregivers.last_name) AS caregivers_name,
+            patients_medications.morning_medicine,
+            patients_medications.afternoon_medicine,
+            patients_medications.night_medicine,
+            food.food_id AS food
+        FROM
+            patients
+            JOIN appointments ON patients.patient_id = appointments.patient_id
+            JOIN doctors ON doctors.doctor_id = appointments.doctor_id
+            JOIN caregivers ON caregivers.patient_id = patients.patient_id
+            LEFT JOIN patients_medications ON patients.patient_id = patients_medications.patient_id
+            LEFT JOIN food ON patients.food_id = food.food_id
+        WHERE
+            patients.patient_id = '$patientId' AND
+            patients.family_code = '$familyCode'
+    ");
+    
+    $patientData = [];
+
+            foreach ($a as $patient) {
+                $patientData[] = [
+                    'patient_id' => $patient->patient_id,
+                    'doctors_name' => $patient->doctors_name,
+                    'doctors_appointments' => $patient->doctors_appointments,
+                    'caregivers_name' => $patient->caregivers_name,
+                    'morning_medicine' => $patient->morning_medicine,
+                    'afternoon_medicine' => $patient->afternoon_medicine,
+                    'night_medicine' => $patient->night_medicine,
+                    'food_id' => $patient->food,
+                ];
     }
 
+    return view('familyMember_home', ['a' => $patientData, ]);
+}
     public function login(Request $request){
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -451,5 +460,11 @@ class ViewController extends Controller
     public function getPatientInfo(Request $request){
         $data = DB::SELECT("SELECT * FROM patients WHERE patient_id = '$request->patientID'");
         return view("patientAdditionalInfo", ["data"=>$data], ["info"=>$data[0]]);
+    }
+
+    public function appointmentInfoView(Request $request){
+        $patientData = DB::SELECT("SELECT * FROM patients");
+        $doctorData = DB::SELECT("SELECT * FROM doctors");
+        return view("doctorsAppointment", compact('patientData', 'doctorData'));
     }
 }
