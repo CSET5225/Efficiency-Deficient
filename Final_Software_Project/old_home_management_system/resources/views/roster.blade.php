@@ -62,7 +62,7 @@
         justify-content: center;
         text-align:center;
         padding: 20px;
-        width: 70%; 
+        width: 85%; 
         }
 
         h1{
@@ -82,15 +82,24 @@
         }
 
         .logout {
-                height: auto;
-                background-color: black;
-            }
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: auto;
+    height: auto;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
 
-        .logout:hover{
-            background-color: white;
-            transition-duration: 2s;
-            color: black;
-        }
+.logout:hover {
+    background-color: white;
+    color: black;
+    transition-duration: 0.5s;
+}
         table, tr, th, td{
             border: 1px solid white;
             background-color: lightgray;
