@@ -68,12 +68,12 @@ Route::get('/caregiversHome', function () {
     return view('caregiversHome');
 });
 
-Route::get('/adminReport', function () {
-    return view('adminreport');
+Route::get('/supervisorsHome', function () {
+    return view('supervisorsHome');
 });
 
-Route::get('/doctorsAppointment', function () {
-    return view('doctorsAppointment');
+Route::get('/adminReport', function () {
+    return view('adminreport');
 });
 
 Route::get('/payment', function () {
@@ -83,8 +83,12 @@ Route::get('/payment', function () {
 Route::get('/Patient', [ViewController::class, 'patientView']);
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
+Route::get('/familyMemberview', [ViewController::class, 'familyView']);
 
-Route::post('/familyMembers_home', [ViewController::class, 'familyHomeView']);
-
+Route::post('/familyMembers_home', [ViewController::class, 'famlyMembers']);
+Route::get('/familyHomeview', [ViewController::class, 'familyHomeView']);
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 
+Route::get('/doctorsAppointment', [ViewController::class, 'appointmentInfoView']);
+
+Route::get('/getAppointmentInfo', [ViewController::class, 'getAppointmentInfo']);

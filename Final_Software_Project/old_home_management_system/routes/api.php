@@ -3,6 +3,7 @@
 use App\Http\Controllers\RegistrationControllerApi;
 use App\Http\Controllers\RosterControllerAPI;
 use App\Http\Controllers\RoleControllerAPI;
+use App\Http\Controllers\appointmentControllerAPI;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,5 @@ Route::resource('register', RegistrationControllerApi::class);
 Route::resource('newRoster', RosterControllerAPI::class);
 
 Route::resource('addRole', RoleControllerAPI::class);
+
+Route::resource('addAppointment', appointmentControllerAPI::class);

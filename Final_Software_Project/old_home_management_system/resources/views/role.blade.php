@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Employee List</title>
     <style>
+      
       body {
         margin: 0;
         overflow: hidden;
@@ -60,46 +61,47 @@
         border :1px solid black; 
       }
 
-    button{
-      margin: 10px;
-      width: 50%;
-      background-color:#9EB8D9; 
-      font-size: large;
-      color: white;
-      border: none;
-      border-radius: 20px;   
-    }
+      button{
+        margin: 10px;
+        width: 50%;
+        background-color:#9EB8D9; 
+        font-size: large;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+      }
 
-    button:hover{
-      transition-duration: 2s;
-      background-color: #EEF5FF;
-      color:black;   
-    }
-
-    h1{
-      position: absolute; 
-      top: 20px; 
-      left: 54%; 
-      transform: translateX(-50%); 
-      z-index: 2; 
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    .logout {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: auto;
-      height: auto;
-      background-color: black;
-    }
-    
-    .logout:hover{
-        background-color: white;
+      button:hover{
         transition-duration: 2s;
-        color: black;
-    }
+        background-color: #EEF5FF;
+        color:black;   
+      }
+
+      h1{
+        position: absolute; 
+        top: 20px; 
+        left: 54%; 
+        transform: translateX(-50%); 
+        z-index: 2; 
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      .logout {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: auto;
+        height: auto;
+        background-color: black;
+      }
+    
+      .logout:hover{
+          background-color: white;
+          transition-duration: 2s;
+          color: black;
+      }
+
     </style>
 </head>
 <body>
