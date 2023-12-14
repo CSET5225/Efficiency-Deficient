@@ -108,6 +108,7 @@
 <form action="">
         <div class="row">
             <button><a href="./doctorsAppointment">Doctors Appointments</a></button>
+            <button><a href="./patientAddInfo">Additional Information</a></button>
             <button><a href="./employeeList">Employee List</a></button>
             <button><a href="./Patients">Patients</a></button>
             <button><a href="./registrationApproval">Registration Approval</a></button>

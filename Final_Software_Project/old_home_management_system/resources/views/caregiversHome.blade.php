@@ -135,11 +135,5 @@ button:hover{
         
     </div>
     </div>
-    @else
-    <script>
-        alert("Please log in.");
-        window.location.href = "/login";
-    </script>
-    @endauth
 </body>
 </html>
