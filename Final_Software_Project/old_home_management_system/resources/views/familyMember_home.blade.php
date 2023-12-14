@@ -88,7 +88,6 @@ body {
         justify-content: center; 
     }
     table {
-        display: none; 
         width: 80%;
         margin-top: 20px;
         border-collapse: collapse;
@@ -111,7 +110,21 @@ body {
     #buttons{
     display: flex;
     flex-direction: row;
-}
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-family: monospace;
+    }
+
+    a:hover{
+        transition-duration: 2s;
+        color: black;
+    }
+
+
+
 </style>
 
 
@@ -123,7 +136,7 @@ body {
         <h1>Family Member</h1>
 
         <div id="form">
-        <form action="{{ url('/familyMembers_home') }}" method="POST">
+        <form action="{{ url('/familyMember_home') }}" method="get">
     @csrf
     <div class='date'>
         <label>Date:</label><br>
@@ -140,11 +153,12 @@ body {
         <input type="text" name="patient_id" id="patient_id" placeholder="Enter Patient ID" required>
     </div>
     <br><br>
-    <div id="buttons">
-        <button type="submit" name="register_button" onclick="showTable()">Ok</button>
-        <button type="button" name="cancel_button" onclick="resetForm()">Cancel</button>
-    </div>
+    
 </form>
+<div id="buttons">
+        <button type="submit" name="register_button" onclick="showTable()">Ok</button>
+        <button type="button" name="cancel_button" onclick="resetForm()"><a href="{{ url('/familyMemberview') }}">cancel</a></button>
+    </div>
         </div>
     </div>
 

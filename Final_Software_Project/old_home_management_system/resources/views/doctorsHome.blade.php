@@ -132,30 +132,46 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Patient ID</th>
                         <th>Date</th>
                         <th>Comment</th>
                         <th>Morning Medicine</th>
                         <th>Afternoon Medicine</th>
                         <th>Night Medicine</th>
+                        <th>Page</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($pastHistory as $pastPatients)
                     <form action="/doctorPatients" method="POST">
-                        @foreach ($pastHistory as $pastPatients)
+                        @csrf
                         <tr>
-                            <td>
-                                <button name="">
-                                    {{ $pastPatients->patient_name}}
-                                </button>
+                            <td >
+                                <input type="text"
+                                name= "patient_name" value="{{$pastPatients->patient_name}}" readonly>
                             </td>
-                            <td>{{ $pastPatients->scheduled_date }}</td>
-                            <td>{{ $pastPatients->comment }}</td>
-                            <td>{{ $pastPatients->morning_medicine }}</td>
-                            <td>{{ $pastPatients->afternoon_medicine }}</td>
-                            <td>{{ $pastPatients->night_medicine }}</td>
+                            <td >
+                                <input type="text" name="patient_id" value="{{ $pastPatients->patient_id }}" readonly>
+                            </td>
+                            <td >
+                                <input type="text" name="scheduled_date" value="{{ $pastPatients->scheduled_date }}" readonly>
+                            </td>
+                            <td >
+                                <input type="text" name="comment" value="{{ $pastPatients->comment }}" readonly>
+                            </td>
+                            <td >
+                                <input type="text" name="morning_medicine" value="{{ $pastPatients->morning_medicine }}" readonly>
+                            </td>
+                            <td >
+                                <input type="text" name="afternoon_medicine" value="{{ $pastPatients->afternoon_medicine }}" readonly>
+                            </td>
+                            <td>
+                                <input type="text" name="night_medicine" value="{{ $pastPatients->night_medicine }}" readonly>
+                            </td>
+                            <td><button>Submit</button></td>
                         </tr>
-                        @endforeach
                     </form>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -17,7 +17,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        height: 110vh;
       }
       .main{
         background-color:#EEF5FF;
@@ -26,12 +26,12 @@
         z-index: 1;
         width: 150%;
         max-width: 420px;
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .date{
-        display: flex; 
+        display: flex;
         flex-direction: column; 
         align-items: center; 
         width: 100%; 
@@ -74,10 +74,10 @@
       }
       h1{
           position: absolute; 
-          top: 20px; 
-          left: 54%; 
-          transform: translateX(-50%); 
-          z-index: 2; 
+          top: 20px;
+          left: 54%;
+          transform: translateX(-50%);
+          z-index: 2;
         padding: 10px;
         border-radius: 10px;
       }
@@ -104,78 +104,115 @@
         padding: 2px;
       }
 
+      #errorMessage{
+        color: crimson;
+      }
+      #successMessage{
+        color: rgb(80, 194, 80);
+      }
 
     </style>
 </head>
 <body>
     <h1>Employees</h1>
     <div class="main">
-      <form action="{{ url('')}}" method="post">
+    <form action="{{ url('/employeeSearch')}}" method="post">
+        @csrf
+        <div class= 'search'>
+          <label for="empID">Employee ID</label>
+          <input id="empID" type="text" placeholder="Search by ID:" name="emp_id">
+          
+          <label for="first_name">First Name</label>
+          <input id="first_name" type="text" placeholder="Search by Employee Name:" name="first_name">
 
-          @csrf
+          <label for="last_name">Last Name</label>
+          <input id="last_name" type="text" placeholder="Search by Employee Name:" name="last_name">
+          
+          <label for="empRole">Employee Role</label>
+          <input id="empRole" type="text" placeholder="Search by Role:" name="emp_role">
 
-          <div class= 'date'>
-
+          <label for="empSalary">Employee Salary</label>
+          <input id="empSalary" type="text" placeholder="Search by Salary:" name="emp_salary">
+          <button>Submit</button>
         </div>
-        </form>
-          <div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Employee ID</th>
-                    <th>Employee Name</th>
-                    <th>Role</th>
-                    <th>Salary</th>
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach ($adminData as $adminData)
+      </form>
+        <div>
+          <div class="table-container">
+            <table>
+              <thead>
                 <tr>
-                  <td>{{ $adminData->admin_id }}</td>
-                  <td>{{ $adminData->full_name }}</td>
-                  <td>{{ $adminData->role_name }}</td>
-                  <td>{{ $adminData->salary }}</td>
+                  <th>Employee ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Role</th>
+                  <th>Salary</th>
                 </tr>
-                @endforeach
-                @foreach ($supervisorData as $supervisorData)
-                <tr>
-                  <td>{{ $supervisorData->supervisor_id }}</td>
-                  <td>{{ $supervisorData->full_name }}</td>
-                  <td>{{ $supervisorData->role_name }}</td>
-                  <td>{{ $supervisorData->salary }}</td>
-                </tr>
-                @endforeach
-                @foreach ($caregiverData as $caregiverData)
-                <tr>
-                  <td>{{ $caregiverData->caregiver_id }}</td>
-                  <td>{{ $caregiverData->full_name }}</td>
-                  <td>{{ $caregiverData->role_name }}</td>
-                  <td>{{ $caregiverData->salary }}</td>
-                </tr>
-                @endforeach
-                @foreach ($doctorData as $doctorData)
-                <tr>
-                  <td>{{ $doctorData->doctor_id }}</td>
-                  <td>{{ $doctorData->full_name }}</td>
-                  <td>{{ $doctorData->role_name }}</td>
-                  <td>{{ $doctorData->salary }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-      </div>
-    <form action="" method="POST">
-    <div>
+              </thead>
+              <tbody>
+              @foreach ($adminData as $adminData)
+              <tr>
+                <td>{{ $adminData->admin_id }}</td>
+                <td>{{ $adminData->first_name }}</td>
+                <td>{{ $adminData->last_name }}</td>
+                <td>{{ $adminData->role_name }}</td>
+                <td>{{ $adminData->salary }}</td>
+              </tr>
+              @endforeach
+              @foreach ($supervisorData as $supervisorData)
+              <tr>
+                <td>{{ $supervisorData->supervisor_id }}</td>
+                <td>{{ $supervisorData->first_name }}</td>
+                <td>{{ $supervisorData->last_name }}</td>
+                <td>{{ $supervisorData->role_name }}</td>
+                <td>{{ $supervisorData->salary }}</td>
+              </tr>
+              @endforeach
+              @foreach ($caregiverData as $caregiverData)
+              <tr>
+                <td>{{ $caregiverData->caregiver_id }}</td>
+                <td>{{ $caregiverData->first_name }}</td>
+                <td>{{ $caregiverData->last_name }}</td>
+                <td>{{ $caregiverData->role_name }}</td>
+                <td>{{ $caregiverData->salary }}</td>
+              </tr>
+              @endforeach
+              @foreach ($doctorData as $doctorData)
+              <tr>
+                <td>{{ $doctorData->doctor_id }}</td>
+                <td>{{ $doctorData->first_name }}</td>
+                <td>{{ $doctorData->last_name }}</td>
+                <td>{{ $doctorData->role_name }}</td>
+                <td>{{ $doctorData->salary }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <form action="{{ url('/updateSalary') }}" method="POST">
+      @csrf
+      <div>
         <label for="empID">Emp ID</label>
         <input type="text" name="empID" id="empID">
-    </div>
-    <div>
+      </div>
+      <div>
+        <label for="">Role Name</label>
+        <input type="text" name="role_name" id="role_name">
+      </div>
+      <div>
         <label for="newSalary">New Salary</label>
         <input type="text" name="newSalary" id="newSalary">
-    </div>
-    <button name = "register_button">Ok</button>
+      </div>
+      @if (isset($successMessage))
+      <p id="successMessage">
+        {{ $successMessage }}
+      </p>
+      @elseif (isset($errorMessage))
+      <p id="errorMessage">
+        {{ $errorMessage }}
+      </p>
+      @endif
+    <button name = "register_button" id="register_button">Ok</button>
     <button name = "cancel_button">Cancel</button>
 </form>
   </div>

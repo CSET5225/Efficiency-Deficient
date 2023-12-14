@@ -32,7 +32,9 @@ Route::get('/rosterView', [ViewController::class,'rosterViewInfo']);
 
 Route::get('/getRosterInfo', [ViewController::class,'getRosterInfo']);
 
-Route::post('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
+Route::POST('/doctorPatients', [ViewController::class, 'doctorPatientsView']);
+
+Route::post('/addMoreMeds', [ViewController::class, 'addMoreMeds']);
 
 Route::get('/loginCheck', [loginApplicationController::class, 'loginCheck']);
 
@@ -49,6 +51,10 @@ Route::get('/patientsHome', function () {
 });
 
 Route::get('/employeeList', [ViewController::class, 'employeeListView']);
+
+Route::post('/employeeSearch', [ViewController::class, 'employeeSearch']);
+
+Route::post('/updateSalary', [ViewController::class, 'updateSalary']);
 
 Route::get('/newRoleForm', function () {
     return view('roleAddForm');
@@ -83,9 +89,10 @@ Route::get('/payment', function () {
 Route::get('/Patient', [ViewController::class, 'patientView']);
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
+Route::get('/familyMemberview', [ViewController::class, 'familyView']);
 
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
-
+Route::post('/familyMembers_home', [ViewController::class, 'famlyMembers']);
+Route::get('/familyHomeview', [ViewController::class, 'familyHomeView']);
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 
 Route::get('/doctorsAppointment', [ViewController::class, 'appointmentInfoView']);
