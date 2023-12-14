@@ -46,7 +46,6 @@ class loginApplicationController extends Controller
     }
 
     public function logout(){
-        session_destroy(); 
     return view('homePage'); 
     }
 }
