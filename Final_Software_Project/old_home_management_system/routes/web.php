@@ -87,8 +87,9 @@ Route::get('/payment', function () {
 Route::get('/Patient', [ViewController::class, 'patientView']);
 
 Route::post('/appointmentFilter', [ViewController::class, 'appointmentFilter']);
+Route::get('/familyMemberview', [ViewController::class, 'familyView']);
 
-Route::get('/familyMembers_home', [ViewController::class, 'familyHomeView']);
-
+Route::post('/familyMembers_home', [ViewController::class, 'famlyMembers']);
+Route::get('/familyHomeview', [ViewController::class, 'familyHomeView']);
 Route::get('/logout', [loginApplicationController::class, 'logout']);
 
